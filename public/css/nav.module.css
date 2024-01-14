@@ -1,0 +1,14 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1B2028;
+    position: sticky;
+    top: 0;
+}
+
+nav .left{
+    display: flex;
+    align-items: center;
+}

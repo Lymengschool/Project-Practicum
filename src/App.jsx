@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Nav from "./components/nav.jsx";
 
-function Appp() {
+function App() {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -14,4 +14,4 @@ function Appp() {
   );
 }
 
-export default Appp
+export default App
