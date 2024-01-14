@@ -1,0 +1,20 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #1B2028;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    margin: 5%, 0, 5%, 5%;
+    gap: 20px;  
+}
+
+.icon {
+   max-height: 30px;
+   max-width: 30px;
+   color: #4B5975;
+}
