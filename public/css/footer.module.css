@@ -9,7 +9,11 @@
     display: flex;
     flex-wrap: wrap;
     width: fit-content;
+<<<<<<< HEAD
     margin: 5%, 0, 5%, 7%;
+=======
+    margin: 5%, 0, 5%, 5%;
+>>>>>>> d425ef01d540f848b767bb80ea0a77abf4759089
     gap: 20px;  
 }
 

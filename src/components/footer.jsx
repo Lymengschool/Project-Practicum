@@ -16,6 +16,7 @@ function Footer() {
                     <Link to="#" className={style.icon}>
                         <FontAwesomeIcon icon={faTelegram} />
                     </Link>
+
         </footer>
     );
 }
