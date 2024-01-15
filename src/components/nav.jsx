@@ -1,25 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import nav from '../../public/css/nav.module.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard, faGear, faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import nav from "../../public/css/nav.module.css";
 
-function Nav(){
-    return(
+function Nav() {
+    return (
         <nav>
             <div className={nav.left}>
-                <Link><img src="../../img/logo.svg" alt="logo" /></Link>
+                <Link to='/'>
+                    <img src='../../img/logo.svg' alt='logo' />
+                </Link>
                 <div>
-                    <p>Jai Type</p>
                     <p>Ultimate typing Simulator</p>
+                    <p>Jai Type</p>
                 </div>
-                <Link className={nav.keyboard}><img src="../../img/keyboard.svg" alt="keyboard" /></Link>
+                <Link to='/' className={nav.icon}>
+                    <FontAwesomeIcon icon={faKeyboard} />
+                </Link>
             </div>
 
-            <div>
-                <Link><img src="../../img/setting.svg" alt="setting" /></Link>
-                <Link><img src="../../img/profile.svg" alt="profile" /></Link>
+            <div className={nav.right}>
+                <Link to='#' className={nav.icon}>
+                    <FontAwesomeIcon icon={faGear} />
+                </Link>
+                <Link to='#' className={nav.icon}>
+                    <FontAwesomeIcon icon={faCircleUser} />
+                </Link>
             </div>
         </nav>
-    )
+    );
 }
 
-export default Nav
+export default Nav;

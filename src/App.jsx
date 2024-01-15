@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Nav from "./components/nav.jsx";
-import Footer from "./components/footer.jsx";
+import Home from "./pages/home.jsx";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Nav/>
+      element: <Home/>
     },
+<<<<<<< HEAD
     {
 <<<<<<< HEAD
       path: "/f",
@@ -16,6 +16,8 @@ function App() {
 >>>>>>> d425ef01d540f848b767bb80ea0a77abf4759089
       element: <Footer/>
     }
+=======
+>>>>>>> 51feb6f40e9635974ae03e44365f86d3896a2b3c
   ])
 
   return (
