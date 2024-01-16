@@ -5,11 +5,10 @@
 }
 
 .container {
-
+    margin-left: 5%;
     display: flex;
     flex-wrap: wrap;
     width: fit-content;
-    margin: 5%, 0, 5%, 7%;
     margin: 5%, 0, 5%, 5%;
     gap: 20px;  
     position: fixed;
@@ -22,12 +21,10 @@
 .icon {
     max-height: 30px;
     max-width: 30px;
-    color: #4b5975;
-}
-
-.iconGroup {
-    margin-left: 5%;
-    gap: 20px;
+    color: #4b5975; 
+    gap: 5px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
+

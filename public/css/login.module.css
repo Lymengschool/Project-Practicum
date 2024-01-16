@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Koh Santepheap';
+    src: url('./fonts/KohSantepheap-Regular.ttf') format('truetype');
+  }
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.tittle {
+    display: flex;
+    width: auto;
+    height: 55px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+
+    color: #007ACC;
+    text-align: center;
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 60px */
+    letter-spacing: 1.24px;
+}
+
+.create {
+    color: #007ACC;
+    text-decoration: none; 
+} 
+
+
+.textContainer {
+    margin-top: 27px;
+}
+
+.text {
+    color: #4B5975;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; 
+    letter-spacing: 0.62px;
+}
+
+.icon {
+    text-decoration: none; 
+    color: #007ACC;
+    font-size: 20px;
+}
