@@ -24,7 +24,7 @@ function Nav() {
                 <Link to='#' className={nav.icon}>
                     <FontAwesomeIcon icon={faGear} />
                 </Link>
-                <Link to='login' className={nav.icon}>
+                <Link to='/login' className={nav.icon}>
                     <FontAwesomeIcon icon={faCircleUser} />
                 </Link>
             </div>

@@ -15,6 +15,7 @@
     padding: 0 1rem 0;
     height: 40px;
     background-color: #151a21;
+    border-radius: 10px;
 }
 
 .menublock button {
