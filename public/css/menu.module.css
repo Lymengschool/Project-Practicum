@@ -1,22 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap");
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 100;
+}
 .menublock {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  height: 100%;
-  background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 0 1rem 0;
+    height: 40px;
+    background-color: #151a21;
 }
 
-.innerleft{
-  display: flex;
-  gap: 1rem;
-  border-right: 1px solid white;
-  padding-right: 1rem;
+.menublock button {
+    border: none;
+    background-color: #151a21;
+    font-family: "Koh Santepheap";
 }
 
-.innerright{
-  display: flex;
-  padding-left: 1rem;
-  gap: 1rem;
-  justify-content: space-evenly;
+.innerleft {
+    display: flex;
+    gap: 1rem;
+    border-right: 1px solid white;
+    padding-right: 1rem;
+    background-color: #151a21;
+}
+
+.time {
+    display: flex;
+    padding-left: 1rem;
+    gap: 1rem;
+    justify-content: space-evenly;
+}
+
+.time input {
+    width: 20%;
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+}
+
+.time input:focus {
+    outline: none;
 }
