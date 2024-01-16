@@ -2,7 +2,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 60%;
   height: 100%;
   background-color: black;
+}
+
+.innerleft{
+  display: flex;
+  gap: 1rem;
+  border-right: 1px solid white;
+  padding-right: 1rem;
+}
+
+.innerright{
+  display: flex;
+  padding-left: 1rem;
+  gap: 1rem;
+  justify-content: space-evenly;
 }
