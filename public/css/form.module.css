@@ -33,6 +33,12 @@
     letter-spacing: 0.6px;
     text-align: center;
     background: #4B5975;
+    transition: transform 0.2s ease-in-out;
+}
+.input:hover, .button:hover  {
+    background-color: #dfdfdf;
+    color: #4B5975;
+    transform: scale(1.03);
 }
 
 .button {
