@@ -1,22 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap");
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 .menublock {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  height: 100%;
-  background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 0 1rem 0;
+    height: 40px;
+    background-color: #151a21;
 }
 
-.innerleft{
-  display: flex;
-  gap: 1rem;
-  border-right: 1px solid white;
-  padding-right: 1rem;
+.menublock button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #151a21;
 }
 
-.innerright{
-  display: flex;
-  padding-left: 1rem;
-  gap: 1rem;
-  justify-content: space-evenly;
+.menublock button span {
+    background-color: #151a21;
+    font-family: "Koh Santepheap";
+    color: #4b5975;
+    transition: transform 0.2s ease-in-out;
+}
+
+.menublock button:hover span {
+    color: #dfdfdf;
+    transform: scale(1.15);
+}
+
+.innerleft {
+    display: flex;
+    height: 100%;
+    gap: 1rem;
+    background-color: #151a21;
+}
+
+.icon {
+    font-size: 1rem;
+    background-color: #151a21;
+    padding-right: 0.5rem;
+}
+
+.innerright {
+    display: flex;
+    padding-left: 1rem;
+    gap: 1rem;
+    width: fit-content;
+    margin-left: 1rem;
+    background-color: #151a21;
+    border-left: 1px solid white;
+}
+
+.none{
+    display: none;
+}
+
+.active{
+    display:flex
 }
