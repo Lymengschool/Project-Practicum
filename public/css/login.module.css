@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap');
+@font-face { font-family: 'Koh Santepheap'; }
 
 @font-face {
     font-family: 'Koh Santepheap';
 }
-
 .body {
     display: flex;
     align-items: center;
@@ -55,6 +55,8 @@
 }
 
 .icon {
+    border: none;
+    outline: none;
     text-decoration: none; 
     color: #007ACC;
     font-size: 20px;
