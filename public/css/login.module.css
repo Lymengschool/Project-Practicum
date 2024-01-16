@@ -52,6 +52,8 @@
 }
 
 .icon {
+    border: none;
+    outline: none;
     text-decoration: none; 
     color: #007ACC;
     font-size: 20px;
