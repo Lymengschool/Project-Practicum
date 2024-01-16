@@ -1,7 +1,7 @@
 import React from "react";
 import style from './../../public/css/form.module.css';
 
-function Form({ name, confirmpassword }) {
+function Form({ name, confirmpassword, }) {
   return (
       <form className={style.contianer}>
         {name && (
@@ -42,11 +42,11 @@ function Form({ name, confirmpassword }) {
           />
         )}
         <input
-          type="button"
-          // className={styles.button}
-          // onClick={() => login()}
-          value="ចូល"
-        />
+        className={style.button}
+        type="button"
+        // onClick={handleButtonClick}
+        value={action === "login" ? "ចូល" : "ចុះឈ្មោះ"}
+      />
       </form>
   );
 }
