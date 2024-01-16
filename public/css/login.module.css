@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap');
+
 @font-face {
     font-family: 'Koh Santepheap';
-    src: url('./fonts/KohSantepheap-Regular.ttf') format('truetype');
-  }
+}
 .body {
     display: flex;
     align-items: center;
