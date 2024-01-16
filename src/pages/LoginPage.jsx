@@ -14,7 +14,7 @@ function login() {
              <div className={style.body}>
                 <div className={style.container}>
                     <h1 className={style.tittle}>ចូលគណនេយ្យ</h1>
-                    <Form />
+                    <Form action={"login"}/>
                     <div className={style.textContainer}>
                         <p className={style.text}>អត់មានគណនេយ្យ ?
                             <Link to="/register" className={style.create}>&nbsp;បង្កើត</Link></p>

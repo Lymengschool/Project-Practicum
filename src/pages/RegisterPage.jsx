@@ -12,7 +12,7 @@ function Register() {
              <div className={style.body}>
                 <div className={style.container}>
                     <h1 className={style.tittle}>ចូលគណនេយ្យ</h1>
-                    <Form name={true} confirmpassword={true}/>
+                    <Form name={true} confirmpassword={true} action={"register"}/>
                             
                 </div>
                 

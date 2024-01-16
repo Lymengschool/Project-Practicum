@@ -46,7 +46,7 @@ function Form({ name, confirmpassword, action}) {
         className={style.button}
         type="button"
         // onClick={handleButtonClick}
-        // value={action === "login" ? "ចូល" : "ចុះឈ្មោះ"}
+        value={action === "login" ? "ចូល" : "ចុះឈ្មោះ"}
       />
       </form>
     </body>
