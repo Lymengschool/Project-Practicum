@@ -50,13 +50,13 @@ function Form({ name, confirmpassword, action }) {
           const error_message = error.message;
           toast.error('Login មិនជោគជ័យ!', {
             position: "top-center",
-            autoClose: 30000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "#4B5975",
             transition: Bounce,
             });
         });
@@ -89,13 +89,13 @@ function Form({ name, confirmpassword, action }) {
           const error_message = error.message;
           toast.warn('គណនេយ្យបង្កើតមិនបានជោគជ័យ', {
             position: "top-center",
-            autoClose: 30000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "#4B5975",
             transition: Bounce,
             });
         });
