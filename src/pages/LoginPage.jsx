@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import {app, auth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider} from './../../src/components/firebase'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function login() {
     const provider = new GoogleAuthProvider();
@@ -19,8 +22,10 @@ function login() {
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
+            if (user) {
+                 alert("user create")
+            }
+           
         }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
@@ -35,28 +40,39 @@ function login() {
 
         const loginWithFacebook = () => {
             signInWithPopup(auth, providers)
-        .then((result) => {
-            // The signed-in user info.
-            const user = result.user;
-
-            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            const credential = FacebookAuthProvider.credentialFromResult(result);
-            const accessToken = credential.accessToken;
-
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
-        })
-        .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = FacebookAuthProvider.credentialFromError(error);
-
-  });
-        }
+                .then((result) => {
+                    // The signed-in user info.
+                    const user = result.user;
+        
+                    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                    const credential = FacebookAuthProvider.credentialFromResult(result);
+                    const accessToken = credential.accessToken;
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error("Facebook sign-in error:", errorCode, errorMessage);
+        
+                    // Check if the user closed the popup
+                    if (errorCode === 'auth/popup-closed-by-user') {
+                        alert("The Facebook sign-in popup was closed. Please try again.");
+                        return;
+                    }
+        
+                    // Additional logging for debugging purposes
+                    if (error.customData && error.customData.email) {
+                        const email = error.customData.email;
+                        console.error("Email:", email);
+                    }
+        
+                    const credential = FacebookAuthProvider.credentialFromError(error);
+                    if (credential) {
+                        console.error("Facebook credential:", credential);
+                    }
+                });
+        };
+        
     
 
     return (
@@ -66,6 +82,7 @@ function login() {
                 <div className={style.container}>
                     <h1 className={style.tittle}>ចូលគណនេយ្យ</h1>
                     <Form action={"login"}/>
+                    <ToastContainer />
                     <div className={style.textContainer}>
                         <p className={style.text}>អត់មានគណនេយ្យ ?
                             <Link to="/register" className={style.create}>&nbsp;បង្កើត</Link></p>

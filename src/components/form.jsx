@@ -2,6 +2,9 @@ import React from "react";
 import style from './../../public/css/form.module.css';
 import {app, auth, database, createUserWithEmailAndPassword, signInWithEmailAndPassword,set, ref} from './firebase'
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { Bounce } from "react-toastify";
 
 function Form({ name, confirmpassword, action }) {
   const [Name, setName] = useState('');
@@ -15,17 +18,47 @@ function Form({ name, confirmpassword, action }) {
     if (action === "login") {
       // validate input fields
       if (!validateEmail(email) || !validatePassword(password)) {
-        alert('Email or Password is Outta Line!!');
+        toast.warn('Email និង password មិនត្រឹមត្រូវ', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "#4B5975",
+          transition: Bounce,
+          });
         return;
       }
 
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          alert('Logged in success!!');
+          toast.success('Login ជោគជ័យ', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "#4B5975",
+            transition: Bounce,
+            });
         })
         .catch(error => {
           const error_message = error.message;
-          alert(error_message);
+          toast.error('Login មិនជោគជ័យ!', {
+            position: "top-center",
+            autoClose: 30000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            });
         });
     } else if (action === "register") {
       createUserWithEmailAndPassword(auth, email, password)
@@ -39,12 +72,32 @@ function Form({ name, confirmpassword, action }) {
           };
 
           set(ref(database, 'users/' + user.uid), user_data);
-          alert('User Created!!');
+          toast.success('គណនេយ្យបង្កើតបានជោគជ័យ', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "#4B5975",
+            transition: Bounce,
+            });
         })
         .catch(error => {
           const error_code = error.code;
           const error_message = error.message;
-          alert(error_message);
+          toast.warn('គណនេយ្យបង្កើតមិនបានជោគជ័យ', {
+            position: "top-center",
+            autoClose: 30000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            });
         });
     }
   };
