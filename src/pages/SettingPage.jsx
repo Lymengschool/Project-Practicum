@@ -6,6 +6,7 @@ import { FaEyeSlash, FaStop } from 'react-icons/fa';
 import { GoSun } from "react-icons/go";
 import { MdKey } from "react-icons/md";
 import Footer from '../components/footer.jsx';
+import toggle from '../components/toggle.jsx';
 
 function Setting() {
     return (
