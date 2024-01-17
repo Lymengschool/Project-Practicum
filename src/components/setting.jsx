@@ -1,7 +1,6 @@
 import React from "react";
 import { FaEyeSlash } from "react-icons/fa";
 import style from "./../../public/css/setting.module.css";
-import Toggle from "./toggle";
 
 function Setting({ icon, detail, name, fun }) {
     // Change the function name to use PascalCase
