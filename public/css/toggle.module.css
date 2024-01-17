@@ -1,4 +1,4 @@
-.toggle-button {
+.toggle_button {
     display: flex;
     width: 91px;
     height: 43px;
@@ -12,7 +12,7 @@
     color: #fff; /* Change to the desired default text color */
   }
 
-  .toggle-button.active {
+  .toggle_button.active {
     background-color: #3498db; /* Change to the desired active background color */
     color: #fff; /* Change to the desired active text color */
   }
