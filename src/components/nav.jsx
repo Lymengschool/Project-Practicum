@@ -32,7 +32,7 @@ function Nav() {
             </div>
 
             <div className={nav.right}>
-                <Link to='#' className={nav.icon}>
+                <Link to='/setting' className={nav.icon}>
                     <FontAwesomeIcon icon={faGear} />
                 </Link>
                 <Link to='/login' className={nav.icon}>

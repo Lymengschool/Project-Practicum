@@ -8,6 +8,7 @@ import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import {app, auth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider} from './../../src/components/firebase'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import Footer from './../components/footer';
 
 
 function login() {
@@ -93,7 +94,7 @@ function login() {
                             &nbsp; <FontAwesomeIcon icon={faFacebook} onClick={loginWithFacebook}/>
                             </button> </p>
                     </div>
-                    
+                    <Footer />
 
                
                 </div>

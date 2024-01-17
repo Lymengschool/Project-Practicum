@@ -4,6 +4,7 @@ import style from './../../public/css/login.module.css'
 import Nav from '../components/nav';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import Footer from './../components/footer';
 
 
 function Register() {
@@ -16,7 +17,7 @@ function Register() {
                     <Form name={true} confirmpassword={true} action={"register"}/>
                     <ToastContainer />      
                 </div>
-                
+                <Footer />
             </div>
         </div>
        
