@@ -85,7 +85,8 @@ function Menu() {
                     }}
                 >
                     <span>
-                        <FaGear className={menu.icon} /> Test Setting
+                        <FaGear className={menu.icon} />
+                        ការកំណត់
                     </span>
                 </button>
 
@@ -158,7 +159,7 @@ function Menu() {
                                     <span>120 វិ.</span>
                                 </button>
                                 <button>
-                                    <span>Custom</span>
+                                    <span>កំណត់ពេល</span>
                                 </button>
                             </div>
 

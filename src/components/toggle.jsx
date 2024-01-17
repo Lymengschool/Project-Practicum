@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './../../public/css/toggle.module.css'
 
-function toggle() { // Change the function name to use PascalCase
+function Toggle() {
 
-    const  toggleButton = () => {
-        const toggleButton = document.querySelector('.toggle_button');
-        toggleButton.classList.toggle('active');
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleToggle = () => {
+        setIsChecked(!isChecked);
     }
 
     return (
-        <div className={style.toggle_button} onclick={toggleButton}>
-            <div>Toggle</div>
-            <div>Button</div>
-        </div>
+        <label className={style.togglebutton}>
+            <input type="checkbox" checked={isChecked} onChange={handleToggle}/>
+            <span className={`${style.slider} ${isChecked ? style.active : ''}`}/>
+        </label>
     );
 }
 
-export default toggle;
+export default Toggle;

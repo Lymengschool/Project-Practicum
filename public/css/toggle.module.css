@@ -1,18 +1,44 @@
-.toggle_button {
-    display: flex;
-    width: 91px;
-    height: 43px;
-    padding: 4px;
-    align-items: flex-start;
-    gap: 10px;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: #2ecc71; /* Change to the desired default background color */
-    color: #fff; /* Change to the desired default text color */
-  }
+.togglebutton {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 34px;
+}
 
-  .toggle_button.active {
-    background-color: #3498db; /* Change to the desired active background color */
-    color: #fff; /* Change to the desired active text color */
-  }
+.togglebutton input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:#3E3E3E;
+  transition: 0.4s;
+  border-radius: 100px;
+}
+
+.slider:before{
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 100px;
+}
+
+.active {
+  background-color: #007ACC;
+}
+
+.active:before {
+  transform: translateX(36px);
+}
