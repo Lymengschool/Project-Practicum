@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap');
+@font-face { font-family: 'Koh Santepheap'; }
+
+.body {
+    background-color:#1B2028;;
+}
+
+.functName {
+    margin-top:34px ;
+margin-left: 15%;
+color: #4B5975;
+font-family: 'Koh Santepheap', sans-serif;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+letter-spacing: -0.38px;
+}
+
+
+.detail {
+    margin-left: 18%;
+    color: #FFF;
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    letter-spacing: 0.48px;
+}

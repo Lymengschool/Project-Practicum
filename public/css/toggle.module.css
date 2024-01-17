@@ -1,0 +1,18 @@
+.toggle-button {
+    display: flex;
+    width: 91px;
+    height: 43px;
+    padding: 4px;
+    align-items: flex-start;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #2ecc71; /* Change to the desired default background color */
+    color: #fff; /* Change to the desired default text color */
+  }
+
+  .toggle-button.active {
+    background-color: #3498db; /* Change to the desired active background color */
+    color: #fff; /* Change to the desired active text color */
+  }
