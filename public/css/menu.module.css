@@ -119,9 +119,11 @@
 .smallmenu .popup .innerbottom button span {
     color: #dfdfdf;
 }
+
 .smallmenu .popup .innertop button:hover,
 .smallmenu .popup .innertop button:hover > span,
 .smallmenu .popup .innertop button:hover > span > .icon,
+
 .smallmenu .popup .innerbottom button:hover,
 .smallmenu .popup .innerbottom button:hover > span,
 .smallmenu .popup .innerbottom button:hover > span > .icon {

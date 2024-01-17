@@ -60,3 +60,28 @@ nav{
 .icon:active{
     color: #007ACC;;
 }
+
+@media (min-width: 400px) and (max-width: 600px){
+    .container .left div p:first-child{
+        color: #8f8e8e;
+        font-size: 0.5rem;
+    }
+    
+    .container .left div p:last-child{
+        color: #dfdfdf;
+        font-size: 1.4rem;
+    }
+
+    .icon{
+        font-size: 1rem;
+        margin-left: 0.5rem;
+    }
+
+    .logoname{
+        display: none;
+    }
+
+    .logo{
+        width: 3rem;
+    }
+}

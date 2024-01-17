@@ -7,6 +7,10 @@ function Toggle() { // Change the function name to use PascalCase
     const toggleSlider = () => {    
           updateSlider();
       }
+    const  toggleButton = () => {
+        const toggleButton = document.querySelector('.toggle_button');
+        toggleButton.classList.toggle('active');
+    }
 
 
     const updateSlider = () => {
