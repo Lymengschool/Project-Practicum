@@ -18,26 +18,27 @@ function Nav() {
     
     return (
         <nav>
-            <div className={nav.left}>
-                <Link to='/'>
-                    <img src='../../img/logo.svg' alt='logo' />
-                </Link>
-                <div>
-                    <p>Ultimate typing Simulator</p>
-                    <p>Jai Type</p>
+            <div className={nav.container}>
+                <div className={nav.left}>
+                    <Link to='/'>
+                        <img src='../../img/logo.svg' alt='logo' />
+                    </Link>
+                    <div>
+                        <p>Ultimate typing Simulator</p>
+                        <p>Jai Type</p>
+                    </div>
+                    <Link to='/' className={nav.icon}>
+                        <FontAwesomeIcon icon={faKeyboard} />
+                    </Link>
                 </div>
-                <Link to='/' className={nav.icon}>
-                    <FontAwesomeIcon icon={faKeyboard} />
-                </Link>
-            </div>
-
-            <div className={nav.right}>
-                <Link to='#' className={nav.icon}>
-                    <FontAwesomeIcon icon={faGear} />
-                </Link>
-                <Link to='/login' className={nav.icon}>
-                    <FontAwesomeIcon icon={faCircleUser} onClick={playSound}/>
-                </Link>
+                <div className={nav.right}>
+                    <Link to='#' className={nav.icon}>
+                        <FontAwesomeIcon icon={faGear} />
+                    </Link>
+                    <Link to='/login' className={nav.icon}>
+                        <FontAwesomeIcon icon={faCircleUser} onClick={playSound}/>
+                    </Link>
+                </div>
             </div>
         </nav>
     );

@@ -6,8 +6,10 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin: 0;
 }
-.menublock {
+.menublock,
+.smallmenu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,21 +20,28 @@
     border-radius: 10px;
 }
 
-.menublock button {
+.smallmenu{
+    display: none;
+}
+
+.menublock button,
+.smallmenu button {
     display: flex;
     align-items: center;
     border: none;
     background-color: #151a21;
 }
 
-.menublock button span {
+.menublock button span,
+.smallmenu button span {
     background-color: #151a21;
     font-family: "Koh Santepheap";
     color: #4b5975;
     transition: transform 0.2s ease-in-out;
 }
 
-.menublock button:hover span {
+.menublock button:hover span,
+.smallmenu button:hover span {
     color: #dfdfdf;
     transform: scale(1.15);
 }
@@ -60,10 +69,72 @@
     border-left: 1px solid white;
 }
 
-.none{
+.none {
     display: none;
 }
 
-.active{
-    display:flex
+.active {
+    display: flex;
+}
+
+.smallmenu .popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.smallmenu .popup .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 1rem;
+    background-color: #1b2028;
+}
+
+.smallmenu .popup .innerbottom {
+    flex-direction: column;
+    margin-top: 0.5rem;
+}
+
+.smallmenu .popup .innertop button,
+.smallmenu .popup .innerbottom button {
+    display: flex;
+    justify-content: center;
+    width: 20rem;
+    border: 1px solid #151a21;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+}
+
+.smallmenu .popup .innertop button span,
+.smallmenu .popup .innerbottom button span {
+    color: #dfdfdf;
+}
+.smallmenu .popup .innertop button:hover,
+.smallmenu .popup .innertop button:hover > span,
+.smallmenu .popup .innertop button:hover > span > .icon,
+.smallmenu .popup .innerbottom button:hover,
+.smallmenu .popup .innerbottom button:hover > span,
+.smallmenu .popup .innerbottom button:hover > span > .icon {
+    color: #151a21;
+    background-color: #007acc;
+}
+
+@media (min-width: 400px) and (max-width: 600px){
+    .menublock{
+        display: none;
+    }
+
+    .smallmenu{
+        display: flex;
+    }
 }
