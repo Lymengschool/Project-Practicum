@@ -11,6 +11,7 @@ const sound = new Howl({
 
 function Nav() {
     const playSound = () => {
+
         sound.stop();
         sound.play();
     };
