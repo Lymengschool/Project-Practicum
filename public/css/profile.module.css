@@ -1,0 +1,74 @@
+.FirstContainer {
+    display: flex;
+    background-color: #4B5975;
+    border-radius: 25px;
+    width: 84%;
+    margin-left: 8%;
+    padding: 10px; /* Add padding as needed */
+}
+
+.FirstBlock {
+    display: flex;
+    width: 30%; /* Adjust the width as per your design */
+    align-items: center; /* Center the content vertically */
+    background-color: #4B5975;
+}
+
+/* Add any additional styling for child elements as needed */
+.picture {
+    font-size: 50px; /* Adjust the margin as needed */
+    margin-left: 10%;
+    color: #4B5975;
+    background-color: #4B5975;
+    box-shadow: #4B5975;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+   margin-top: 43px;
+}
+
+.nameContainer {
+    margin-right: 5px;
+}
+
+.name {
+    background-color: #4B5975;
+    font-weight: bold;
+    color: #D1D0C5;
+    font-size: 26px;
+}
+
+.join {
+    background-color: #4B5975;
+    color: #D1D0C5;
+    font-size: 14px;
+    
+}
+
+.secondBlock {
+    width: 70%;
+    background-color: #4B5975;
+}
+
+
+.secondBlockContainer {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;;
+    background-color: #4B5975;
+    margin-top: 30px;
+}
+
+.test {
+    font-size: 14px;
+    color: #D1D0C5;
+    background-color: #4B5975;
+    margin-top: auto
+}
+
+.Num {
+    font-size: 64px;
+    color: #D1D0C5;
+    background-color: #4B5975;
+   
+}
