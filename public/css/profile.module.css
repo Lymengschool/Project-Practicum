@@ -70,5 +70,48 @@
     font-size: 64px;
     color: #D1D0C5;
     background-color: #4B5975;
-   
+}
+
+
+.firstRow {
+    margin-left: 5%;
+    width: 90%;
+    height: fit-content;
+}
+
+.secondRow , .thirdRow {
+    display: flex;
+    margin-top: 5%;
+    justify-content: space-around;
+    background-color: #4B5975;
+    align-items: center;
+}
+
+.tittle {
+    background-color: #4B5975;
+    font-size: 28px;
+    font-weight: bold;
+    color: #007ACC;
+    text-align: center;
+    
+}
+
+.secondContainer {
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.firstBlockContainer {
+    width: 200%;
+    margin-left: 8%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    height: 326px;
+    flex-wrap: wrap;
+    background-color: #4B5975;
+    border-radius: 25px;
+    margin-bottom: 5%;
 }
