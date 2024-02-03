@@ -1,0 +1,38 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap');
+@font-face { font-family: 'Koh Santepheap'; }
+
+@font-face {
+    font-family: 'Koh Santepheap';
+} */
+
+.typing {
+    color: #e2e2e2;
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.76px; 
+}
+
+.correct {
+    color: #4B5975;
+}
+.incorrect {
+    color: #DC343E;
+}
+.active{
+    color: #17A2B8;
+  }
+.active::before{
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    border-radius: 5px;
+    background: #17A2B8;
+    animation: blink 1s ease-in-out infinite;
+}
