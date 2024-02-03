@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from '../components/nav.jsx';
 import SettingComponent from '../components/setting.jsx';
-import style from './../../public/css/SettingPage.module.css';
+import style from './../../public/css/settingPage.module.css';
 import { FaEyeSlash, FaStop } from 'react-icons/fa';
 import { GoSun } from "react-icons/go";
 import { MdKey } from "react-icons/md";
