@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Nav from "../components/nav.jsx";
-import Footer from "../components/footer.jsx";
 import style from "./../../public/css/result.module.css"
 import Chart from 'chart.js/auto';
 
