@@ -96,7 +96,6 @@ function login() {
                     </div>
                     <Footer />
 
-               
                 </div>
                 
             </div>
