@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import style from './../css/typing.module.css';
+import style from '../../public/css/typing.module.css';
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {  } from "@fortawesome/free-brands-svg-icons";
@@ -14,7 +14,7 @@ function Typing() {
     const [CPM, setCPM] = useState(0.00);
 
     function getParaprah() {
-        const txt = "យោងតាមប្រភពពី មន្ត្រីនគរបាលខណ្ឌច្បារអំពៅ បានអោយដឹងថា កាលពីថ្ងៃទី១៥ ខែមករា ឆ្នាំ២០២៤ សមត្ថកិច្ចជំនាញបានឃាត់ខ្លួនឈ្មោះ ប្រាក់ ពៅ ភេទប្រុស ជនជាតិខ្មែរ មុខរបរកម្មករសំណង់ ស្នាក់នៅផ្ទះB៥ ភូមិតាងៅក្រោម សង្កាត់និរោធ ខណ្ឌច្បារអំពៅ ពាក់ព័ន្ធករណីលួចទ្រព្យសម្បត្តិ នៅចំណុចផ្ទះB៤ ភូមិតាងៅក្រោម សង្កាត់និរោធ ខណ្ឌច្បារអំពៅ ។"
+        const txt = "យោង តាម ប្រភព ពី មន្ត្រីនគរបាលខណ្ឌច្បារអំពៅ បានអោយដឹងថា កាលពីថ្ងៃទី១៥ ខែមករា ឆ្នាំ២០២៤ សមត្ថកិច្ចជំនាញបានឃាត់ខ្លួនឈ្មោះ ប្រាក់ ពៅ ភេទប្រុស ជនជាតិខ្មែរ មុខរបរកម្មករសំណង់ ស្នាក់នៅផ្ទះB៥ ភូមិតាងៅក្រោម សង្កាត់និរោធ ខណ្ឌច្បារអំពៅ ពាក់ព័ន្ធករណីលួចទ្រព្យសម្បត្តិ នៅចំណុចផ្ទះB៤ ភូមិតាងៅក្រោម សង្កាត់និរោធ ខណ្ឌច្បារអំពៅ ។"
         setParagraph(txt)
     }
 
@@ -81,10 +81,12 @@ function Typing() {
     return (
         <>
             <article>
-                <div className="container mt-5">
-                    <input type="text" className="text-input" onChange={handleKeyDown} style={{opacity: 0}}/>
-                    <p className={`${style.typing} text-content`}>
-                    </p>
+                <div className={style.container}>
+                    <div>
+                        <input type="text" className="text-input" onChange={handleKeyDown} style={{opacity: 0}}/>
+                        <p className={`${style.typing} text-content`}>
+                        </p>
+                    </div>
                 </div>
             </article>
         </>

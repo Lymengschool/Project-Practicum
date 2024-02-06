@@ -13,7 +13,7 @@ function Nav() {
     const playSound = () => {
 
         sound.stop();
-        sound.play();
+        // sound.play();
     };
 
     return (
