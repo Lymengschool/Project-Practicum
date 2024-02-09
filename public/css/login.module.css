@@ -17,11 +17,10 @@
 .tittle {
     display: flex;
     width: auto;
-    height: 55px;
+    height: auto;
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
-
     color: #007ACC;
     text-align: center;
     font-family: 'Koh Santepheap', sans-serif;

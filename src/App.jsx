@@ -3,7 +3,7 @@ import Home from "./pages/home.jsx";
 import Login from "./pages/LoginPage.jsx";
 import Register from "./pages/RegisterPage.jsx";
 import Setting from "./pages/SettingPage.jsx";
-import Result from "./pages/resultPage.jsx";
+import Result from "./pages/ResultPage.jsx";
 import Profile from "./pages/ProfilePage.jsx";
 
 function App() {
