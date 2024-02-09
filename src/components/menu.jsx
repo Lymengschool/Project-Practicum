@@ -3,10 +3,12 @@ import menu from "./../../public/css/menu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faQuoteLeft, faBrain, faWrench, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import { FaGear } from "react-icons/fa6";
+import Typing from "../components/typing.jsx"
 
 function Menu() {
     const [activeButton, setActiveButton] = useState(1);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [timer, setTimer] = useState(30);
 
     return (
         <div className={menu.container}>
@@ -39,16 +41,16 @@ function Menu() {
                 </div>
 
                 <div className={`${menu.innerright} ${activeButton === 1 ? menu.active : menu.none}`}>
-                    <button>
+                    <button onClick={() => setTimer(30)}>
                         <span>30 វិ.</span>
                     </button>
-                    <button>
+                    <button onClick={() => setTimer(60)}>
                         <span>60 វិ.</span>
                     </button>
-                    <button>
+                    <button onClick={() => setTimer(90)}>
                         <span>90 វិ.</span>
                     </button>
-                    <button>
+                    <button onClick={() => setTimer(120)}>
                         <span>120 វិ.</span>
                     </button>
                     <button>
@@ -146,16 +148,16 @@ function Menu() {
                             </div>
 
                             <div className={`${menu.innerbottom} ${activeButton === 1 ? menu.active : menu.none}`}>
-                                <button>
+                                <button onClick={() => setTimer(30)}>
                                     <span>30 វិ.</span>
                                 </button>
-                                <button>
+                                <button onClick={() => setTimer(60)}>
                                     <span>60 វិ.</span>
                                 </button>
-                                <button>
+                                <button onClick={() => setTimer(90)}>
                                     <span>90 វិ.</span>
                                 </button>
-                                <button>
+                                <button onClick={() => setTimer(120)}>
                                     <span>120 វិ.</span>
                                 </button>
                                 <button>
@@ -184,6 +186,8 @@ function Menu() {
                     </div>
                 )}
             </div>
+
+            <Typing onButtonClick={activeButton} timerm={timer}/>
         </div>
     );
 }
