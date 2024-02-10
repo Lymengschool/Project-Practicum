@@ -60,16 +60,18 @@
 }
 
 .test {
-    font-size: 14px;
+    font-size: 24px;
     color: #D1D0C5;
-    background-color: #4B5975;
-    margin-top: auto
+    background-color: hsl(220, 22%, 38%);
+    margin-top: auto;
+    font-family: 'Koh Santepheap', sans-serif;
 }
 
 .Num {
     font-size: 64px;
     color: #D1D0C5;
     background-color: #4B5975;
+    
 }
 
 
@@ -78,6 +80,7 @@
     width: 90%;
     height: fit-content;
 }
+
 
 .secondRow , .thirdRow {
     display: flex;
@@ -95,7 +98,8 @@
     font-weight: bold;
     color: #007ACC;
     text-align: center;
-    
+    font-family: 'Koh Santepheap', sans-serif;
+    gap: 5%;
 }
 
 .secondContainer {
@@ -119,4 +123,49 @@
     background-color: #4B5975;
     border-radius: 25px;
   
+}
+
+@media (min-width: 400px) and (max-width: 600px){
+    
+    .FirstBlock, .FirstContainer {
+        flex-direction: column;
+    }
+
+    .FirstBlock {
+      text-align: center;
+        margin-left: auto;
+        width: 100%;
+    }
+
+    .picture {
+        margin-left: 0;
+    }
+
+    .secondBlockContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 17%;
+       
+    }
+
+    .tittle {
+       font-size: 20px;
+    }
+
+    .test {
+        font-size: 16px;
+        
+    }
+
+    .Num {
+        font-size: 34px;
+    }
+
+    .firstBlock {
+        margin-top: 2%;
+        margin-bottom: 2%;
+        width: max-content;
+        margin-left: 7%;
+    }
 }
