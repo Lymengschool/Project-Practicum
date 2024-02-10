@@ -3,12 +3,12 @@ import menu from "./../../public/css/menu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faQuoteLeft, faBrain, faWrench, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import { FaGear } from "react-icons/fa6";
-import Typing from "../components/typing.jsx"
+import Typing from "../components/typing.jsx";
 
 function Menu() {
     const [activeButton, setActiveButton] = useState(1);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
-    const [length, setLength] = useState('m');
+    const [length, setLength] = useState("m");
     const [timer, setTimer] = useState(30);
 
     return (
@@ -62,13 +62,13 @@ function Menu() {
                 </div>
 
                 <div className={`${menu.innerright} ${activeButton === 2 ? menu.active : menu.none}`}>
-                    <button onClick={() => setLength('s')}>
+                    <button onClick={() => setLength("s")}>
                         <span>ខ្លី</span>
                     </button>
-                    <button onClick={() => setLength('m')}>
+                    <button onClick={() => setLength("m")}>
                         <span>មធ្យម</span>
                     </button>
-                    <button onClick={() => setLength('l')}>
+                    <button onClick={() => setLength("l")}>
                         <span>វែង</span>
                     </button>
                 </div>
@@ -167,13 +167,13 @@ function Menu() {
                             </div>
 
                             <div className={`${menu.innerbottom} ${activeButton === 2 ? menu.active : menu.none}`}>
-                                <button onClick={() => setLength('s')}>
+                                <button onClick={() => setLength("s")}>
                                     <span>ខ្លី</span>
                                 </button>
-                                <button onClick={() => setLength('m')}>
+                                <button onClick={() => setLength("m")}>
                                     <span>មធ្យម</span>
                                 </button>
-                                <button onClick={() => setLength('l')}>
+                                <button onClick={() => setLength("l")}>
                                     <span>វែង</span>
                                 </button>
                             </div>
@@ -187,8 +187,10 @@ function Menu() {
                     </div>
                 )}
             </div>
-
-            <Typing onButtonClick={activeButton} timerm={timer} slength={length}/>
+            <div className={menu.cuscontain}>
+                <div className={menu.innercon}>hi</div>
+            </div>
+            <Typing onButtonClick={activeButton} timerm={timer} slength={length} />
         </div>
     );
 }
