@@ -98,20 +98,22 @@
 
 .secondContainer {
     display: flex;
-    width: 70%;
+    width: 60%;
+    height: auto;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 1%;
+    margin-left: 8%;
+    
 }
 
 .firstBlockContainer {
-    width: 200%;
-    margin-left: 8%;
+    width: 255%;
     margin-top: 2%;
     display: flex;
     flex-direction: column;
-    height: 326px;
+    height: auto;
     flex-wrap: wrap;
     background-color: #4B5975;
     border-radius: 25px;
-    margin-bottom: 5%;
 }
