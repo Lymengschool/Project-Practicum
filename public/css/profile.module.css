@@ -85,6 +85,8 @@
     justify-content: space-around;
     background-color: #4B5975;
     align-items: center;
+    border-radius: 25px;
+    margin-bottom: 40px;
 }
 
 .tittle {
@@ -99,7 +101,7 @@
 .secondContainer {
     display: flex;
     width: 60%;
-    height: auto;
+    height: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 1%;
@@ -112,8 +114,9 @@
     margin-top: 2%;
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 100%;
     flex-wrap: wrap;
     background-color: #4B5975;
     border-radius: 25px;
+  
 }
