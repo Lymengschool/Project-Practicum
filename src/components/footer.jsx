@@ -20,6 +20,7 @@ function Footer() {
                     <Link to="#" className={style.icon}>
                         <FaGithub />
                     </Link>
+                    <p className={style.footText}>power by team</p>
         </footer>
     );
 }

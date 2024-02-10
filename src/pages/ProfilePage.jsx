@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from "../components/nav.jsx";
 import style from "./../../public/css/profile.module.css";
+import Footer from '../components/footer.jsx';
 import { RiImageAddFill } from "react-icons/ri";
 
 function Profile() {
@@ -96,7 +97,9 @@ function Profile() {
 
     
             </div>
+            <Footer/>
         </div>
+    
     );
 }
 

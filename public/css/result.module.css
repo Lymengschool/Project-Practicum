@@ -34,7 +34,20 @@
     justify-content: center;
     width: 80%;
     margin-left: 10%;
-    margin-top: 10%;
-    height: fit-content;
-    margin-bottom: 10%;
+    margin-top: 5%;
+    height: 10%;
+    margin-bottom: 5%;
+}
+
+.restartContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.restart {
+    color: #007ACC;
+    margin-bottom: 5%;
+    font-size: 30px;
+    outline: none;
+    border: none;
 }
