@@ -8,7 +8,8 @@ import style from "../../public/css/typing.module.css";
 function Typing(props) {
     const { onButtonClick } = props;
     const { timerm } = props;
-    console.log(` timerm: ${timerm}`);
+    const { slength } = props;
+    console.log(` timerm: ${slength}`);
 
     const [timer, setTimer] = useState(timerm);
     const [timerStarted, setTimerStarted] = useState(false);
@@ -16,14 +17,31 @@ function Typing(props) {
     const [mistake, setMistake] = useState(0);
     const [WPM, setWPM] = useState(0.0);
     const [CPM, setCPM] = useState(0.0);
+    const [paragraph, setPara] = useState("");
 
     const navigate = useNavigate();
 
     function getParaprah() {
-        const txt =
-            "យោង តាម ប្រភព ពី មន្ត្រីនគរបាលខណ្ឌច្បារអំពៅ បានអោយដឹងថា កាលពីថ្ងៃទី១៥ ខែមករា ឆ្នាំ២០២៤ សមត្ថកិច្ចជំនាញបានឃាត់ខ្លួនឈ្មោះ ប្រាក់ ពៅ ភេទប្រុស ជនជាតិខ្មែរ មុខរបរកម្មករសំណង់ ស្នាក់នៅផ្ទះB៥ ភូមិតាងៅក្រោម សង្កាត់និរោធ ខណ្ឌច្បារអំពៅ ពាក់ព័ន្ធករណីលួចទ្រព្យសម្បត្តិ នៅចំណុចផ្ទះB៤ ភូមិតាងៅក្រោម សង្កាត់និរោធ ខណ្ឌច្បារអំពៅ ។";
-        setParagraph(txt);
+        fetch("/../public/data/para.json")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data); // This will log the fetched data to the console
+                if (slength === "s") {
+                    setPara(data.s[0]);
+                } else if (slength === "m") {
+                    setPara(data.m[0]);
+                } else if (slength === "l") {
+                    setPara(data.l[0]);
+                }
+            });
     }
+
+    useEffect(() => {
+        getParaprah();
+    }, [slength]); 
+
+
+    setParagraph(paragraph);
 
     function setParagraph(txt) {
         var content = $(".text-content");
@@ -120,6 +138,13 @@ function Typing(props) {
                         <p className={style.time} onChange={startTimer}>
                             {timer}
                         </p>
+                        <div>
+                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <p className={`${style.typing} text-content`}></p>
+                        </div>
+                    </div>
+
+                    <div className={`${style.body} ${onButtonClick === 2 ? style.show : style.none}`}>
                         <div>
                             <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
                             <p className={`${style.typing} text-content`}></p>

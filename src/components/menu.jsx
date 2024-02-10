@@ -8,6 +8,7 @@ import Typing from "../components/typing.jsx"
 function Menu() {
     const [activeButton, setActiveButton] = useState(1);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [length, setLength] = useState('m');
     const [timer, setTimer] = useState(30);
 
     return (
@@ -61,13 +62,13 @@ function Menu() {
                 </div>
 
                 <div className={`${menu.innerright} ${activeButton === 2 ? menu.active : menu.none}`}>
-                    <button>
+                    <button onClick={() => setLength('s')}>
                         <span>ខ្លី</span>
                     </button>
-                    <button>
+                    <button onClick={() => setLength('m')}>
                         <span>មធ្យម</span>
                     </button>
-                    <button>
+                    <button onClick={() => setLength('l')}>
                         <span>វែង</span>
                     </button>
                 </div>
@@ -166,13 +167,13 @@ function Menu() {
                             </div>
 
                             <div className={`${menu.innerbottom} ${activeButton === 2 ? menu.active : menu.none}`}>
-                                <button>
+                                <button onClick={() => setLength('s')}>
                                     <span>ខ្លី</span>
                                 </button>
-                                <button>
+                                <button onClick={() => setLength('m')}>
                                     <span>មធ្យម</span>
                                 </button>
-                                <button>
+                                <button onClick={() => setLength('l')}>
                                     <span>វែង</span>
                                 </button>
                             </div>
@@ -187,7 +188,7 @@ function Menu() {
                 )}
             </div>
 
-            <Typing onButtonClick={activeButton} timerm={timer}/>
+            <Typing onButtonClick={activeButton} timerm={timer} slength={length}/>
         </div>
     );
 }
