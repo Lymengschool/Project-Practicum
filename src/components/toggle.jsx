@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import style from './../../public/css/toggle.module.css'
+import style from './../../public/css/toggle.module.css';
 
-function Toggle() {
-
+function Toggle({ functName, setIsNoTimer, setlightMode, setAccu100 }) {
     const [isChecked, setIsChecked] = useState(false);
 
     const handleToggle = () => {
-        setIsChecked(!isChecked);
-    }
+        setIsChecked(prevState => !prevState); 
+        if (functName === 'NoTimer') {
+            setIsNoTimer(prevState => !prevState);
+        } else if (functName === 'lightMode') {
+            setlightMode(prevState => !prevState);
+        } else {
+            setAccu100(prevState => !prevState);
+        }
+    };
 
     return (
         <label className={style.toggleBtn}>
