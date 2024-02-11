@@ -162,7 +162,7 @@ function Typing(props) {
             <article>
                 <div className={style.container}>
                     <div className={`${style.body} ${onButtonClick === 1 ? style.show : style.none}`}>
-                        <p className={style.time}>{timer}</p>
+                        {isNoTimer && <p className={style.time}>{timer}</p>}
                         <div>
                             <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
                             <p className={`${style.typing} text-content`}></p>
