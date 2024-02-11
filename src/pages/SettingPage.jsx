@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from '../components/nav.jsx';
 import SettingComponent from '../components/setting.jsx';
 import style from './../../public/css/settingPage.module.css';
@@ -10,12 +10,15 @@ import Toggle from '../components/toggle.jsx';
 import Typing from "../components/typing.jsx";
 
 function Setting() {
-    const [isNoTimer, setIsNoTimer] = useState(false); 
-    const [isAccu100, setAccu100] = useState(false);
-    const [islightMode, setlightMode] = useState(false);
-    console.log(isNoTimer);
-    console.log(isAccu100);
-    console.log(islightMode);
+    const [isNoTimer, setIsNoTimer] = useState(JSON.parse(localStorage.getItem('isNoTimer')) || false); 
+    const [isAccu100, setAccu100] = useState(JSON.parse(localStorage.getItem('isAccu100')) || false);
+    const [islightMode, setlightMode] = useState(JSON.parse(localStorage.getItem('islightMode')) || false);
+
+    useEffect(() => {
+        localStorage.setItem('isNoTimer', JSON.stringify(isNoTimer));
+        localStorage.setItem('isAccu100', JSON.stringify(isAccu100));
+        localStorage.setItem('islightMode', JSON.stringify(islightMode));
+    }, [isNoTimer, isAccu100, islightMode]);
     
     return (
         <div>

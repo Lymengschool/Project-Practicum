@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
-import style from './../../public/css/toggle.module.css';
+import React, { useState } from "react";
+import style from "./../../public/css/toggle.module.css";
 
 function Toggle({ functName, setIsNoTimer, setlightMode, setAccu100 }) {
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(() => {
+        if (functName === "NoTimer") {
+            return JSON.parse(localStorage.getItem("isNoTimer")) || false;
+        } else if (functName === "lightMode") {
+            return JSON.parse(localStorage.getItem("islightMode")) || false;
+        } else {
+            return JSON.parse(localStorage.getItem("isAccu100")) || false;
+        }
+    });
 
     const handleToggle = () => {
-        setIsChecked(prevState => !prevState); 
-        if (functName === 'NoTimer') {
-            setIsNoTimer(prevState => !prevState);
-            sessionStorage.setItem('isNoTimer', JSON.stringify(!isChecked));
-        } else if (functName === 'lightMode') {
-            setlightMode(prevState => !prevState);
-            sessionStorage.setItem('islightMode', JSON.stringify(!isChecked));
+        setIsChecked((prevState) => !prevState);
+        if (functName === "NoTimer") {
+            setIsNoTimer((prevState) => !prevState);
+            sessionStorage.setItem("isNoTimer", JSON.stringify(!isChecked));
+        } else if (functName === "lightMode") {
+            setlightMode((prevState) => !prevState);
+            sessionStorage.setItem("islightMode", JSON.stringify(!isChecked));
         } else {
-            setAccu100(prevState => !prevState);
-            sessionStorage.setItem('isAccu100', JSON.stringify(!isChecked));
+            setAccu100((prevState) => !prevState);
+            sessionStorage.setItem("isAccu100", JSON.stringify(!isChecked));
         }
     };
 
     return (
         <label className={style.toggleBtn}>
-            <input type="checkbox" checked={isChecked} onChange={handleToggle}/>
-            <span className={`${style.toggleSlider} ${isChecked ? style.active : ''}`}/>
+            <input type='checkbox' checked={isChecked} onChange={handleToggle} />
+            <span className={`${style.toggleSlider} ${isChecked ? style.active : ""}`} />
         </label>
     );
 }
