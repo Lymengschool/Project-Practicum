@@ -1,7 +1,5 @@
-// Toggle.jsx
 import React, { useState } from 'react';
 import style from './../../public/css/toggle.module.css';
-
 
 function Toggle({ functName, setIsNoTimer, setlightMode, setAccu100 }) {
     const [isChecked, setIsChecked] = useState(false);
@@ -10,10 +8,13 @@ function Toggle({ functName, setIsNoTimer, setlightMode, setAccu100 }) {
         setIsChecked(prevState => !prevState); 
         if (functName === 'NoTimer') {
             setIsNoTimer(prevState => !prevState);
+            sessionStorage.setItem('isNoTimer', JSON.stringify(!isChecked));
         } else if (functName === 'lightMode') {
             setlightMode(prevState => !prevState);
+            sessionStorage.setItem('islightMode', JSON.stringify(!isChecked));
         } else {
             setAccu100(prevState => !prevState);
+            sessionStorage.setItem('isAccu100', JSON.stringify(!isChecked));
         }
     };
 

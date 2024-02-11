@@ -7,7 +7,21 @@ import Setting from '../pages/SettingPage';
 // import {  } from "@fortawesome/free-brands-svg-icons";
 
 function Typing(props) {
-    const { isNoTimer, isAccu100, islightMode } = props;
+    const [isNoTimer, setIsNoTimer] = useState(() => {
+        // Retrieve from session storage or default to false
+        return JSON.parse(sessionStorage.getItem('isNoTimer')) || false;
+    });
+
+    const [isAccu100, setIsAccu100] = useState(() => {
+        // Retrieve from session storage or default to false
+        return JSON.parse(sessionStorage.getItem('isAccu100')) || false;
+    });
+
+    const [islightMode, setIsLightMode] = useState(() => {
+        // Retrieve from session storage or default to false
+        return JSON.parse(sessionStorage.getItem('islightMode')) || false;
+    });
+
 
     const { onButtonClick } = props;
     const { timerm } = props;
@@ -93,9 +107,9 @@ function Typing(props) {
         } else {
             console.log("incorrect");
             $(content[inputIndex]).addClass(style.incorrect);
-            console.log(props.isAccu100);
-            if (props.isAccu100) {
-                console.log(props.isAccu100);
+            console.log(isAccu100);
+            if (isAccu100) {
+                console.log(isAccu100);
                 setTimerStarted(false);
                 navigate("/result");
             }
