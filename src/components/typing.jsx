@@ -9,7 +9,6 @@ function Typing(props) {
     const { onButtonClick } = props;
     const { timerm } = props;
     const { slength } = props;
-    console.log(` timerm: ${timerm}`);
 
     const [timer, setTimer] = useState(timerm);
     const [timerStarted, setTimerStarted] = useState(false);
