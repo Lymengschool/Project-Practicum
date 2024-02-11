@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import style from './../../public/css/toggle.module.css';
 
+
 function Toggle({ functName, setIsNoTimer, setlightMode, setAccu100 }) {
     const [isChecked, setIsChecked] = useState(false);
 
