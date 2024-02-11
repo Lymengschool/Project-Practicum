@@ -187,9 +187,6 @@ function Menu() {
                     </div>
                 )}
             </div>
-            <div className={menu.cuscontain}>
-                <div className={menu.innercon}>hi</div>
-            </div>
             <Typing onButtonClick={activeButton} timerm={timer} slength={length} />
         </div>
     );

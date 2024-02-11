@@ -141,7 +141,11 @@
     }
 }
 
-.cuscontain{
-    z-index: 2;
+.cuscontain {
+    z-index: 99;
+    position: relative; /* Changed from grid to relative */
     background-color: bisque;
+    display: grid; /* Added */
+    justify-content: center; /* Added */
+    align-items: center; /* Added */
 }

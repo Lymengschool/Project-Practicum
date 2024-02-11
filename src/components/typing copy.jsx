@@ -9,15 +9,16 @@ function Typing(props) {
     const { onButtonClick } = props;
     const { timerm } = props;
     const { slength } = props;
-    console.log(` timerm: ${timerm}`);
+    console.log(` timerm: ${slength}`);
 
     const [timer, setTimer] = useState(timerm);
     const [timerStarted, setTimerStarted] = useState(false);
-    const [userHasStartedTyping, setUserHasStartedTyping] = useState(false);
+    const [paragraph, setPara] = useState("");
     const [correct, setCorrect] = useState(0);
     const [mistake, setMistake] = useState(0);
     const [WPM, setWPM] = useState(0.0);
     const [CPM, setCPM] = useState(0.0);
+   
 
     const navigate = useNavigate();
 
@@ -26,15 +27,13 @@ function Typing(props) {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data); // This will log the fetched data to the console
-                let para = "";
                 if (slength === "s") {
-                    para = data.s[0];
+                    setPara(data.s[0]);
                 } else if (slength === "m") {
-                    para = data.m[0];
+                    setPara(data.m[0]);
                 } else if (slength === "l") {
-                    para = data.l[0];
+                    setPara(data.l[0]);
                 }
-                setParagraph(para);
             });
     }
 
@@ -42,7 +41,13 @@ function Typing(props) {
         getParaprah();
     }, [slength]); 
 
+
+    setParagraph(paragraph);
+
     function setParagraph(txt) {
+        if (onButtonClick === 4) {
+            txt="យោង តាម ប្រភព ពី មន្ត្រីនគរបាលខណ្ឌច្បារអំពៅ បានអោយដឹងថា កាលពីថ្ងៃទី១៥ ខែមករា ឆ្នាំ២០២៤ ។"
+        }
         var content = $(".text-content");
         content.empty();
         txt.split("").forEach((char) => {
@@ -61,10 +66,6 @@ function Typing(props) {
     }
 
     function handleKeyDown(e) {
-        if (!timerStarted) {
-            setUserHasStartedTyping(true);
-            startTimer();
-        }
         const content = $(".text-content").find("span");
         const input = $(".text-input");
         input.focus();
@@ -110,21 +111,24 @@ function Typing(props) {
 
     const decrementTimer = () => {
         setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
-    };
+    };444
 
     const startTimer = () => {
-        setTimerStarted(true);
-        const countdown = setInterval(() => {
-            decrementTimer();
-            if (timerRef.current === 0) {
-                clearInterval(countdown);
-            }
-        }, 1000);
+        if (!timerStarted) {
+            setTimerStarted(true);
+            const countdown = setInterval(() => {
+                decrementTimer();
+                if (timerRef.current === 0) {
+                    clearInterval(countdown);
+                }
+            }, 1000);
+        }
     };
-    
+
     useEffect(() => {
         getParaprah();
         window.addEventListener("keydown", focusOnInput);
+        window.addEventListener("keydown", startTimer);
         // getLocations();
         // getPlaces();
         // getAccomodations();
@@ -135,9 +139,16 @@ function Typing(props) {
             <article>
                 <div className={style.container}>
                     <div className={`${style.body} ${onButtonClick === 1 ? style.show : style.none}`}>
-                        <p className={style.time}>
+                        <p className={style.time} onChange={startTimer}>
                             {timer}
                         </p>
+                        <div>
+                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <p className={`${style.typing} text-content`}></p>
+                        </div>
+                    </div>
+
+                    <div className={`${style.body} ${onButtonClick === 2 ? style.show : style.none}`}>
                         <div>
                             <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
                             <p className={`${style.typing} text-content`}></p>
@@ -147,6 +158,13 @@ function Typing(props) {
                     <div className={`${style.body} ${onButtonClick === 3 ? style.show : style.none}`}>
                         <div className={style.zen}>
                             <textarea className={`${style.typing}`} />
+                        </div>
+                    </div>
+
+                    <div className={`${style.body} ${onButtonClick === 4 ? style.show : style.none}`}>
+                        <div>
+                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <p className={`${style.typing} text-content`}></p>
                         </div>
                     </div>
                 </div>
