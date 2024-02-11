@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../../public/css/typing.module.css";
+import Toggle from '../components/toggle.jsx'; 
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {  } from "@fortawesome/free-brands-svg-icons";
 
 function Typing(props) {
+    const [isAccu100, setIsAccu100] = useState(false);
+
     const { onButtonClick } = props;
     const { timerm } = props;
     const { slength } = props;
@@ -90,6 +93,12 @@ function Typing(props) {
         } else {
             console.log("incorrect");
             $(content[inputIndex]).addClass(style.incorrect);
+            console.log(Accu100);
+            // if ( Accu100 ) {
+            //     console.log(Accu100);
+            //     setTimerStarted(false);
+            //     navigate("/result");
+            // }
         }
 
         console.log("key down");

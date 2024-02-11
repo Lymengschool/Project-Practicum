@@ -15,6 +15,11 @@ function Setting() {
     console.log(isNoTimer);
     console.log(isAccu100);
     console.log(islightMode);
+
+    // Function to update isAccu100 state
+    const handleAccu100Toggle = () => {
+        setAccu100(prevState => !prevState);
+    };
     
     return (
         <div>
@@ -23,7 +28,8 @@ function Setting() {
             <SettingComponent icon={<FaEyeSlash />} name={'ការកំណត់ពេល '} detail={'សម្រាប់បង្ហាញពេលវេលារាប់ចុះ'} fun={<Toggle functName={'NoTimer'} setIsNoTimer={setIsNoTimer}/>}/> 
             {/* Pass setIsNoTimer as a prop */}
             <SettingComponent icon={<GoSun />} name={'ផ្ទៃស '} detail={'សម្រាប់បង្ហាញ light mode'} fun={<Toggle functName={'lightMode'} setlightMode={setlightMode}/>}/>
-            <SettingComponent icon={<FaStop />} name={'ឈប់ពេលខុស  '} detail={'សម្រាប់អ្នកដែលចង់បានភាពត្រឹមត្រូវ 100%។ ពេលដែលអ្នកវាយខុស នឹងឈប់ជាបន្ទាន់។'} fun={<Toggle functName={'Accu100'} setAccu100={setAccu100}/>}/>
+            {/* Pass handleAccu100Toggle function as a prop to update isAccu100 state */}
+            <SettingComponent icon={<FaStop />} name={'ឈប់ពេលខុស  '} detail={'សម្រាប់អ្នកដែលចង់បានភាពត្រឹមត្រូវ 100%។ ពេលដែលអ្នកវាយខុស នឹងឈប់ជាបន្ទាន់។'} fun={<Toggle functName={'Accu100'} toggleAccu100={handleAccu100Toggle}/>}/>
             <SettingComponent icon={<MdKey />} name={'ប្តូរពាក្យសម្ងាត់  '} detail={'ប្តូរពាក្យសម្ថាត់របស់អ្នក'} />
             <Footer />
         </div>
