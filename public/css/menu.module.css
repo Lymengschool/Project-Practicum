@@ -131,6 +131,50 @@
     background-color: #007acc;
 }
 
+.ppopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.pinner {
+    background-color: #1B2028;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+}
+
+.ppopup .pinner textarea{
+    background-color: #151A21;
+    color: #F7EEEE;
+    width: 100%;
+    overflow: auto;
+    height: 300px;
+    resize: none;
+    font-family: "Koh Santepheap";
+}
+
+.ppopup .pinner button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+    border: none;
+    background-color: #151A21;
+    color: #F7EEEE;
+    font-family: "Koh Santepheap";
+    border-radius: 10px;
+}
+
 @media (min-width: 400px) and (max-width: 600px){
     .menublock{
         display: none;
@@ -141,11 +185,3 @@
     }
 }
 
-.cuscontain {
-    z-index: 99;
-    position: relative; /* Changed from grid to relative */
-    background-color: bisque;
-    display: grid; /* Added */
-    justify-content: center; /* Added */
-    align-items: center; /* Added */
-}

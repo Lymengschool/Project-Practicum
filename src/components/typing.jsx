@@ -40,7 +40,7 @@ function Typing(props) {
 
     useEffect(() => {
         getParaprah();
-    }, [slength]); 
+    }, [slength]);
 
     function setParagraph(txt) {
         var content = $(".text-content");
@@ -57,7 +57,11 @@ function Typing(props) {
     function focusOnInput(e) {
         const content = $(".text-content").find("span");
         const input = $(".text-input");
-        input.focus();
+        const textarea = document.getElementById("myTextarea"); // Get the textarea by its id
+        if (document.activeElement !== textarea) {
+            // Check if the textarea is not the currently focused element
+            input.focus();
+        }
     }
 
     function handleKeyDown(e) {
@@ -121,7 +125,7 @@ function Typing(props) {
             }
         }, 1000);
     };
-    
+
     useEffect(() => {
         getParaprah();
         window.addEventListener("keydown", focusOnInput);
@@ -135,9 +139,14 @@ function Typing(props) {
             <article>
                 <div className={style.container}>
                     <div className={`${style.body} ${onButtonClick === 1 ? style.show : style.none}`}>
-                        <p className={style.time}>
-                            {timer}
-                        </p>
+                        <p className={style.time}>{timer}</p>
+                        <div>
+                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <p className={`${style.typing} text-content`}></p>
+                        </div>
+                    </div>
+
+                    <div className={`${style.body} ${onButtonClick === 2 ? style.show : style.none}`}>
                         <div>
                             <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
                             <p className={`${style.typing} text-content`}></p>
@@ -147,6 +156,13 @@ function Typing(props) {
                     <div className={`${style.body} ${onButtonClick === 3 ? style.show : style.none}`}>
                         <div className={style.zen}>
                             <textarea className={`${style.typing}`} />
+                        </div>
+                    </div>
+
+                    <div className={`${style.body} ${onButtonClick === 4 ? style.show : style.none}`}>
+                        <div>
+                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <p className={`${style.typing} text-content`}></p>
                         </div>
                     </div>
                 </div>

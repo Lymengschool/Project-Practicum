@@ -10,6 +10,7 @@ function Menu() {
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [length, setLength] = useState("m");
     const [timer, setTimer] = useState(30);
+    const [show, setShow] = useState(false);
 
     return (
         <div className={menu.container}>
@@ -74,7 +75,7 @@ function Menu() {
                 </div>
 
                 <div className={`${menu.innerright} ${activeButton === 4 ? menu.active : menu.none}`}>
-                    <button>
+                    <button onClick={() => setShow(true)}>
                         <span>ផ្លាស់ប្តូ</span>
                     </button>
                 </div>
@@ -179,7 +180,7 @@ function Menu() {
                             </div>
 
                             <div className={`${menu.innerbottom} ${activeButton === 4 ? menu.active : menu.none}`}>
-                                <button>
+                                <button onClick={() => setShow(true)}>
                                     <span>ផ្លាស់ប្តូ</span>
                                 </button>
                             </div>
@@ -187,6 +188,18 @@ function Menu() {
                     </div>
                 )}
             </div>
+
+            {show && (
+                <div className={menu.ppopup}>
+                    <div className={menu.pinner}>
+                        <textarea id='myTextarea'></textarea>
+                        <button onClick={() => setShow(false)}>
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <Typing onButtonClick={activeButton} timerm={timer} slength={length} />
         </div>
     );
