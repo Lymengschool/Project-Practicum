@@ -17,12 +17,6 @@ function Typing(props) {
         return JSON.parse(sessionStorage.getItem('isAccu100')) || false;
     });
 
-    const [islightMode, setIsLightMode] = useState(() => {
-        // Retrieve from session storage or default to false
-        return JSON.parse(sessionStorage.getItem('islightMode')) || false;
-    });
-
-
     const { onButtonClick } = props;
     const { timerm } = props;
     const { slength } = props;
@@ -162,7 +156,12 @@ function Typing(props) {
             <article>
                 <div className={style.container}>
                     <div className={`${style.body} ${onButtonClick === 1 ? style.show : style.none}`}>
-                        {isNoTimer && <p className={style.time}>{timer}</p>}
+
+                       
+                        
+                    {isNoTimer ? null : <p className={style.time}>{timer}</p>}
+
+
                         <div>
                             <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
                             <p className={`${style.typing} text-content`}></p>
