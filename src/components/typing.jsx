@@ -3,23 +3,18 @@ import { useNavigate } from "react-router-dom";
 import style from "../../public/css/typing.module.css";
 import Setting from '../pages/SettingPage';
 import clickFile from './../../public/audio/click.wav'
+import clickMistakeFile from './../../public/audio/mistake_click.wav'
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {  } from "@fortawesome/free-brands-svg-icons";
 
 var clickNoise = new Audio(clickFile);
+var mistakeClickNoise = new Audio(clickMistakeFile);
 
 
 const sound = new Howl({
     src: [""],
 });
-
-const playSound = () => {
-    // sound.stop();
-    // sound.play();
-    clickNoise.play();
-
-};
 
 function Typing(props) {
     const [isNoTimer, setIsNoTimer] = useState(() => {
@@ -31,6 +26,16 @@ function Typing(props) {
         // Retrieve from session storage or default to false
         return JSON.parse(sessionStorage.getItem('isAccu100')) || false;
     });
+
+    const playSound = () => {
+        clickNoise.play();
+    
+    };
+
+    const playMistakeSound = () => {
+        mistakeClickNoise.play();
+    
+    };
 
     const { onButtonClick } = props;
     const { timerm } = props;
@@ -90,7 +95,6 @@ function Typing(props) {
     }
 
     function handleKeyDown(e) {
-        playSound();
         if (!timerStarted) {
             setUserHasStartedTyping(true);
             startTimer();
@@ -113,9 +117,11 @@ function Typing(props) {
 
         if ($(content[inputIndex]).html() === inputValue.split("")[inputValue.length - 1]) {
             console.log("correct");
+            playSound();
             $(content[inputIndex]).addClass(style.correct);
         } else {
             console.log("incorrect");
+            playMistakeSound()
             $(content[inputIndex]).addClass(style.incorrect);
             console.log(isAccu100);
             if (isAccu100) {
