@@ -20,6 +20,7 @@ function Toggle({ functName, setIsNoTimer, setlightMode, setAccu100 }) {
         } else if (functName === "lightMode") {
             setlightMode((prevState) => !prevState);
             sessionStorage.setItem("islightMode", JSON.stringify(!isChecked));
+            
         } else {
             setAccu100((prevState) => !prevState);
             sessionStorage.setItem("isAccu100", JSON.stringify(!isChecked));
