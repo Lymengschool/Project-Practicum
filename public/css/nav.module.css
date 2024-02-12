@@ -41,7 +41,7 @@ nav{
 }
 
 .container .left div p:last-child{
-    color: #dfdfdf;
+    color: var(--focus);
     font-size: 1.7rem;
 }
 
@@ -58,7 +58,7 @@ nav{
 }
 
 .icon:active{
-    color: #007ACC;;
+    color: var(--focus);
 }
 
 @media (min-width: 400px) and (max-width: 600px){
