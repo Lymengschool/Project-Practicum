@@ -1,21 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap');
-@font-face { font-family: 'Koh Santepheap'; }
+@import url("https://fonts.googleapis.com/css2?family=Koh+Santepheap&display=swap");
+@font-face {
+    font-family: "Koh Santepheap";
+}
 
 .tittle {
     text-align: center;
-    color: #4B5975;
-    font-family: "Koh Santepheap", ' sans-serif';
+    color: #4b5975;
+    font-family: "Koh Santepheap", " sans-serif";
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%; 
+    line-height: 150%;
     letter-spacing: 1.6px;
 }
 
 .changePass {
     display: flex;
     height: fit-content;
-    width:100%;
+    width: 100%;
     flex-direction: row;
     justify-content: space-around;
 }
@@ -31,62 +33,60 @@
     outline: none;
     border: none;
     width: 90px;
-    height:50px;
-    background-color: #4B5975;
+    height: 50px;
+    background-color: #4b5975;
     color: white;
     border-radius: 25px;
     margin-top: auto;
     margin-left: 20%;
     font-size: 20px;
-    font-family: 'Koh Santepheap', sans-serif;
+    font-family: "Koh Santepheap", sans-serif;
 }
 
 .popupBackground {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent white background */
-  z-index: 1000; /* Ensure the popup is above other content */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(2px);
-  }
-  
-  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent white background */
+    z-index: 1000; /* Ensure the popup is above other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.popup {
     position: absolute;
     left: 35%;
     bottom: 20%;
     padding: 1%;
     border-radius: 8px;
-    background-color: #4B5975;
+    background-color: #4b5975;
     border-radius: 100px;
     width: 400px;
     height: 400px;
-  }
+}
 
-  .popupInner {
-    background-color: #4B5975;
+.popupInner {
+    background-color: #4b5975;
     color: aliceblue;
     border-radius: 100px;
     margin-top: 15%;
-  }
-   
-  .form {
-    background-color: #4B5975;
-   
-  }
+}
 
-  .formGroup {
+.form {
+    background-color: #4b5975;
+}
+
+.formGroup {
     width: fit-content;
     margin-left: 13%;
     margin-top: 5%;
     border-radius: 25px;
-    
-  }
-  .customLabel {
+}
+.customLabel {
     color: aliceblue;
     height: 43px;
     width: 289px;
@@ -94,31 +94,29 @@
     outline: none;
     border: none;
     text-align: center;
-  }
+}
 
-  .buttonPop {
+.buttonPop {
     outline: none;
     border: none;
     width: 90px;
-    height:50px;
-    background-color: #1B2028;
+    height: 50px;
+    background-color: #1b2028;
     color: white;
     border-radius: 25px;
     margin-top: 5%;
     margin-left: 35%;
-  }
-  
-  
-  .closeBtn {
+}
+
+.closeBtn {
     outline: none;
     border: none;
     color: white;
-    font-family: "Koh Santepheap", ' sans-serif';
+    font-family: "Koh Santepheap", " sans-serif";
     width: 35px;
     height: 35px;
     font-size: 15px;
-    background-color:#4B5975;
+    background-color: #4b5975;
     border-radius: 25px;
     margin-top: 0;
-  }
-  
+}
