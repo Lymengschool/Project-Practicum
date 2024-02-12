@@ -41,7 +41,7 @@
     font-family: 'Koh Santepheap', sans-serif;
 }
 
-.popup-background {
+.popupBackground {
   position: fixed;
   top: 0;
   left: 0;
@@ -52,7 +52,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10000px);
+  backdrop-filter: blur(-100px);
   }
   
   .popup {
