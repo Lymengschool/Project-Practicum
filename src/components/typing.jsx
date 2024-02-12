@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../../public/css/typing.module.css";
-import Setting from '../pages/SettingPage';
-import clickFile from './../../public/audio/click.wav'
-import clickMistakeFile from './../../public/audio/mistake_click.wav'
+import Setting from "../pages/SettingPage";
+import clickFile from "./../../public/audio/click.wav";
+import clickMistakeFile from "./../../public/audio/mistake_click.wav";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {  } from "@fortawesome/free-brands-svg-icons";
 
 var clickNoise = new Audio(clickFile);
 var mistakeClickNoise = new Audio(clickMistakeFile);
-
 
 const sound = new Howl({
     src: [""],
@@ -19,27 +18,23 @@ const sound = new Howl({
 function Typing(props) {
     const [isNoTimer, setIsNoTimer] = useState(() => {
         // Retrieve from session storage or default to false
-        return JSON.parse(sessionStorage.getItem('isNoTimer')) || false;
+        return JSON.parse(sessionStorage.getItem("isNoTimer")) || false;
     });
 
     const [isAccu100, setIsAccu100] = useState(() => {
         // Retrieve from session storage or default to false
-        return JSON.parse(sessionStorage.getItem('isAccu100')) || false;
+        return JSON.parse(sessionStorage.getItem("isAccu100")) || false;
     });
 
     const playSound = () => {
         clickNoise.play();
-    
     };
 
     const playMistakeSound = () => {
         mistakeClickNoise.play();
-    
     };
 
-    const onButtonClick = props.onButtonClick;
-    const timerm = props.timerm;
-    const slength  = props.slength;
+    const { onButtonClick, timerm, slength, setOnType } = props;
 
     const [timer, setTimer] = useState(timerm);
     const [mode, setMode] = useState(1 || onButtonClick);    // 1: Timer, 2: Quote, 3: Free Mind, 4: Customize
@@ -137,7 +132,7 @@ function Typing(props) {
             $(content[inputIndex]).addClass(style.correct);
         } else {
             console.log("incorrect");
-            playMistakeSound()
+            playMistakeSound();
             $(content[inputIndex]).addClass(style.incorrect);
             console.log(isAccu100);
             if (isAccu100) {
@@ -145,7 +140,6 @@ function Typing(props) {
                 setTimerStarted(false);
                 navigate("/result");
             }
-
         }
 
         console.log("key down");
@@ -181,13 +175,22 @@ function Typing(props) {
         }, 1000);
     };
 
+    const handleMouseMove = () => {
+        
+        setOnType(false);
+        console.log("Mouse moved");
+    };
+
     useEffect(() => {
         getParaprah();
         window.addEventListener("keydown", focusOnInput);
+        window.addEventListener("keydown", () => setOnType(true));
         // getLocations();
         // getPlaces();
         // getAccomodations();
         // getTransportations();
+
+        window.addEventListener("mousemove", handleMouseMove);
     }, []);
     return (
         <>

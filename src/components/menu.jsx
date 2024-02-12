@@ -11,10 +11,12 @@ function Menu() {
     const [length, setLength] = useState("m");
     const [timer, setTimer] = useState(30);
     const [show, setShow] = useState(false);
+    const [onType, setOnType] = useState(false);
+    console.log(onType)
 
     return (
         <div className={menu.container}>
-            <div className={menu.menublock}>
+            <div className={`${menu.menublock} ${onType === false ? menu.active : menu.none }`}>
                 <div className={menu.innerleft}>
                     <button onClick={() => setActiveButton(1)}>
                         <span>
@@ -199,8 +201,9 @@ function Menu() {
                     </div>
                 </div>
             )}
+            
 
-            <Typing onButtonClick={activeButton} timerm={timer} slength={length} />
+            <Typing onButtonClick={activeButton} timerm={timer} slength={length} setOnType={setOnType}/>
         </div>
     );
 }
