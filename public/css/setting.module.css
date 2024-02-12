@@ -4,7 +4,7 @@
 }
 
 .body {
-    background-color: #1b2028;
+    background-color: var(--background);
     display: flex;
     align-items: center;
 }
@@ -20,7 +20,7 @@
 .functName {
     margin-top: 34px;
     margin-left: 15%;
-    color: #4b5975;
+    color: var(--head);
     font-family: "Koh Santepheap", sans-serif;
     font-size: 20px;
     font-style: normal;
@@ -31,7 +31,7 @@
 
 .detail {
     margin-left: 18%;
-    color: #fff;
+    color: var(--word);
     font-family: "Koh Santepheap", sans-serif;
     font-size: 16px;
     font-style: normal;

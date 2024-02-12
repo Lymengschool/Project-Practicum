@@ -16,7 +16,7 @@
     width: fit-content;
     padding: 0 1rem 0;
     height: 40px;
-    background-color: #151a21;
+    background-color: var(--subback);
     border-radius: 10px;
 }
 
@@ -29,12 +29,12 @@
     display: flex;
     align-items: center;
     border: none;
-    background-color: #151a21;
+    background-color: var(--subback);
 }
 
 .menublock button span,
 .smallmenu button span {
-    background-color: #151a21;
+    background-color: var(--subback);
     font-family: "Koh Santepheap";
     color: #4b5975;
     transition: transform 0.2s ease-in-out;
@@ -42,7 +42,7 @@
 
 .menublock button:hover span,
 .smallmenu button:hover span {
-    color: #dfdfdf;
+    color: var(--hover);
     transform: scale(1.15);
 }
 
@@ -50,12 +50,12 @@
     display: flex;
     height: 100%;
     gap: 1rem;
-    background-color: #151a21;
+    background-color: var(--subback);
 }
 
 .icon {
     font-size: 1rem;
-    background-color: #151a21;
+    background-color: var(--subback);
     padding-right: 0.5rem;
 }
 
@@ -65,7 +65,7 @@
     gap: 1rem;
     width: fit-content;
     margin-left: 1rem;
-    background-color: #151a21;
+    background-color: var(--subback);
     border-left: 1px solid white;
 }
 
@@ -109,7 +109,7 @@
     display: flex;
     justify-content: center;
     width: 20rem;
-    border: 1px solid #151a21;
+    border: 1px solid var(--subback);
     padding: 0.5rem 0;
     margin-bottom: 0.5rem;
     border-radius: 10px;
@@ -127,7 +127,7 @@
 .smallmenu .popup .innerbottom button:hover,
 .smallmenu .popup .innerbottom button:hover > span,
 .smallmenu .popup .innerbottom button:hover > span > .icon {
-    color: #151a21;
+    color: var(--subback);
     background-color: #007acc;
 }
 
@@ -152,7 +152,7 @@
 }
 
 .ppopup .pinner textarea{
-    background-color: #151A21;
+    background-color: var(--subback);
     color: #F7EEEE;
     width: 100%;
     overflow: auto;
@@ -169,7 +169,7 @@
     padding: 0.5rem 0;
     margin-top: 1rem;
     border: none;
-    background-color: #151A21;
+    background-color: var(--subback);
     color: #F7EEEE;
     font-family: "Koh Santepheap";
     border-radius: 10px;

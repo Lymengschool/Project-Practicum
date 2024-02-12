@@ -5,7 +5,7 @@
 
 .tittle {
     text-align: center;
-    color: #4b5975;
+    color: var(--head);
     font-family: "Koh Santepheap", " sans-serif";
     font-size: 40px;
     font-style: normal;

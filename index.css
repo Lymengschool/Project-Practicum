@@ -1,7 +1,8 @@
 :root {
-  --blue: #1e90ff;
-  --white: #ffffff;
-  --gray: #4B5975;
-  --black: #151a21;
-  --lightgray: #dfdfdf;
+  --head: #1e90ff;
+  --focus: #1e90ff;
+  --word: #4B5975;
+  --subback: #151a21;
+  --hover: #dfdfdf;
+  --background: #1b2028;
 }
