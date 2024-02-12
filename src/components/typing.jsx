@@ -2,9 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../../public/css/typing.module.css";
 import Setting from '../pages/SettingPage';
+import clickFile from './../../public/audio/click.wav'
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {  } from "@fortawesome/free-brands-svg-icons";
+
+var clickNoise = new Audio(clickFile);
+
 
 const sound = new Howl({
     src: [""],
@@ -13,6 +17,8 @@ const sound = new Howl({
 const playSound = () => {
     // sound.stop();
     // sound.play();
+    clickNoise.play();
+
 };
 
 function Typing(props) {
