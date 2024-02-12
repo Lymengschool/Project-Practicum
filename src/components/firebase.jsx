@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
-import { signInWithRedirect, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { signInWithRedirect, signInWithPopup, FacebookAuthProvider, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBl6rvFMcaoh0P87U3lhmgSQkSgjTwyOzg",
@@ -28,5 +28,6 @@ export {
   signInWithRedirect,
   signInWithPopup,
   ref,
-  FacebookAuthProvider
+  FacebookAuthProvider,
+  onAuthStateChanged
 };

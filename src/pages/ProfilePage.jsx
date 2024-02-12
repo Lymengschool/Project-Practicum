@@ -3,8 +3,20 @@ import Nav from "../components/nav.jsx";
 import style from "./../../public/css/profile.module.css";
 import Footer from '../components/footer.jsx';
 import { RiImageAddFill } from "react-icons/ri";
+import { auth } from "./../components/firebase.jsx";
 
 function Profile() {
+
+    const user = auth.currentUser;
+    if (user !== null) {
+
+        const displayName = user.user_name;
+        const email = user.email;
+        const photoURL = user.photoURL;
+        const emailVerified = user.emailVerified;
+        const uid = user.uid;
+
+    }
 
     return (
         <div>
@@ -13,7 +25,7 @@ function Profile() {
                 <div className={style.FirstBlock}>
                     <div className={style.picture}><RiImageAddFill /></div>
                     <div className={style.nameContainer}>
-                        <p className={style.name}>Ly Kongming</p>
+                        <p className={style.name}>{displayName}</p>
                         <p className={style.join}>Joined Since: 01-Jan-2023</p>
                     </div>
                 </div>

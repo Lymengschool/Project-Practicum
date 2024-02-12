@@ -1,6 +1,6 @@
 import React from "react";
 import style from './../../public/css/form.module.css';
-import {app, auth, database, createUserWithEmailAndPassword, signInWithEmailAndPassword,set, ref} from './firebase'
+import {app, auth, database,onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword,set, ref} from './firebase'
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -48,7 +48,14 @@ function Form({ name, confirmpassword, action }) {
             theme: "#4B5975",
             transition: Bounce,
             });
-            navigate("/profile");
+
+            onAuthStateChanged(auth, (user) => {
+              if (user) {
+                navigate("/profile");
+                const uid = user.uid;  
+              } 
+            });
+            
         })
         .catch(error => {
           const error_message = error.message;
