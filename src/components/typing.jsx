@@ -37,17 +37,18 @@ function Typing(props) {
     
     };
 
-    const { onButtonClick } = props;
-    const { timerm } = props;
-    const { slength } = props;
+    const onButtonClick = props.onButtonClick;
+    const timerm = props.timerm;
+    const slength  = props.slength;
 
     const [timer, setTimer] = useState(timerm);
+    const [mode, setMode] = useState(1 || onButtonClick);    // 1: Timer, 2: Quote, 3: Free Mind, 4: Customize
     const [timerStarted, setTimerStarted] = useState(false);
     const [userHasStartedTyping, setUserHasStartedTyping] = useState(false);
     const [correct, setCorrect] = useState(0);
     const [mistake, setMistake] = useState(0);
     const [WPM, setWPM] = useState(0.0);
-    const [CPM, setCPM] = useState(0.0);
+    const [CPM, setCPM] = useState(0.0);slength
 
     const navigate = useNavigate();
 
@@ -70,7 +71,16 @@ function Typing(props) {
 
     useEffect(() => {
         getParaprah();
-    }, [slength]);
+        if (mode === 1) {
+            console.log("Timer Mode");
+        } else if (mode === 2) {
+            console.log("Quotes Mode");
+        } else if (mode === 3) {
+            console.log("Free Mind Mode");
+        } else {
+            console.log("Custom Mode")
+        }
+    }, [slength, mode]);
 
     function setParagraph(txt) {
         var content = $(".text-content");
@@ -99,8 +109,14 @@ function Typing(props) {
             setUserHasStartedTyping(true);
             startTimer();
         }
+
         const content = $(".text-content").find("span");
         const input = $(".text-input");
+
+        console.log("event+++", e, content, input)
+
+
+
         input.focus();
         var inputValue = input.val();
         var inputLength = inputValue.length;
@@ -177,10 +193,10 @@ function Typing(props) {
         <>
             <article>
                 <div className={style.container}>
-                    <div className={`${style.body} ${onButtonClick === 1 ? style.show : style.none}`}>
+                    <div className={`${style.body}`}>
             
                         
-                        {isNoTimer ? null : <p className={style.time}>{timer}</p>}
+                        {isNoTimer ? null : <p className={`${style.time} ${onButtonClick === 1 ? style.show : style.none}`}>{timer}</p>}
 
                         <div>
                             <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
@@ -188,25 +204,6 @@ function Typing(props) {
                         </div>
                     </div>
 
-                    <div className={`${style.body} ${onButtonClick === 2 ? style.show : style.none}`}>
-                        <div>
-                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
-                            <p className={`${style.typing} text-content`}></p>
-                        </div>
-                    </div>
-
-                    <div className={`${style.body} ${onButtonClick === 3 ? style.show : style.none}`}>
-                        <div className={style.zen}>
-                            <textarea className={`${style.typing}`} />
-                        </div>
-                    </div>
-
-                    <div className={`${style.body} ${onButtonClick === 4 ? style.show : style.none}`}>
-                        <div>
-                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
-                            <p className={`${style.typing} text-content`}></p>
-                        </div>
-                    </div>
                 </div>
             </article>
         </>
