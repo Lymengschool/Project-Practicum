@@ -5,12 +5,15 @@ import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { Bounce } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Form({ name, confirmpassword, action }) {
   const [Name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [Confirmpassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
 
   const handleButtonClick = () => {
 
@@ -45,6 +48,7 @@ function Form({ name, confirmpassword, action }) {
             theme: "#4B5975",
             transition: Bounce,
             });
+            navigate("/profile");
         })
         .catch(error => {
           const error_message = error.message;

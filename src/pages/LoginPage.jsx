@@ -9,11 +9,12 @@ import {app, auth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider} fr
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Footer from './../components/footer';
-
+import { useNavigate } from "react-router-dom";
 
 function login() {
     const provider = new GoogleAuthProvider();
     const providers = new FacebookAuthProvider();
+    const navigate = useNavigate();
 
         const loginWithGoogle = () => {
             signInWithPopup(auth, provider)
@@ -24,7 +25,8 @@ function login() {
             // The signed-in user info.
             const user = result.user;
             if (user) {
-                 alert("user create")
+                 alert("user create");
+                 navigate("/profile");
             }
            
         }).catch((error) => {
@@ -48,6 +50,8 @@ function login() {
                     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                     const credential = FacebookAuthProvider.credentialFromResult(result);
                     const accessToken = credential.accessToken;
+                    navigate("/profile");
+
                 })
                 .catch((error) => {
                     // Handle Errors here.

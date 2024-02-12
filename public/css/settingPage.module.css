@@ -3,11 +3,122 @@
 
 .tittle {
     text-align: center;
-color: #4B5975;
-font-family: "Koh Santepheap", ' sans-serif';
-font-size: 40px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 60px */
-letter-spacing: 1.6px;
+    color: #4B5975;
+    font-family: "Koh Santepheap", ' sans-serif';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; 
+    letter-spacing: 1.6px;
 }
+
+.changePass {
+    display: flex;
+    height: fit-content;
+    width:100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.detail {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    margin-left: -5%;
+}
+
+.button {
+    outline: none;
+    border: none;
+    width: 90px;
+    height:50px;
+    background-color: #4B5975;
+    color: white;
+    border-radius: 25px;
+    margin-top: auto;
+    margin-left: 20%;
+    font-size: 20px;
+    font-family: 'Koh Santepheap', sans-serif;
+}
+
+.popup-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+  z-index: 1000; /* Ensure the popup is above other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10000px);
+  }
+  
+  .popup {
+    position: absolute;
+    left: 35%;
+    bottom: 20%;
+    padding: 1%;
+    border-radius: 8px;
+    background-color: #4B5975;
+    border-radius: 100px;
+    width: 400px;
+    height: 400px;
+  }
+
+  .popupInner {
+    background-color: #4B5975;
+    color: aliceblue;
+    border-radius: 100px;
+    margin-top: 15%;
+  }
+   
+  .form {
+    background-color: #4B5975;
+   
+  }
+
+  .formGroup {
+    width: fit-content;
+    margin-left: 13%;
+    margin-top: 5%;
+    border-radius: 25px;
+    
+  }
+  .customLabel {
+    color: aliceblue;
+    height: 43px;
+    width: 289px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    text-align: center;
+  }
+
+  .buttonPop {
+    outline: none;
+    border: none;
+    width: 90px;
+    height:50px;
+    background-color: #1B2028;
+    color: white;
+    border-radius: 25px;
+    margin-top: 5%;
+    margin-left: 35%;
+  }
+  
+  
+  .closeBtn {
+    outline: none;
+    border: none;
+    color: white;
+    font-family: "Koh Santepheap", ' sans-serif';
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    background-color:#4B5975;
+    border-radius: 25px;
+    margin-top: 0;
+  }
+  
