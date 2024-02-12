@@ -112,7 +112,7 @@ function Form({ name, confirmpassword, action }) {
   };
 
   const validatePassword = (password) => {
-    return password.length >= 6;
+    return password.length >= 3;
   };
  
   return (
