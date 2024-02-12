@@ -6,6 +6,15 @@ import Setting from '../pages/SettingPage';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {  } from "@fortawesome/free-brands-svg-icons";
 
+const sound = new Howl({
+    src: [""],
+});
+
+const playSound = () => {
+    // sound.stop();
+    // sound.play();
+};
+
 function Typing(props) {
     const [isNoTimer, setIsNoTimer] = useState(() => {
         // Retrieve from session storage or default to false
@@ -75,6 +84,7 @@ function Typing(props) {
     }
 
     function handleKeyDown(e) {
+        playSound();
         if (!timerStarted) {
             setUserHasStartedTyping(true);
             startTimer();

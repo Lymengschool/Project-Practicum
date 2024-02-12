@@ -9,6 +9,8 @@ import Footer from '../components/footer.jsx';
 import Toggle from '../components/toggle.jsx'; 
 import Typing from "../components/typing.jsx";
 import { RxCross2 } from "react-icons/rx";
+import { Howl, Howler } from 'howler';
+
 
 function Setting() {
     const [isNoTimer, setIsNoTimer] = useState(JSON.parse(localStorage.getItem('isNoTimer')) || false); 
@@ -27,6 +29,8 @@ function Setting() {
         setConfirmNewPassword('');
         setError(null);
       };
+
+      
 
 
     useEffect(() => {
