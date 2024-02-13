@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from "../components/nav.jsx";
 import style from "./../../public/css/profile.module.css";
 import Footer from '../components/footer.jsx';
@@ -6,17 +6,33 @@ import { RiImageAddFill } from "react-icons/ri";
 import { auth } from "./../components/firebase.jsx";
 
 function Profile() {
+    const [user, setUser] = useState(null);
 
-    const user = auth.currentUser;
-    if (user !== null) {
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in.
+                setUser(user);
+            } else {
+                // No user is signed in.
+                setUser(null);
+            }
+        });
 
-        const displayName = user.user_name;
-        const email = user.email;
-        const photoURL = user.photoURL;
-        const emailVerified = user.emailVerified;
-        const uid = user.uid;
+        // Cleanup function to unsubscribe from the listener when the component unmounts
+        return () => unsubscribe();
+    }, []);
 
+    if (!user) {
+        // If user is null, return loading indicator or redirect to login page
+        return <p>Loading...</p>;
     }
+
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+    const emailVerified = user.emailVerified;
+    const uid = user.uid;
 
     return (
         <div>
