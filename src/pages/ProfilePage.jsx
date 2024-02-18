@@ -27,8 +27,10 @@ function Profile() {
         // If user is null, return loading indicator or redirect to login page
         return <p>Loading...</p>;
     }
+    
 
     const displayName = user.displayName;
+  
     const email = user.email;
     const photoURL = user.photoURL;
     const emailVerified = user.emailVerified;

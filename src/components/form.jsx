@@ -18,7 +18,7 @@ function Form({ name, confirmpassword, action }) {
     if (action === "login") {
       // Validate input fields
       if (!validateEmail(email) || !validatePassword(password)) {
-        toast.warn('Email និង password មិនត្រឹមត្រូវ', {
+        toast.warn('Email and password are incorrect', {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -34,7 +34,7 @@ function Form({ name, confirmpassword, action }) {
 
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          toast.success('Login ជោគជ័យ', {
+          toast.success('Login successful', {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -45,11 +45,12 @@ function Form({ name, confirmpassword, action }) {
             theme: "#4B5975",
             transition: Bounce,
           });
+          const user = auth.currentUser;
           navigate("/profile"); // Navigate to profile after successful login
         })
         .catch(error => {
           const error_message = error.message;
-          toast.error('Login មិនជោគជ័យ!', {
+          toast.error('Login failed!', {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -62,8 +63,43 @@ function Form({ name, confirmpassword, action }) {
           });
         });
     } else if (action === "register") {
-      // Register logic
-    }
+
+      if (!validateEmail(email) || !validatePassword(password)) {
+        alert('Email or Password is Outta Line!!');
+        return;
+      }
+  
+      if (password !== Confirmpassword) {
+        alert("password not match!!");
+        return;
+      }
+  
+      // Move on with Auth
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+  
+          // Create User data
+          const user_data = {
+            user_name: Name,
+            email: email,
+            last_login: Date.now()
+          };
+  
+          // Push to Firebase Database
+          set(ref(database, 'users/' + user.uid), user_data);
+  
+          // Done
+          alert('User Created!!');
+        })
+        .catch(error => {
+          // Firebase will use this to alert of its errors
+          const error_code = error.code;
+          const error_message = error.message;
+  
+          alert(error_message);
+        });
+    };
   };
 
   const validateEmail = (email) => {
@@ -87,14 +123,14 @@ function Form({ name, confirmpassword, action }) {
   });
 
   return (
-    <body className={style.body}>
-      <form className={style.contianer}>
+    <div className={style.body}>
+      <form className={style.container}>
         {name && (
           <input
             className={style.input}
             type="text"
             id="Name"
-            placeholder="ឈ្មោះ"
+            placeholder="Name"
             value={Name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -103,7 +139,7 @@ function Form({ name, confirmpassword, action }) {
           className={style.input}
           type="email"
           id="email"
-          placeholder="អ៊ីមែល"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -111,7 +147,7 @@ function Form({ name, confirmpassword, action }) {
           className={style.input}
           type="password"
           id="password"
-          placeholder="ពាក្យសម្ងាត់"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -121,7 +157,7 @@ function Form({ name, confirmpassword, action }) {
             className={style.input}
             type="password"
             id="Confirmpassword"
-            placeholder="ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់"
+            placeholder="Confirm Password"
             value={Confirmpassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
@@ -130,10 +166,10 @@ function Form({ name, confirmpassword, action }) {
           className={style.button}
           type="button"
           onClick={handleButtonClick}
-          value={action === "login" ? "ចូល" : "ចុះឈ្មោះ"}
+          value={action === "login" ? "Login" : "Register"}
         />
       </form>
-    </body>
+    </div>
   );
 }
 
