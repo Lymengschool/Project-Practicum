@@ -25,8 +25,8 @@ function login() {
             // The signed-in user info.
             const user = result.user;
             if (user) {
-                 alert("user create");
-                 navigate("/profile");
+                alert("user create");
+                navigate("/profile");
             }
            
         }).catch((error) => {
@@ -83,7 +83,7 @@ function login() {
     return (
         <div> 
             <Nav />
-             <div className={style.body}>
+            <div className={style.body}>
                 <div className={style.container}>
                     <h1 className={style.tittle}>ចូលគណនេយ្យ</h1>
                     <Form action={"login"}/>
@@ -104,7 +104,7 @@ function login() {
                 
             </div>
         </div>
-       
+
     );
 }
 

@@ -125,6 +125,7 @@ function Form({ name, confirmpassword, action }) {
   return (
     <div className={style.body}>
       <form className={style.container}>
+
         {name && (
           <input
             className={style.input}
