@@ -10,6 +10,8 @@ import Toggle from '../components/toggle.jsx';
 import Typing from "../components/typing.jsx";
 import { RxCross2 } from "react-icons/rx";
 import { Howl, Howler } from 'howler';
+import PopReset from '../components/popUpResetPass.jsx';
+
 
 
 function Setting() {
@@ -52,6 +54,7 @@ function Setting() {
                 </div>
                 <button className={style.button} onClick={openPopup}>ប្តូរ</button>
             </div>
+
 
             {isOpen && (
   <div className={style.popupBackground}>
@@ -101,6 +104,8 @@ function Setting() {
     </div>
   </div>
 )}
+
+<PopReset />
 
 
             <Typing isNoTimer={isNoTimer} isAccu100={isAccu100} islightMode={islightMode} />

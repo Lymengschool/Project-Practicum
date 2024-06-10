@@ -5,6 +5,8 @@ import Footer from '../components/footer.jsx';
 import { RiImageAddFill } from "react-icons/ri";
 import { auth } from "./../components/firebase.jsx";
 
+
+
 function Profile() {
     const [user, setUser] = useState(null);
 
