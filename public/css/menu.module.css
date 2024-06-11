@@ -193,6 +193,10 @@
     background-color: #303f9f; /* Darker shade on hover */
 }
 
+#time{
+    color: #ffffff;
+}
+
 @media (min-width: 400px) and (max-width: 600px) {
     .menublock {
         display: none;

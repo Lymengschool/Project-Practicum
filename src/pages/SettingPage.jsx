@@ -104,15 +104,16 @@ function Setting() {
                             autoFocus
                             required
                             margin='dense'
-                            id='name'
-                            name='oldPassword'
-                            label='ពាក្យសម្ងាត់ចាស់'
+                            id={style.input}
+                            name='confirmPassword'
+                            label='ពាក្យសម្រេចចាស់'
                             type='text'
                             fullWidth
                             variant='standard'
-                            placeholder='ពាក្យសម្ងាត់ចាស់'
+                            placeholder='ពាក្យសម្រេចចាស់'
                             InputLabelProps={{
                                 shrink: true,
+                                style: { color: "white" },
                             }}
                         />
 
@@ -120,7 +121,7 @@ function Setting() {
                             autoFocus
                             required
                             margin='dense'
-                            id='name'
+                            id={style.input}
                             name='newPassword'
                             label='ពាក្យសម្ងាតថ្មី់'
                             type='text'
@@ -129,6 +130,7 @@ function Setting() {
                             placeholder='ពាក្យសម្ងាតថ្មី់'
                             InputLabelProps={{
                                 shrink: true,
+                                style: { color: "white" },
                             }}
                         />
 
@@ -136,7 +138,7 @@ function Setting() {
                             autoFocus
                             required
                             margin='dense'
-                            id='name'
+                            id={style.input}
                             name='confirmPassword'
                             label='ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់'
                             type='text'
@@ -145,6 +147,7 @@ function Setting() {
                             placeholder='ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់'
                             InputLabelProps={{
                                 shrink: true,
+                                style: { color: "white" },
                             }}
                         />
                     </DialogContent>
@@ -158,7 +161,7 @@ function Setting() {
                     </DialogActions>
                 </Dialog>
             </React.Fragment>
-            <Typing isNoTimer={isNoTimer} isAccu100={isAccu100} islightMode={islightMode} />
+            {/* <Typing isNoTimer={isNoTimer} isAccu100={isAccu100} islightMode={islightMode} /> */}
             <Footer />
         </div>
     );

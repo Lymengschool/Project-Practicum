@@ -19,20 +19,23 @@ function Menu() {
     const [timer, setTimer] = useState(30);
     const [show, setShow] = useState(false);
     const [onType, setOnType] = useState(false);
-    const [open, setOpen] = React.useState(false);
-    const [email, setEmail] = useState("");
+    const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [tempTimer, setTempTimer] = useState(timer);
 
     const handleClickOpen = () => {
         setOpen(true);
+        setDialogOpen(true); // Set dialogOpen to true when the dialog opens
     };
 
     const handleClose = () => {
         setOpen(false);
+        setDialogOpen(false); // Set dialogOpen to false when the dialog closes
     };
 
     return (
         <div className={menu.container}>
-            <div className={`${menu.menublock} ${onType === false ? menu.active : menu.none }`}>
+            <div className={`${menu.menublock} ${onType === false ? menu.active : menu.none}`}>
                 <div className={menu.innerleft}>
                     <button onClick={() => setActiveButton(1)}>
                         <span>
@@ -85,26 +88,31 @@ function Menu() {
                             id: menu.dialog,
                         }}
                     >
-                        <DialogTitle id={menu.dialogContentText}>Subscribe</DialogTitle>
+                        <DialogTitle id={menu.dialogContentText}>កំណត់ម៉ោងផ្ទាល់ខ្លួន</DialogTitle>
                         <DialogContent>
                             <DialogContentText id={menu.dialogContentText}>
-                                To subscribe to this website, please enter your email address here. We will send updates occasionally.
+                            សូមដាក់ពេលដែលចង់កំណត់
                             </DialogContentText>
                             <TextField
                                 autoFocus
                                 required
                                 margin="dense"
-                                id="name"
-                                name="email"
-                                label="Email Address"
-                                type="email"
+                                label="ពេល"
+                                id={menu.time}
+                                type="number"
                                 fullWidth
                                 variant="standard"
+                                value={tempTimer}
+                                onChange={(e) => setTempTimer(e.target.value)}
+                                InputLabelProps={{
+                                    shrink: true,
+                                    style: { color: 'white' },
+                                }}
                             />
                         </DialogContent>
-                        <DialogActions >
-                            <button onClick={handleClose} id={menu.button}>Cancel</button>
-                            <button onClick={handleClose} id={menu.button}>Subscribe</button>
+                        <DialogActions>
+                            <button onClick={handleClose} id={menu.button}>បោះបង់</button>
+                            <button onClick={() => { setTimer(tempTimer); handleClose(); }} id={menu.button}>ផ្លាស់ប្ដូរ</button>
                         </DialogActions>
                     </Dialog>
                 </div>
@@ -247,7 +255,13 @@ function Menu() {
                 </div>
             )}
 
-            <Typing onButtonClick={activeButton} timerm={timer} slength={length} setOnType={setOnType}/>
+            <Typing 
+                onButtonClick={activeButton} 
+                timerm={timer} 
+                slength={length} 
+                setOnType={setOnType} 
+                dialogOpen={dialogOpen} // Pass the dialogOpen state to Typing component
+            />
         </div>
     );
 }

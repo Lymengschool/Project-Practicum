@@ -24,7 +24,7 @@ function Typing(props) {
         mistakeClickNoise.play();
     };
 
-    const { onButtonClick, timerm, slength, setOnType } = props;
+    const { onButtonClick, timerm, slength, setOnType, dialogOpen } = props;
 
     const [timer, setTimer] = useState(timerm);
     const [mode, setMode] = useState(1 || onButtonClick);
@@ -84,6 +84,8 @@ function Typing(props) {
     }
 
     function handleKeyDown(e) {
+        if (dialogOpen) return; // Do not process input if the dialog is open
+
         if (!timerStarted) {
             setUserHasStartedTyping(true);
             startTimer();
@@ -194,7 +196,7 @@ function Typing(props) {
                             <p className={`${style.time} ${onButtonClick === 1 ? style.show : style.none}`}>{timer}</p>
                         )}
                         <div>
-                            <input type="text" className="text-input" onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <input type="text" className="text-input" onChange={handleKeyDown} style={{ opacity: 0 }} disabled={dialogOpen} />
                             <p className={`${style.typing} text-content`}></p>
                         </div>
                     </div>
