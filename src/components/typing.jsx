@@ -75,6 +75,22 @@ function Typing(props) {
         });
     }
 
+     function resetTypingState() {
+        setTimer(timerm);
+        setTimerStarted(false);
+        setUserHasStartedTyping(false);
+        setCorrect(0);
+        setMistake(0);
+        setCurrentPosition(0);
+        setWordCount(0);
+        getParagraph();
+    }
+
+    // Listen for changes in timerm prop
+    useEffect(() => {
+        resetTypingState();
+    }, [timerm]);
+
     function focusOnInput(e) {
         const input = $(".text-input");
         const textarea = document.getElementById("myTextarea");
