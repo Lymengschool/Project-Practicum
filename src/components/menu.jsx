@@ -4,6 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faQuoteLeft, faBrain, faWrench, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import { FaGear } from "react-icons/fa6";
 import Typing from "../components/typing.jsx";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 function Menu() {
     const [activeButton, setActiveButton] = useState(1);
@@ -12,7 +19,16 @@ function Menu() {
     const [timer, setTimer] = useState(30);
     const [show, setShow] = useState(false);
     const [onType, setOnType] = useState(false);
-    console.log(onType)
+    const [open, setOpen] = React.useState(false);
+    const [email, setEmail] = useState("");
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className={menu.container}>
@@ -57,11 +73,40 @@ function Menu() {
                     <button onClick={() => setTimer(120)}>
                         <span>120 វិ.</span>
                     </button>
-                    <button>
+                    <button onClick={handleClickOpen}>
                         <span>
                             <FontAwesomeIcon className={menu.icon} icon={faScrewdriverWrench} />
                         </span>
                     </button>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        PaperProps={{
+                            id: menu.dialog,
+                        }}
+                    >
+                        <DialogTitle id={menu.dialogContentText}>Subscribe</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id={menu.dialogContentText}>
+                                To subscribe to this website, please enter your email address here. We will send updates occasionally.
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                required
+                                margin="dense"
+                                id="name"
+                                name="email"
+                                label="Email Address"
+                                type="email"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </DialogContent>
+                        <DialogActions >
+                            <button onClick={handleClose} id={menu.button}>Cancel</button>
+                            <button onClick={handleClose} id={menu.button}>Subscribe</button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
 
                 <div className={`${menu.innerright} ${activeButton === 2 ? menu.active : menu.none}`}>
@@ -201,7 +246,6 @@ function Menu() {
                     </div>
                 </div>
             )}
-            
 
             <Typing onButtonClick={activeButton} timerm={timer} slength={length} setOnType={setOnType}/>
         </div>

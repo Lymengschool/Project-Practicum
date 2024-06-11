@@ -20,7 +20,7 @@
     border-radius: 10px;
 }
 
-.smallmenu{
+.smallmenu {
     display: none;
 }
 
@@ -123,7 +123,6 @@
 .smallmenu .popup .innertop button:hover,
 .smallmenu .popup .innertop button:hover > span,
 .smallmenu .popup .innertop button:hover > span > .icon,
-
 .smallmenu .popup .innerbottom button:hover,
 .smallmenu .popup .innerbottom button:hover > span,
 .smallmenu .popup .innerbottom button:hover > span > .icon {
@@ -151,7 +150,7 @@
     width: 500px;
 }
 
-.ppopup .pinner textarea{
+.ppopup .pinner textarea {
     background-color: var(--subback);
     color: var(--word);
     width: 100%;
@@ -170,18 +169,36 @@
     margin-top: 1rem;
     border: none;
     background-color: var(--subback);
-    color: #F7EEEE;
+    color: #f7eeee;
     font-family: "Koh Santepheap";
     border-radius: 10px;
 }
 
-@media (min-width: 400px) and (max-width: 600px){
-    .menublock{
+#dialogContentText {
+    color: #ffffff; /* Black text for better contrast */
+}
+
+#button {
+    color: #ffffff;
+    background-color: #3f51b5; /* Button background color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    z-index: 12;
+}
+
+#button:hover {
+    background-color: #303f9f; /* Darker shade on hover */
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+    .menublock {
         display: none;
     }
 
-    .smallmenu{
+    .smallmenu {
         display: flex;
     }
 }
-
