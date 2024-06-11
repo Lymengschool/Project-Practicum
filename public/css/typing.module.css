@@ -8,18 +8,38 @@
     font-weight: 400;
     line-height: 150%;
     letter-spacing: 1px; 
+    position: relative; 
+}
+
+.active {
+    border-left: 2px solid white;
+    animation: blink 1s step-end infinite;
+    position: relative;
+}
+
+@keyframes blink {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: white;
+    }
 }
 
 .correct {
-    color: #4B5975;
+    color: white; /* Change color to white for correct characters */
 }
+
 .incorrect {
-    color: #DC343E;
+    color: red; /* Change color to red for incorrect characters */
 }
-.active{
-    color: #17A2B8;
+
+.active {
+    color: #17A2B8; /* Keep the cursor color */
 }
-.active::before{
+
+
+.active::before {
     position: absolute;
     content: "";
     height: 2px;
@@ -32,7 +52,7 @@
     animation: blink 1s ease-in-out infinite;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +60,7 @@
     margin-top: 50px;
 }
 
-.container .time{
+.container .time {
     color: #007ACC;
     font-family: 'Koh Santepheap', sans-serif;
     font-size: 15px;
@@ -49,15 +69,15 @@
     width: 90%;
 }
 
-.container .body{
+.container .body {
     width: 90%;
 }
 
-.show{
+.show {
     display: block;
 }
 
-.none{
+.none {
     display: none;
 }
 

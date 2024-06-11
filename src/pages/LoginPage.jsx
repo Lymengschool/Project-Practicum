@@ -25,10 +25,14 @@ function login() {
             // The signed-in user info.
             const user = result.user;
             if (user) {
+                localStorage.setItem('isLogin', true);
+                localStorage.setItem('user', JSON.stringify(user));
+                navigate("/profile"); 
                 alert("user create");
                 navigate("/profile");
             }
-           
+
+
         }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
@@ -51,6 +55,9 @@ function login() {
                     const credential = FacebookAuthProvider.credentialFromResult(result);
                     const accessToken = credential.accessToken;
                     navigate("/profile");
+                    localStorage.setItem('isLogin', true);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    navigate("/profile"); 
 
                 })
                 .catch((error) => {

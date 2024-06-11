@@ -1,28 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../../public/css/typing.module.css";
-import Setting from "../pages/SettingPage";
 import clickFile from "./../../public/audio/click.wav";
 import clickMistakeFile from "./../../public/audio/mistake_click.wav";
-
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {  } from "@fortawesome/free-brands-svg-icons";
 
 var clickNoise = new Audio(clickFile);
 var mistakeClickNoise = new Audio(clickMistakeFile);
 
-const sound = new Howl({
-    src: [""],
-});
-
 function Typing(props) {
     const [isNoTimer, setIsNoTimer] = useState(() => {
-        // Retrieve from session storage or default to false
         return JSON.parse(sessionStorage.getItem("isNoTimer")) || false;
     });
 
     const [isAccu100, setIsAccu100] = useState(() => {
-        // Retrieve from session storage or default to false
         return JSON.parse(sessionStorage.getItem("isAccu100")) || false;
     });
 
@@ -37,21 +27,20 @@ function Typing(props) {
     const { onButtonClick, timerm, slength, setOnType } = props;
 
     const [timer, setTimer] = useState(timerm);
-    const [mode, setMode] = useState(1 || onButtonClick);    // 1: Timer, 2: Quote, 3: Free Mind, 4: Customize
+    const [mode, setMode] = useState(1 || onButtonClick);
     const [timerStarted, setTimerStarted] = useState(false);
     const [userHasStartedTyping, setUserHasStartedTyping] = useState(false);
     const [correct, setCorrect] = useState(0);
     const [mistake, setMistake] = useState(0);
-    const [WPM, setWPM] = useState(0.0);
-    const [CPM, setCPM] = useState(0.0);slength
+    const [currentPosition, setCurrentPosition] = useState(0);
+    const [wordCount, setWordCount] = useState(0);
 
     const navigate = useNavigate();
 
-    function getParaprah() {
+    function getParagraph() {
         fetch("/../public/data/para.json")
             .then((response) => response.json())
             .then((data) => {
-                console.log(data); // This will log the fetched data to the console
                 let para = "";
                 if (slength === "s") {
                     para = data.s[0];
@@ -65,7 +54,7 @@ function Typing(props) {
     }
 
     useEffect(() => {
-        getParaprah();
+        getParagraph();
         if (mode === 1) {
             console.log("Timer Mode");
         } else if (mode === 2) {
@@ -73,28 +62,23 @@ function Typing(props) {
         } else if (mode === 3) {
             console.log("Free Mind Mode");
         } else {
-            console.log("Custom Mode")
+            console.log("Custom Mode");
         }
     }, [slength, mode]);
 
     function setParagraph(txt) {
         var content = $(".text-content");
         content.empty();
-        txt.split("").forEach((char) => {
-            let span = $(`<span>${char}</span>`);
-            // console.log(str)
-
+        txt.split("").forEach((char, index) => {
+            let span = $(`<span class="${index === 0 ? style.active : ""}">${char}</span>`);
             content.append(span);
         });
-        return;
     }
 
     function focusOnInput(e) {
-        const content = $(".text-content").find("span");
         const input = $(".text-input");
-        const textarea = document.getElementById("myTextarea"); // Get the textarea by its id
+        const textarea = document.getElementById("myTextarea");
         if (document.activeElement !== textarea) {
-            // Check if the textarea is not the currently focused element
             input.focus();
         }
     }
@@ -108,44 +92,59 @@ function Typing(props) {
         const content = $(".text-content").find("span");
         const input = $(".text-input");
 
-        console.log("event+++", e, content, input)
-
-
-
         input.focus();
         var inputValue = input.val();
         var inputLength = inputValue.length;
-        var inputIndex = inputLength - 1 || 0;
-        console.log("split", e);
 
         if (e.nativeEvent.inputType === "deleteContentBackward") {
-            // Backspace key was pressed
-            console.log("Backspace key pressed", content[inputLength]);
-            $(content[inputLength]).removeClass(style.incorrect).removeClass(style.correct);
+            $(content[currentPosition - 1]).removeClass(style.incorrect).removeClass(style.correct);
+            setCurrentPosition(Math.max(0, currentPosition - 1));
+            updateActiveCharacter(content, currentPosition - 1);
+            if (inputValue.endsWith(" ")) {
+                setWordCount((prev) => Math.max(0, prev - 1));
+            }
+            return;
         }
 
-        console.log($(content[inputIndex]).html(), inputValue.split("")[inputValue.length - 1]);
-
-        if ($(content[inputIndex]).html() === inputValue.split("")[inputValue.length - 1]) {
-            console.log("correct");
+        if ($(content[currentPosition]).html() === inputValue[inputLength - 1]) {
             playSound();
-            $(content[inputIndex]).addClass(style.correct);
+            $(content[currentPosition]).addClass(style.correct);
+            setCorrect((prev) => prev + 1);
+            if (inputValue.endsWith(" ")) {
+                setWordCount((prev) => prev + 1);
+            }
         } else {
-            console.log("incorrect");
             playMistakeSound();
-            $(content[inputIndex]).addClass(style.incorrect);
-            console.log(isAccu100);
+            $(content[currentPosition]).addClass(style.incorrect);
+            setMistake((prev) => prev + 1);
             if (isAccu100) {
-                console.log(isAccu100);
                 setTimerStarted(false);
                 navigate("/result");
             }
         }
 
-        console.log("key down");
+        setCurrentPosition(currentPosition + 1);
+        updateActiveCharacter(content, currentPosition + 1);
 
-        return;
+        // Update typing rate
+        const elapsedTimeInMinutes = (timerm - timer) / 60;
+        const grossWPM = wordCount / elapsedTimeInMinutes;
+        const netWPM = grossWPM - mistake / elapsedTimeInMinutes;
+        const cpm = (correct + mistake) / elapsedTimeInMinutes;
+
+        localStorage.setItem('wpm', Math.max(0, netWPM).toFixed(2));
+        localStorage.setItem('cpm', cpm.toFixed(2));
+        
+        console.log(`WPM: ${Math.max(0, netWPM).toFixed(2)}`);
+        console.log(`CPM: ${cpm.toFixed(2)}`);
     }
+
+    const updateActiveCharacter = (content, position) => {
+        content.removeClass(style.active);
+        if (position < content.length) {
+            $(content[position]).addClass(style.active);
+        }
+    };
 
     const timerRef = useRef(timer);
 
@@ -176,37 +175,29 @@ function Typing(props) {
     };
 
     const handleMouseMove = () => {
-        
         setOnType(false);
-        console.log("Mouse moved");
     };
 
     useEffect(() => {
-        getParaprah();
+        getParagraph();
         window.addEventListener("keydown", focusOnInput);
         window.addEventListener("keydown", () => setOnType(true));
-        // getLocations();
-        // getPlaces();
-        // getAccomodations();
-        // getTransportations();
-
         window.addEventListener("mousemove", handleMouseMove);
     }, []);
+
     return (
         <>
             <article>
                 <div className={style.container}>
                     <div className={`${style.body}`}>
-            
-                        
-                        {isNoTimer ? null : <p className={`${style.time} ${onButtonClick === 1 ? style.show : style.none}`}>{timer}</p>}
-
+                        {isNoTimer ? null : (
+                            <p className={`${style.time} ${onButtonClick === 1 ? style.show : style.none}`}>{timer}</p>
+                        )}
                         <div>
-                            <input type='text' className='text-input' onChange={handleKeyDown} style={{ opacity: 0 }} />
+                            <input type="text" className="text-input" onChange={handleKeyDown} style={{ opacity: 0 }} />
                             <p className={`${style.typing} text-content`}></p>
                         </div>
                     </div>
-
                 </div>
             </article>
         </>

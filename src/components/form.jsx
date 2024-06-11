@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from './../../public/css/form.module.css';
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, set, ref, onAuthStateChanged } from './firebase'
+import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, set, ref, onAuthStateChanged, database } from './firebase'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from "react-toastify";
@@ -48,8 +48,13 @@ function Form({ name, confirmpassword, action }) {
             transition: Bounce,
           });
           const user = auth.currentUser;
-          navigate("/profile"); // Navigate to profile after successful login
+          //set local storage to true for login variables
+          localStorage.setItem('isLogin', true);
+          localStorage.setItem('user', JSON.stringify(user));
+          console.log("islogin at login page:",localStorage.getItem('isLogin'));
+          navigate("/profile"); 
         })
+
         .catch(error => {
           const error_message = error.message;
           toast.error('Login failed!', {
@@ -168,6 +173,8 @@ function Form({ name, confirmpassword, action }) {
         <input
           className={style.button}
           type="button"
+          
+          // onClick={handleButtonClick
           onClick={handleButtonClick}
           value={action === "login" ? "Login" : "Register"}
         />

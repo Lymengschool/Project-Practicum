@@ -21,6 +21,8 @@ function Profile() {
             }
         });
 
+        console.log("islogin at login page:",localStorage.getItem('isLogin'));
+
         // Cleanup function to unsubscribe from the listener when the component unmounts
         return () => unsubscribe();
     }, []);
@@ -32,7 +34,6 @@ function Profile() {
     
 
     const displayName = user.displayName;
-  
     const email = user.email;
     const photoURL = user.photoURL;
     const emailVerified = user.emailVerified;
