@@ -144,17 +144,28 @@ function Typing(props) {
         setCurrentPosition(currentPosition + 1);
         updateActiveCharacter(content, currentPosition + 1);
 
+        if (currentPosition + 1 === content.length) {
+            // Navigate to the result page
+            navigate("/result");
+        }
+
         // Update typing rate
         const elapsedTimeInMinutes = (timerm - timer) / 60;
         const grossWPM = wordCount / elapsedTimeInMinutes;
         const netWPM = grossWPM - mistake / elapsedTimeInMinutes;
         const cpm = (correct + mistake) / elapsedTimeInMinutes;
+        const accuracy = (correct / (correct + mistake)) * 100;
+        const timeTaken = timerm - timer;
 
         localStorage.setItem('wpm', Math.max(0, netWPM).toFixed(2));
         localStorage.setItem('cpm', cpm.toFixed(2));
+        localStorage.setItem('accuracy', accuracy.toFixed(2));
+        localStorage.setItem('timeTaken', timeTaken);
         
         console.log(`WPM: ${Math.max(0, netWPM).toFixed(2)}`);
         console.log(`CPM: ${cpm.toFixed(2)}`);
+        console.log(`Accuracy: ${accuracy.toFixed(2)}%`);
+        console.log(`Time taken: ${timeTaken} seconds`);
     }
 
     const updateActiveCharacter = (content, position) => {

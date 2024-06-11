@@ -91,11 +91,11 @@ function Result() {
                 </div>
                 <div className={style.block}>
                     <p className={style.word}>ភាពត្រឹមត្រូវ</p>
-                    <p className={style.numW}>90%</p>
+                    <p className={style.numW}>{localStorage.getItem('accuracy') || 0}</p>
                 </div>
                 <div className={style.block}>
                     <p className={style.word}>រយ:ពេល</p>
-                    <p className={style.numW}>100s</p>
+                    <p className={style.numW}>{localStorage.getItem('timeTaken') || 0}</p>
                 </div>
             </div>
             {/* Add a canvas element for the chart */}
