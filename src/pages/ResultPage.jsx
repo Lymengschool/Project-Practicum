@@ -10,7 +10,7 @@ function Result() {
     const navigate = useNavigate();
     const chartRef = useRef(null);
     const [chartData, setChartData] = useState([]);
-    const dataPushedRef = useRef(false); // Track if data is pushed
+    const dataPushedRef = useRef(false); 
 
     const generateData = (count) => {
         const data = [];
@@ -26,12 +26,33 @@ function Result() {
         navigate("/");
     }
 
+    const pushDataToFirebase = (timeTaken, accuracy, wpm, cpm) => {
+        const isLogin = localStorage.getItem('isLogin') === 'true';
+        if (isLogin && !dataPushedRef.current) {
+            const user = auth.currentUser;
+            if (user) {
+                const userStatsRef = ref(database, `users/${user.uid}/typingStats`);
+                push(userStatsRef, {
+                    timeTaken,
+                    accuracy,
+                    wpm,
+                    cpm,
+                    timestamp: Date.now()
+                }).then(() => {
+                    console.log("WPM and CPM successfully saved.");
+                    dataPushedRef.current = true; // Mark as pushed
+                }).catch((error) => {
+                    console.error("Error saving WPM and CPM:", error);
+                });
+            }
+        }
+    };
+
     useEffect(() => {
         const wpm = parseFloat(localStorage.getItem('wpm')) || 0;
         const cpm = parseFloat(localStorage.getItem('cpm')) || 0;
-        const isLogin = localStorage.getItem('isLogin') === 'true';
-        const accuracy = parseFloat(localStorage.getItem('accuracy') || 0);
-        const timeTaken = parseFloat(localStorage.getItem('timeTaken') || 0);
+        const accuracy = parseFloat(localStorage.getItem('accuracy')) || 0;
+        const timeTaken = parseFloat(localStorage.getItem('timeTaken')) || 0;
 
         // Update chart data
         const newData = generateData(wpm); // Use wpm for demo, replace with actual data
@@ -39,25 +60,7 @@ function Result() {
 
         // Ensure all values are finite numbers
         if (isFinite(wpm) && isFinite(cpm) && isFinite(accuracy)) {
-            if (isLogin && !dataPushedRef.current) { // Check if data is already pushed
-                const user = auth.currentUser;
-                
-                if (user) {
-                    const userStatsRef = ref(database, `users/${user.uid}/typingStats`);
-                    push(userStatsRef, {
-                        timeTaken,
-                        accuracy,
-                        wpm,
-                        cpm,
-                        timestamp: Date.now()
-                    }).then(() => {
-                        console.log("WPM and CPM successfully saved.");
-                        dataPushedRef.current = true; // Mark as pushed
-                    }).catch((error) => {
-                        console.error("Error saving WPM and CPM:", error);
-                    });
-                }
-            }
+            pushDataToFirebase(timeTaken, accuracy, wpm, cpm);
         } else {
             console.error('Invalid data: ', { wpm, cpm, accuracy });
         }

@@ -11,6 +11,8 @@ const useServeData = () => {
     const [todayTimeTaken, setTodayTimeTaken] = useState(0);
     const [todayCurrentCPM, setTodayCurrentCPM] = useState(0);
     const [todayAccuracy, setTodayAccuracy] = useState(0);
+    const [todayWPM, setTodayWPM] = useState(0);
+    const [totalWPM, setTotalWPM] = useState(0);
     const [username, setUsername] = useState('');
     const [joinDate, setJoinDate] = useState('');
 
@@ -78,6 +80,8 @@ const useServeData = () => {
                 let todayCPM = 0;
                 let todayAcc = 0;
                 let todayCount = 0;
+                let todayWPM = 0;
+                let totalWPM = 0;
                 const count = Object.keys(typingStats).length;
     
                 for (const key in typingStats) {
@@ -89,20 +93,24 @@ const useServeData = () => {
                             console.log("Entry matches today's date:", entry); // Debug log for matching entry
                             todayTime += entry.timeTaken;
                             todayCPM += entry.cpm;
+                            todayWPM += entry.wpm;
                             todayAcc += entry.accuracy;
                             todayCount++;
                         }
                         totalTime += entry.timeTaken;
                         totalCPM += entry.cpm;
                         totalAcc += entry.accuracy;
+                        totalWPM += entry.wpm;
                     }
                 }
     
                 const avgTodayCPM = todayCount > 0 ? (todayCPM / todayCount) : 0;
                 const avgTodayAcc = todayCount > 0 ? (todayAcc / todayCount) : 0;
+                const avgTodayWPM = todayCount > 0? (todayWPM / todayCount) : 0;
+                const avgTotalWPM = count > 0? (totalWPM / count) : 0;
                 const avgTotalCPM = count > 0 ? (totalCPM / count) : 0;
                 const avgTotalAcc = count > 0 ? (totalAcc / count) : 0;
-    
+        
                 setTypingHistoryCount(count);
                 setTotalTimeTaken(totalTime);
                 setTotalCurrentCPM(parseInt(avgTotalCPM));
@@ -110,6 +118,8 @@ const useServeData = () => {
                 setTodayTimeTaken(todayTime);
                 setTodayCurrentCPM(parseInt(avgTodayCPM));
                 setTodayAccuracy(parseInt(avgTodayAcc));
+                setTodayWPM(parseInt(avgTodayWPM));
+                setTotalWPM(parseInt(avgTotalWPM));
     
                 console.log("Total time taken:", totalTime);
                 console.log("Total current CPM:", avgTotalCPM);
@@ -129,7 +139,8 @@ const useServeData = () => {
     
     
 
-    return { user, userStats, username, joinDate, typingHistoryCount, totalTimeTaken, totalCurrentCPM, totalAccuracy, todayTimeTaken, todayCurrentCPM, todayAccuracy };
+    return { user, userStats, username, joinDate, typingHistoryCount, totalTimeTaken, totalWPM, todayWPM,
+        totalCurrentCPM, totalAccuracy, todayTimeTaken, todayCurrentCPM, todayAccuracy };
 };
 
 export { useServeData };
