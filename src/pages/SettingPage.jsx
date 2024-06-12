@@ -20,6 +20,10 @@ function Setting() {
     const [isAccu100, setAccu100] = useState(JSON.parse(localStorage.getItem("isAccu100")) || false);
     const [islightMode, setlightMode] = useState(JSON.parse(localStorage.getItem("islightMode")) || false);
     const [open, setOpen] = React.useState(false);
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const [error, setError] = useState(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -38,6 +42,26 @@ function Setting() {
         localStorage.setItem("isAccu100", JSON.stringify(isAccu100));
         localStorage.setItem("islightMode", JSON.stringify(islightMode));
     }, [isNoTimer, isAccu100, islightMode]);
+
+    const handlePasswordChange = async (event) => {
+        event.preventDefault();
+
+        if (newPassword !== confirmNewPassword) {
+            setError("New passwords do not match.");
+            return;
+        }
+
+        const user = firebase.auth().currentUser;
+        const credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+
+        try {
+            await user.reauthenticateWithCredential(credential);
+            await user.updatePassword(newPassword);
+            handleClose();
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
     return (
         <div>
@@ -85,13 +109,7 @@ function Setting() {
                     }}
                     PaperProps={{
                         component: "form",
-                        onSubmit: () => {
-                            // event.preventDefault();
-                            // const formData = new FormData(event.currentTarget);
-                            // const email = formJson.email;
-                            // console.log(email);
-                            handleClose();
-                        },
+                        onSubmit: handlePasswordChange,
                     }}
                 >
                     <DialogTitle id={style.dialogContentText}>ប្តូរពាក្យសម្ងាត់</DialogTitle>
@@ -115,6 +133,8 @@ function Setting() {
                                 shrink: true,
                                 style: { color: "white" },
                             }}
+                            value={currentPassword}
+                            onChange={(event) => setCurrentPassword(event.target.value)}
                         />
 
                         <TextField
@@ -132,6 +152,8 @@ function Setting() {
                                 shrink: true,
                                 style: { color: "white" },
                             }}
+                            value={newPassword}
+                            onChange={(event) => setNewPassword(event.target.value)}
                         />
 
                         <TextField
@@ -149,6 +171,8 @@ function Setting() {
                                 shrink: true,
                                 style: { color: "white" },
                             }}
+                            value={confirmNewPassword}
+                            onChange={(event) => setConfirmNewPassword(event.target.value)}
                         />
                     </DialogContent>
                     <DialogActions>
