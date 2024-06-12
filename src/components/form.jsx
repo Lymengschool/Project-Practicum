@@ -90,7 +90,7 @@ function Form({ name, confirmpassword, action }) {
           const user_data = {
             user_name: Name,
             email: email,
-            last_login: Date.now()
+            last_login: new Date().toLocaleDateString('en-CA') 
           };
   
           // Push to Firebase Database

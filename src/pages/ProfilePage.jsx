@@ -4,10 +4,11 @@ import style from "./../../public/css/profile.module.css";
 import Footer from '../components/footer.jsx';
 import { RiImageAddFill } from "react-icons/ri";
 import { auth, database, ref, get } from "./../components/firebase.jsx";
-
+import { useServeData } from "./../components/serveData.jsx";
 function Profile() {
     const [user, setUser] = useState(null);
     const [userStats, setUserStats] = useState(null); // State to store user statistics
+    const { username, joinDate, typingHistoryCount, totalCurrentCPM, totalTimeTaken, totalAccuracy, todayTimeTaken, todayCurrentCPM, todayAccuracy  } = useServeData();
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -55,19 +56,19 @@ function Profile() {
                 <div className={style.FirstBlock}>
                     <div className={style.picture}><RiImageAddFill /></div>
                     <div className={style.nameContainer}>
-                        <p className={style.name}>{displayName}</p>
-                        <p className={style.join}>Joined Since: 01-Jan-2023</p>
+                        <p className={style.name}>{username}</p>
+                        <p className={style.join}>Joined Since: {joinDate}</p>
                     </div>
                 </div>
                 <div className={style.secondBlock}>
                     <div className={style.secondBlockContainer}>
                         <div className={style.tests}>
                             <div className={style.test}>តេស្តសរុប</div>
-                            <div className={style.Num}>99</div>
+                            <div className={style.Num}>{typingHistoryCount}</div>
                         </div>
                         <div className={style.tests}>
                             <div className={style.test}>ម៉ោងតេស្តសរុប</div>
-                            <div className={style.Num}>1:30:15</div>
+                            <div className={style.Num}>{totalTimeTaken} s</div>
                         </div>
                     </div>
                 </div>
@@ -83,22 +84,22 @@ function Profile() {
                         <div className={style.secondRow}>
                             <div className={style.tests}>
                                 <div className={style.test}>ពាក្យក្នុង​​.វ</div>
-                                <div className={style.Num}>{userStats ? userStats.wpm : 'Loading...'}</div>
+                                <div className={style.Num}>0</div>
                             </div>
                             <div className={style.tests}>
                                 <div className={style.test}>អក្សរក្នុង​​.វ</div>
-                                <div className={style.Num}>{userStats ? userStats.cpm : 'Loading...'}</div>
+                                <div className={style.Num}>{todayCurrentCPM}</div>
                             </div>
                         </div>
 
                         <div className={style.thirdRow}> 
                         <div className={style.tests}>
                                             <div className={style.test}>ភាពត្រឹមត្រូវ</div>
-                                            <div className={style.Num}>90%</div>
+                                            <div className={style.Num}>{todayAccuracy}</div>
                                         </div>
                                         <div className={style.tests}>
                                             <div className={style.test}>រយ:ពេល</div>
-                                            <div className={style.Num}>100s</div>
+                                            <div className={style.Num}>{todayTimeTaken}</div>
                             </div>
                         </div>
                         
@@ -118,18 +119,18 @@ function Profile() {
                             </div>
                             <div className={style.tests}>
                                 <div className={style.test}>អក្សរក្នុង​​.វ</div>
-                                <div className={style.Num}>210</div>
+                                <div className={style.Num}>{totalCurrentCPM}</div>
                             </div>
                         </div>
 
                         <div className={style.thirdRow}> 
                         <div className={style.tests}>
                                             <div className={style.test}>ភាពត្រឹមត្រូវ</div>
-                                            <div className={style.Num}>90%</div>
+                                            <div className={style.Num}>{totalAccuracy}</div>
                                         </div>
                                         <div className={style.tests}>
                                             <div className={style.test}>រយ:ពេល</div>
-                                            <div className={style.Num}>100s</div>
+                                            <div className={style.Num}>{totalTimeTaken} s</div>
                             </div>
                         </div>
                         

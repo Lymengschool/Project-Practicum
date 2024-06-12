@@ -12,15 +12,16 @@ import 'react-toastify/dist/ReactToastify.css';
 const sound = new Howl({
     src: ["/audio/snail.mp3"], // Corrected path to audio file
 });
-// make function for sorting
 
+console.log('isLogin at nav:', localStorage.getItem('isLogin'));
 
 function Nav() {
-
     function handleSignOut() {
         firebaseSignOut(auth).then(() => {
+            window.location.href = "/";
+            localStorage.setItem('isLogin', 'false');
             console.log("Signing out...");
-            toast.success("logout success ...")
+            toast.success("logout success ...");
         }).catch((error) => {
             console.log(error.message);
         });
@@ -30,6 +31,8 @@ function Nav() {
         // sound.stop();
         // sound.play();
     };
+
+    const isLogin = localStorage.getItem('isLogin') === 'true';
 
     return (
         <nav>
@@ -52,8 +55,8 @@ function Nav() {
                     <Link to='/setting' className={nav.icon}>
                         <FontAwesomeIcon icon={faGear} />
                     </Link>
-                    <Link to='/login' className={nav.icon}>
-                        <FontAwesomeIcon icon={faCircleUser} onClick={playSound} />
+                    <Link to={isLogin ? '/profile' : '/login'} className={nav.icon}>
+                        <FontAwesomeIcon icon={faCircleUser} />
                     </Link>
                 </div>
             </div>
