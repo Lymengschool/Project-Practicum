@@ -136,8 +136,7 @@ function Typing(props) {
             $(content[currentPosition]).addClass(style.incorrect);
             setMistake((prev) => prev + 1);
             if (isAccu100) {
-                setTimerStarted(false);
-                navigate("/result");
+                return; // Do not process further input if a mistake has been made and isAccu100 is true
             }
         }
 

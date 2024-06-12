@@ -1,5 +1,4 @@
 import React from "react";
-import { FaEyeSlash } from "react-icons/fa";
 import style from "./../../public/css/setting.module.css";
 
 function Setting({ icon, detail, name, fun }) {
