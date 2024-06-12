@@ -3,41 +3,50 @@ import Nav from "../components/nav.jsx";
 import style from "./../../public/css/profile.module.css";
 import Footer from '../components/footer.jsx';
 import { RiImageAddFill } from "react-icons/ri";
-import { auth } from "./../components/firebase.jsx";
-
-
+import { auth, database, ref, get } from "./../components/firebase.jsx";
 
 function Profile() {
     const [user, setUser] = useState(null);
+    const [userStats, setUserStats] = useState(null); // State to store user statistics
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
-                // User is signed in.
                 setUser(user);
+                fetchUserStats(user.uid); // Fetch user stats when user is signed in
             } else {
-                // No user is signed in.
                 setUser(null);
             }
         });
 
-        console.log("islogin at login page:",localStorage.getItem('isLogin'));
+        console.log("islogin at login page:", localStorage.getItem('isLogin'));
 
-        // Cleanup function to unsubscribe from the listener when the component unmounts
         return () => unsubscribe();
     }, []);
 
+    const fetchUserStats = async (uid) => {
+        try {
+            const userStatsRef = ref(database, `users/${uid}/typingStats`);
+            const snapshot = await get(userStatsRef);
+            if (snapshot.exists()) {
+                setUserStats(snapshot.val());
+            } else {
+                console.log("No data available");
+            }
+        } catch (error) {
+            console.error("Error fetching user stats:", error);
+        }
+    };
+
     if (!user) {
-        // If user is null, return loading indicator or redirect to login page
         return <p>Loading...</p>;
     }
-    
 
     const displayName = user.displayName;
     const email = user.email;
     const photoURL = user.photoURL;
     const emailVerified = user.emailVerified;
-    const uid = user.uid;
+    const uid = user.uid;;
 
     return (
         <div>
@@ -74,16 +83,16 @@ function Profile() {
                         <div className={style.secondRow}>
                             <div className={style.tests}>
                                 <div className={style.test}>ពាក្យក្នុង​​.វ</div>
-                                <div className={style.Num}>30</div>
+                                <div className={style.Num}>{userStats ? userStats.wpm : 'Loading...'}</div>
                             </div>
                             <div className={style.tests}>
                                 <div className={style.test}>អក្សរក្នុង​​.វ</div>
-                                <div className={style.Num}>210</div>
+                                <div className={style.Num}>{userStats ? userStats.cpm : 'Loading...'}</div>
                             </div>
                         </div>
 
                         <div className={style.thirdRow}> 
-                         <div className={style.tests}>
+                        <div className={style.tests}>
                                             <div className={style.test}>ភាពត្រឹមត្រូវ</div>
                                             <div className={style.Num}>90%</div>
                                         </div>
@@ -114,7 +123,7 @@ function Profile() {
                         </div>
 
                         <div className={style.thirdRow}> 
-                         <div className={style.tests}>
+                        <div className={style.tests}>
                                             <div className={style.test}>ភាពត្រឹមត្រូវ</div>
                                             <div className={style.Num}>90%</div>
                                         </div>
