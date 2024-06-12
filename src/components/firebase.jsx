@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, reauthenticateWithCredential, GoogleAuthProvider, signOut, EmailAuthProvider } from "firebase/auth";
 import { getDatabase, ref, set, get, push } from "firebase/database";
 import { signInWithRedirect, signInWithPopup, FacebookAuthProvider, onAuthStateChanged } from "firebase/auth";
 
@@ -33,5 +33,8 @@ export {
   signInWithPopup,
   ref,
   FacebookAuthProvider,
-  onAuthStateChanged
+  onAuthStateChanged,
+  EmailAuthProvider,
+  updatePassword, 
+  reauthenticateWithCredential,
 };

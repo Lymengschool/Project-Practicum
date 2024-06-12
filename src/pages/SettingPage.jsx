@@ -14,6 +14,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { auth, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "../components/firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Setting() {
     const [isNoTimer, setIsNoTimer] = useState(JSON.parse(localStorage.getItem("isNoTimer")) || false);
@@ -23,7 +26,6 @@ function Setting() {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
-    const [error, setError] = useState(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -43,23 +45,28 @@ function Setting() {
         localStorage.setItem("islightMode", JSON.stringify(islightMode));
     }, [isNoTimer, isAccu100, islightMode]);
 
-    const handlePasswordChange = async (event) => {
-        event.preventDefault();
-
+    const handlePasswordChange = async (e) => {
+        e.preventDefault();
         if (newPassword !== confirmNewPassword) {
-            setError("New passwords do not match.");
+            toast.error("Passwords do not match!");
             return;
         }
 
-        const user = firebase.auth().currentUser;
-        const credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+        const user = auth.currentUser;
+        if (!user) {
+            toast.error("No user is signed in.");
+            return;
+        }
+
+        const credential = EmailAuthProvider.credential(user.email, currentPassword);
 
         try {
-            await user.reauthenticateWithCredential(credential);
-            await user.updatePassword(newPassword);
+            await reauthenticateWithCredential(user, credential);
+            await updatePassword(user, newPassword);
+            toast.success("Password updated successfully!");
             handleClose();
         } catch (error) {
-            setError(error.message);
+            toast.error("Error updating password: " + error.message);
         }
     };
 
@@ -99,87 +106,47 @@ function Setting() {
             </div>
 
             <React.Fragment>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    ModalProps={{
-                        BackdropProps: {
-                            timeout: 500,
-                        },
-                    }}
-                    PaperProps={{
-                        component: "form",
-                        onSubmit: handlePasswordChange,
-                    }}
-                >
-                    <DialogTitle id={style.dialogContentText}>ប្តូរពាក្យសម្ងាត់</DialogTitle>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>ប្តូរពាក្យសម្ងាត់</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id={style.dialogContentText}>
-                            សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។
-                        </DialogContentText>
-
+                        <DialogContentText>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។</DialogContentText>
                         <TextField
                             autoFocus
                             required
                             margin='dense'
-                            id={style.input}
-                            name='confirmPassword'
-                            label='ពាក្យសម្រេចចាស់'
-                            type='text'
+                            label='ពាក្យសម្ងាត់ចាស់'
+                            type='password'
                             fullWidth
                             variant='standard'
-                            placeholder='ពាក្យសម្រេចចាស់'
-                            InputLabelProps={{
-                                shrink: true,
-                                style: { color: "white" },
-                            }}
                             value={currentPassword}
-                            onChange={(event) => setCurrentPassword(event.target.value)}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
                         />
-
                         <TextField
-                            autoFocus
                             required
                             margin='dense'
-                            id={style.input}
-                            name='newPassword'
-                            label='ពាក្យសម្ងាតថ្មី់'
-                            type='text'
+                            label='ពាក្យសម្ងាតថ្មី'
+                            type='password'
                             fullWidth
                             variant='standard'
-                            placeholder='ពាក្យសម្ងាតថ្មី់'
-                            InputLabelProps={{
-                                shrink: true,
-                                style: { color: "white" },
-                            }}
                             value={newPassword}
-                            onChange={(event) => setNewPassword(event.target.value)}
+                            onChange={(e) => setNewPassword(e.target.value)}
                         />
-
                         <TextField
-                            autoFocus
                             required
                             margin='dense'
-                            id={style.input}
-                            name='confirmPassword'
                             label='ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់'
-                            type='text'
+                            type='password'
                             fullWidth
                             variant='standard'
-                            placeholder='ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់'
-                            InputLabelProps={{
-                                shrink: true,
-                                style: { color: "white" },
-                            }}
                             value={confirmNewPassword}
-                            onChange={(event) => setConfirmNewPassword(event.target.value)}
+                            onChange={(e) => setConfirmNewPassword(e.target.value)}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <button onClick={handleClose} id={style.button}>
+                        <button onClick={handleClose} className={style.button}>
                             បោះបង់
                         </button>
-                        <button type='submit' id={style.button}>
+                        <button onClick={handlePasswordChange} className={style.button}>
                             ផ្លាស់ប្តូ
                         </button>
                     </DialogActions>
