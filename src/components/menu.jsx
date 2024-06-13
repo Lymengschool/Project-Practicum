@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faQuoteLeft, faBrain, faWrench, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import { FaGear } from "react-icons/fa6";
 import Typing from "../components/typing.jsx";
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function Menu() {
     const [activeButton, setActiveButton] = useState(1);
@@ -21,6 +21,7 @@ function Menu() {
     const [open, setOpen] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [tempTimer, setTempTimer] = useState(timer);
+    const [textArea, setTextArea] = useState("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -89,29 +90,37 @@ function Menu() {
                     >
                         <DialogTitle id={menu.dialogContentText}>កំណត់ម៉ោងផ្ទាល់ខ្លួន</DialogTitle>
                         <DialogContent>
-                            <DialogContentText id={menu.dialogContentText}>
-                            សូមដាក់ពេលដែលចង់កំណត់
-                            </DialogContentText>
+                            <DialogContentText id={menu.dialogContentText}>សូមដាក់ពេលដែលចង់កំណត់</DialogContentText>
                             <TextField
                                 autoFocus
                                 required
-                                margin="dense"
-                                label="ពេល"
+                                margin='dense'
+                                label='ពេល'
                                 id={menu.time}
-                                type="number"
+                                type='number'
                                 fullWidth
-                                variant="standard"
+                                variant='standard'
                                 value={tempTimer}
                                 onChange={(e) => setTempTimer(e.target.value)}
                                 InputLabelProps={{
                                     shrink: true,
-                                    style: { color: 'white' },
+                                    style: { color: "white" },
                                 }}
                             />
                         </DialogContent>
                         <DialogActions>
-                            <button onClick={handleClose} id={menu.button}>បោះបង់</button>
-                            <button onClick={() => { setTimer(tempTimer); handleClose(); }} id={menu.button}>ផ្លាស់ប្ដូរ</button>
+                            <button onClick={handleClose} id={menu.button}>
+                                បោះបង់
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setTimer(tempTimer);
+                                    handleClose();
+                                }}
+                                id={menu.button}
+                            >
+                                ផ្លាស់ប្ដូរ
+                            </button>
                         </DialogActions>
                     </Dialog>
                 </div>
@@ -246,20 +255,26 @@ function Menu() {
             {show && (
                 <div className={menu.ppopup}>
                     <div className={menu.pinner}>
-                        <textarea id='myTextarea'></textarea>
-                        <button onClick={() => setShow(false)}>
+                        <textarea id='myTextarea' placeholder='Enter your text here...' ></textarea>
+                        <button
+                            onClick={() => {
+                                setTextArea(document.getElementById('myTextarea').value);
+                                setShow(false);
+                            }}
+                        >
                             Ok
                         </button>
                     </div>
                 </div>
             )}
 
-            <Typing 
-                onButtonClick={activeButton} 
-                timerm={timer} 
-                slength={length} 
-                setOnType={setOnType} 
+            <Typing
+                onButtonClick={activeButton}
+                timerm={timer}
+                slength={length}
+                setOnType={setOnType}
                 dialogOpen={dialogOpen} // Pass the dialogOpen state to Typing component
+                textArea={textArea}
             />
         </div>
     );

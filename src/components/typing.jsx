@@ -24,7 +24,7 @@ function Typing(props) {
         mistakeClickNoise.play();
     };
 
-    const { onButtonClick, timerm, slength, setOnType, dialogOpen } = props;
+    const { onButtonClick, timerm, slength, setOnType, dialogOpen, textArea } = props;
 
     const [timer, setTimer] = useState(timerm);
     const [mode, setMode] = useState(1 || onButtonClick);
@@ -52,6 +52,17 @@ function Typing(props) {
                 setParagraph(para);
             });
     }
+
+    useEffect(() => {
+        setTimer(timerm);
+        setTimerStarted(false);
+        setUserHasStartedTyping(false);
+        setCorrect(0);
+        setMistake(0);
+        setCurrentPosition(0);
+        setWordCount(0);
+        setParagraph(textArea);
+    }, [textArea, timerm]);
 
     useEffect(() => {
         getParagraph();
