@@ -7,6 +7,7 @@
     background-color: var(--background);
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .body div{
@@ -14,11 +15,10 @@
 }
 
 .body .info{
-    width: 80%;
+    width: 100%;
 }
 
 .functName {
-    margin-top: 34px;
     margin-left: 15%;
     color: var(--head);
     font-family: "Koh Santepheap", sans-serif;

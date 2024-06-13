@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./../../public/css/setting.module.css";
 
-function Setting({ icon, detail, name, fun }) {
+function Setting({ icon, detail, name}) {
     // Change the function name to use PascalCase
     return (
         <div className={style.body}>
@@ -11,7 +11,7 @@ function Setting({ icon, detail, name, fun }) {
                 </h1>
                 <p className={style.detail}> {detail} </p>
             </div>
-            {fun}
+           
         </div>
     );
 }

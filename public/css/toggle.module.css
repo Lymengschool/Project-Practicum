@@ -40,5 +40,5 @@
 }
 
 .active:before {
-  transform: translateX(36px);
+  transform: translateX(32px);
 }

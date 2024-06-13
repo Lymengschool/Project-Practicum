@@ -17,16 +17,11 @@
 .changePass {
     display: flex;
     height: fit-content;
-    width: 100%;
+    width: 80%;
     flex-direction: row;
     justify-content: space-around;
-}
-
-.detail {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    margin-left: -5%;
+    align-items: center;
+    margin-top: 34px;
 }
 
 .button {
@@ -38,7 +33,6 @@
     color: white;
     border-radius: 25px;
     margin-top: auto;
-    margin-left: 20%;
     font-size: 20px;
     font-family: "Koh Santepheap", sans-serif;
 }
@@ -146,4 +140,10 @@
 
 #input{
     color: white;
+}
+
+.toggle{
+    margin-right: 20%;
+    background-color: #303f9f;
+    width: 100%;
 }

@@ -15,17 +15,71 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { auth, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "../components/firebase";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Setting() {
-    const [isNoTimer, setIsNoTimer] = useState(JSON.parse(localStorage.getItem("isNoTimer")) || false);
-    const [isAccu100, setAccu100] = useState(JSON.parse(localStorage.getItem("isAccu100")) || false);
-    const [islightMode, setlightMode] = useState(JSON.parse(localStorage.getItem("islightMode")) || false);
+    const [isNoTimer, setIsNoTimer] = useState(() => {
+        const storedValue = sessionStorage.getItem("isNoTimer");
+        return storedValue ? JSON.parse(storedValue) : false; // Default to false if not stored
+    });
+    const [isLightMode, setIsLightMode] = useState(() => JSON.parse(localStorage.getItem("isLightMode")) || false);
+    const [isAccu100, setIsAccu100] = useState(() => JSON.parse(localStorage.getItem("isAccu100")) || false);
     const [open, setOpen] = React.useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+    useEffect(() => {
+        localStorage.setItem("isNoTimer", JSON.stringify(isNoTimer));
+        console.log(sessionStorage.getItem("isNoTimer"));
+
+    }, [isNoTimer]);
+
+    useEffect(() => {
+        localStorage.setItem("isLightMode", JSON.stringify(isLightMode));
+        if (isLightMode) {
+            document.documentElement.style.setProperty("--head", "#1E107A");
+            document.documentElement.style.setProperty("--focus", "#55C6F0");
+            document.documentElement.style.setProperty("--word", "#1D1E1E");
+            document.documentElement.style.setProperty("--subback", "#E5DDD4");
+            document.documentElement.style.setProperty("--hover", "#1b2028");
+            document.documentElement.style.setProperty("--background", "#FFF9F2");
+        } else {
+            document.documentElement.style.setProperty("--head", "#1e90ff");
+            document.documentElement.style.setProperty("--focus", "#1e90ff");
+            document.documentElement.style.setProperty("--word", "#4B5975");
+            document.documentElement.style.setProperty("--subback", "#151a21");
+            document.documentElement.style.setProperty("--hover", "#dfdfdf");
+            document.documentElement.style.setProperty("--background", "#1b2028");
+        }
+    }, [isLightMode]);
+
+    useEffect(() => {
+        localStorage.setItem("isAccu100", JSON.stringify(isAccu100));
+    }, [isAccu100]);
+
+    const handleNoTimerToggle = () => {
+        setIsNoTimer(prevState => {
+            const newState = !prevState;
+            sessionStorage.setItem("isNoTimer", JSON.stringify(newState));
+            console.log(newState ? "turn" : "off"); // Log "turn" if newState is true, otherwise log "off"
+            return newState;
+        });
+    };
+
+    const handleLightModeToggle = () => {
+        setIsLightMode((prevState) => !prevState);
+    };
+
+    const handleAccu100Toggle = () => {
+        setIsAccu100(prevState => {
+            const newState = !prevState;
+            sessionStorage.setItem("isAccu100", JSON.stringify(newState));
+            console.log(newState ? "turn Accu100" : "off Accu100"); // Log based on new state
+            return newState;
+        });
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,8 +96,8 @@ function Setting() {
     useEffect(() => {
         localStorage.setItem("isNoTimer", JSON.stringify(isNoTimer));
         localStorage.setItem("isAccu100", JSON.stringify(isAccu100));
-        localStorage.setItem("islightMode", JSON.stringify(islightMode));
-    }, [isNoTimer, isAccu100, islightMode]);
+        localStorage.setItem("islightMode", JSON.stringify(isLightMode));
+    }, [isNoTimer, isAccu100, isLightMode]);
 
     const handlePasswordChange = async (e) => {
         e.preventDefault();
@@ -74,33 +128,35 @@ function Setting() {
         <div>
             <Nav />
             <h1 className={style.tittle}>ការកំណត់</h1>
-            <SettingComponent
-                icon={<FaEyeSlash />}
-                name={"ការកំណត់ពេល "}
-                detail={"សម្រាប់បង្ហាញពេលវេលារាប់ចុះ"}
-                fun={<Toggle functName={"NoTimer"} setIsNoTimer={setIsNoTimer} />}
-            />
-            <SettingComponent
-                icon={<GoSun />}
-                name={"ផ្ទៃស "}
-                detail={"សម្រាប់បង្ហាញ light mode"}
-                fun={<Toggle functName={"lightMode"} setlightMode={setlightMode} />}
-            />
-            <SettingComponent
-                icon={<FaStop />}
-                name={"ឈប់ពេលខុស  "}
-                detail={"សម្រាប់អ្នកដែលចង់បានភាពត្រឹមត្រូវ 100%។ ពេលដែលអ្នកវាយខុស នឹងឈប់ជាបន្ទាន់។"}
-                fun={<Toggle functName={"Accu100"} setAccu100={setAccu100} />}
-            />
+
             <div className={style.changePass}>
-                <div className={style.detail}>
-                    <SettingComponent
-                        icon={<MdKey />}
-                        name={"ប្តូរពាក្យសម្ងាត់"}
-                        detail={"ប្តូរពាក្យសម្ថាត់របស់អ្នក"}
-                    />
-                </div>
-                <button className={style.button} onClick={/*openPopup*/ handleClickOpen}>
+                <SettingComponent
+                    icon={<FaEyeSlash />}
+                    name={"ការកំណត់ពេល "}
+                    detail={"សម្រាប់បង្ហាញពេលវេលារាប់ចុះ"}
+                />
+                <Toggle isChecked={isNoTimer} handleToggle={handleNoTimerToggle} className={style.toggle} />
+            </div>
+
+            <div className={style.changePass}>
+                <SettingComponent icon={<GoSun />} name={"ផ្ទៃស "} detail={"សម្រាប់បង្ហាញ light mode"} />
+                <Toggle isChecked={isLightMode} handleToggle={handleLightModeToggle} className={style.toggle} />
+            </div>
+
+            <div className={style.changePass}>
+                <SettingComponent
+                    icon={<FaStop />}
+                    name={"ឈប់ពេលខុស  "}
+                    detail={"សម្រាប់អ្នកដែលចង់បានភាពត្រឹមត្រូវ 100%។ ពេលដែលអ្នកវាយខុស នឹងឈប់ជាបន្ទាន់។"}
+                />
+
+                <Toggle isChecked={isAccu100} handleToggle={handleAccu100Toggle} className={style.toggle} />
+            </div>
+
+            <div className={style.changePass}>
+                <SettingComponent icon={<MdKey />} name={"ប្តូរពាក្យសម្ងាត់"} detail={"ប្តូរពាក្យសម្ថាត់របស់អ្នក"} />
+
+                <button className={style.button} onClick={handleClickOpen}>
                     ប្តូរ
                 </button>
             </div>
@@ -152,7 +208,7 @@ function Setting() {
                     </DialogActions>
                 </Dialog>
             </React.Fragment>
-            {/* <Typing isNoTimer={isNoTimer} isAccu100={isAccu100} islightMode={islightMode} /> */}
+            
             <Footer />
         </div>
     );
