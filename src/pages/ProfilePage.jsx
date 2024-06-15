@@ -67,9 +67,9 @@ function Profile() {
                             <div className={style.test}>តេស្តសរុប</div>
                             <div className={style.Num}>{typingHistoryCount}</div>
                         </div>
-                        <div className={style.tests}>
+                        <div className={style.tests1}>
                             <div className={style.test}>ម៉ោងតេស្តសរុប</div>
-                            <div className={style.Num}>{totalTimeTaken} s</div>
+                            <div className={style.Num}>{totalTimeTaken}</div>
                         </div>
                     </div>
                 </div>
@@ -122,6 +122,7 @@ function Profile() {
                                         <div className={style.tests}>
                                             <div className={style.test}>រយ:ពេល</div>
                                             <div className={style.Num}>{totalTimeTaken}</div>
+                                
                             </div>
                         </div>
                 </div>

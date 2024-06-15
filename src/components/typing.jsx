@@ -86,7 +86,7 @@ function Typing(props) {
         });
     }
 
-     function resetTypingState() {
+    function resetTypingState() {
         setTimer(timerm);
         setTimerStarted(false);
         setUserHasStartedTyping(false);
@@ -142,12 +142,17 @@ function Typing(props) {
             if (inputValue.endsWith(" ")) {
                 setWordCount((prev) => prev + 1);
             }
-        } else {
+        } 
+        
+        if ($(content[currentPosition]).html() !== inputValue[inputLength - 1]) {
             playMistakeSound();
             $(content[currentPosition]).addClass(style.incorrect);
             setMistake((prev) => prev + 1);
+            if (inputValue.endsWith(" ")) {
+                setWordCount((prev) => prev + 1);
+            }
             if (isAccu100) {
-                return; // Do not process further input if a mistake has been made and isAccu100 is true
+                return; 
             }
         }
 

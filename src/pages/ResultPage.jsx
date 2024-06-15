@@ -10,7 +10,8 @@ function Result() {
     const navigate = useNavigate();
     const chartRef = useRef(null);
     const [chartData, setChartData] = useState([]);
-    const dataPushedRef = useRef(false); 
+    const dataPushedRef = useRef(false);
+    const componentMounted = useRef(false); // Track component mount status
 
     const generateData = (count) => {
         const data = [];
@@ -49,6 +50,11 @@ function Result() {
     };
 
     useEffect(() => {
+        if (componentMounted.current) {
+            // Prevent the useEffect logic from running again
+            return;
+        }
+
         const wpm = parseFloat(localStorage.getItem('wpm')) || 0;
         const cpm = parseFloat(localStorage.getItem('cpm')) || 0;
         const accuracy = parseFloat(localStorage.getItem('accuracy')) || 0;
@@ -84,6 +90,9 @@ function Result() {
         const ctx = chartRef.current.getContext('2d');
         const myChart = new Chart(ctx, config);
 
+        // Mark component as mounted
+        componentMounted.current = true;
+
         // Cleanup on component unmount
         return () => myChart.destroy();
     }, []); // Empty dependency array to ensure it runs once on mount
@@ -114,7 +123,7 @@ function Result() {
                 <canvas ref={chartRef}></canvas>
             </div>
             <div className={style.restartContainer}>
-                <button onClick={() => restart()} className={style.restart}> <VscDebugRestart /> </button>
+                <button onClick={restart} className={style.restart}> <VscDebugRestart /> </button>
             </div>
         </div>
     );

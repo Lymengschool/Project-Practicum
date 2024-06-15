@@ -36,6 +36,7 @@
     font-weight: bold;
     color: #D1D0C5;
     font-size: 26px;
+    padding-bottom: 8px;
 }
 
 .join {
@@ -45,8 +46,12 @@
     
 }
 
+/* .tests1 {
+    margin-left: 80%;
+} */
+
 .secondBlock {
-    width: 70%;
+    width: 60%;
     background-color: #4B5975;
 }
 
@@ -54,12 +59,13 @@
 .secondBlockContainer {
     display: flex;
     justify-content: space-around;
-    text-align: center;;
     background-color: #4B5975;
     margin-top: 30px;
 }
 
 .test {
+    text-align: center;
+    justify-self: center;
     font-size: 24px;
     color: #D1D0C5;
     background-color: hsl(220, 22%, 38%);
@@ -68,9 +74,11 @@
 }
 
 .Num {
+    
     font-size: 64px;
     color: #D1D0C5;
     background-color: #4B5975;
+    font-family: 'Koh Santepheap', sans-serif;
     
 }
 
@@ -83,13 +91,20 @@
 
 
 .secondRow , .thirdRow {
+    
     display: flex;
+    flex-wrap: nowrap;
     margin-top: 5%;
     justify-content: space-between;
     background-color: #4B5975;
     align-items: center;
     border-radius: 25px;
     margin-bottom: 40px;
+}
+
+.thirdRow {
+    margin-left: 7%;
+    height: fit-content;
 }
 
 .tittle {
@@ -126,6 +141,7 @@
     border-radius: 25px;
     padding: 10px;
     margin-right: 1%;
+    
 }
 
 .rightbox {
@@ -167,7 +183,7 @@
     }
 
     .FirstBlock {
-      text-align: center;
+    text-align: center;
         margin-left: auto;
         width: 100%;
     }
@@ -181,14 +197,13 @@
         display: flex;
         justify-content: space-between;
         margin-left: 17%;
-       
     }
 
 
 
     .tittle {
-       font-size: 20px;
-       margin-top: 0.5%;
+    font-size: 20px;
+    margin-top: 0.5%;
     }
 
     .test {
@@ -197,7 +212,7 @@
     }
 
     .Num {
-        font-size: 34px;
+        font-size: 14px;
     }
 
     .firstBlock {

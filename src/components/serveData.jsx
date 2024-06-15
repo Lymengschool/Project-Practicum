@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { auth, database, ref, get } from './firebase';
 
+// Utility function to format time from seconds to "h m s"
+const formatTime = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+
+    
+    if (h > 0) {
+        return `${h}h ${m}m ${s}s`;
+    } 
+    if (m > 0) {
+        return `${m}m ${s}s`;
+    }
+    return `${s}s`;
+};
+
 const useServeData = () => {
     const [user, setUser] = useState(null);
     const [userStats, setUserStats] = useState(null);
     const [typingHistoryCount, setTypingHistoryCount] = useState(0);
-    const [totalTimeTaken, setTotalTimeTaken] = useState(0);
+    const [totalTimeTaken, setTotalTimeTaken] = useState("0h 0m 0s");
     const [totalCurrentCPM, setTotalCurrentCPM] = useState(0);
     const [totalAccuracy, setTotalAccuracy] = useState(0);
-    const [todayTimeTaken, setTodayTimeTaken] = useState(0);
+    const [todayTimeTaken, setTodayTimeTaken] = useState("0h 0m 0s");
     const [todayCurrentCPM, setTodayCurrentCPM] = useState(0);
     const [todayAccuracy, setTodayAccuracy] = useState(0);
     const [todayWPM, setTodayWPM] = useState(0);
@@ -38,10 +54,10 @@ const useServeData = () => {
     const resetStats = () => {
         setUserStats(null);
         setTypingHistoryCount(0);
-        setTotalTimeTaken(0);
+        setTotalTimeTaken("0h 0m 0s");
         setTotalCurrentCPM(0);
         setTotalAccuracy(0);
-        setTodayTimeTaken(0);
+        setTodayTimeTaken("0h 0m 0s");
         setTodayCurrentCPM(0);
         setTodayAccuracy(0);
     };
@@ -112,19 +128,19 @@ const useServeData = () => {
                 const avgTotalAcc = count > 0 ? (totalAcc / count) : 0;
         
                 setTypingHistoryCount(count);
-                setTotalTimeTaken(totalTime);
+                setTotalTimeTaken(formatTime(totalTime));
                 setTotalCurrentCPM(parseInt(avgTotalCPM));
                 setTotalAccuracy(parseInt(avgTotalAcc));
-                setTodayTimeTaken(todayTime);
+                setTodayTimeTaken(formatTime(todayTime));
                 setTodayCurrentCPM(parseInt(avgTodayCPM));
                 setTodayAccuracy(parseInt(avgTodayAcc));
                 setTodayWPM(parseInt(avgTodayWPM));
                 setTotalWPM(parseInt(avgTotalWPM));
     
-                console.log("Total time taken:", totalTime);
+                console.log("Total time taken:", formatTime(totalTime));
                 console.log("Total current CPM:", avgTotalCPM);
                 console.log("Total accuracy:", avgTotalAcc);
-                console.log("Today's time taken:", todayTime);
+                console.log("Today's time taken:", formatTime(todayTime));
                 console.log("Today's current CPM:", avgTodayCPM);
                 console.log("Today's accuracy:", avgTodayAcc);
             } else {
@@ -137,8 +153,6 @@ const useServeData = () => {
         }
     };
     
-    
-
     return { user, userStats, username, joinDate, typingHistoryCount, totalTimeTaken, totalWPM, todayWPM,
         totalCurrentCPM, totalAccuracy, todayTimeTaken, todayCurrentCPM, todayAccuracy };
 };
