@@ -9,7 +9,8 @@ import { auth, signOut as firebaseSignOut } from "./firebase"; // Adjust the pat
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IoCloseOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 const sound = new Howl({
     src: ["/audio/snail.mp3"], // Corrected path to audio file
@@ -26,6 +27,8 @@ function Nav() {
     );
 
     const navigate = useNavigate();
+    const location = useLocation();
+    
     function handleSignOut() {
         firebaseSignOut(auth)
         .then(() => {
@@ -66,13 +69,15 @@ function Nav() {
                     </Link>
                 </div>
                 <div className={nav.right}>
-                    <FiLogOut className={nav.icon} onClick={handleSignOut} />
+                  
                     <Link to='/setting' className={nav.icon}>
                         <FontAwesomeIcon icon={faGear} />
                     </Link>
                     <Link to={isLogin ? '/profile' : '/login'} className={nav.icon}>
-                        <FontAwesomeIcon icon={faCircleUser} />
+                        <FontAwesomeIcon icon={faCircleUser} />  
                     </Link>
+                    
+                    {location.pathname === '/profile' && <FiLogOut className={nav.icon} onClick={handleSignOut} />}
                 </div>
             </div>
         </nav>
