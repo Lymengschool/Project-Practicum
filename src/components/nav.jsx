@@ -6,7 +6,7 @@ import { FiLogOut } from "react-icons/fi";
 import { Howl } from "howler";
 import nav from "../../public/css/nav.module.css";
 import { auth, signOut as firebaseSignOut } from "./firebase"; // Adjust the path accordingly
-import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
+import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IoCloseOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";

@@ -24,7 +24,7 @@ function Typing(props) {
         mistakeClickNoise.play();
     };
 
-    const { onButtonClick, timerm, slength, setOnType, dialogOpen, textArea } = props;
+    const { onButtonClick, timerm, slength, setOnType, dialogOpen, textArea, onChangeMenu } = props;
 
     const [timer, setTimer] = useState(timerm);
     const [mode, setMode] = useState(1 || onButtonClick);
@@ -102,7 +102,7 @@ function Typing(props) {
     useEffect(() => {
         resetTypingState();
         stopTimer();
-    }, [timerm]);
+    }, [timerm, onChangeMenu]);
 
     function focusOnInput(e) {
         const input = $(".text-input");

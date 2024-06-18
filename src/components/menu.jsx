@@ -275,6 +275,7 @@ function Menu() {
                 setOnType={setOnType}
                 dialogOpen={dialogOpen} // Pass the dialogOpen state to Typing component
                 textArea={textArea}
+                onChangeMenu={activeButton}
             />
         </div>
     );
