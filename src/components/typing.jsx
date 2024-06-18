@@ -152,6 +152,7 @@ function Typing(props) {
                 setWordCount((prev) => prev + 1);
             }
             if (isAccu100) {
+                navigate("/result");
                 return; 
             }
         }
