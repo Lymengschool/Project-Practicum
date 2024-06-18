@@ -145,7 +145,7 @@
 }
 
 #input{
-    color: white;
+    color: var(--word);
 }
 
 .toggle{

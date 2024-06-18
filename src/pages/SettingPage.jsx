@@ -182,12 +182,13 @@ function Setting() {
 
             <React.Fragment>
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>ប្តូរពាក្យសម្ងាត់</DialogTitle>
+                    <DialogTitle id={style.input}>ប្តូរពាក្យសម្ងាត់</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។</DialogContentText>
+                        <DialogContentText id={style.input}>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។</DialogContentText>
                         <TextField
                             autoFocus
                             required
+                            id={style.input}
                             margin='dense'
                             label='ពាក្យសម្ងាត់ចាស់'
                             type='password'
@@ -195,26 +196,37 @@ function Setting() {
                             variant='standard'
                             value={currentPassword}
                             onChange={(e) => setCurrentPassword(e.target.value)}
+                            InputLabelProps={{
+                                id: style.input
+                            }}
                         />
                         <TextField
                             required
                             margin='dense'
+                            id={style.input}
                             label='ពាក្យសម្ងាតថ្មី'
                             type='password'
                             fullWidth
                             variant='standard'
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
+                            InputLabelProps={{
+                                id: style.input
+                            }}
                         />
                         <TextField
                             required
                             margin='dense'
+                            id={style.input}
                             label='ផ្ទៀងផ្ទាត់ពាក្យសម្ងាត់'
                             type='password'
                             fullWidth
                             variant='standard'
                             value={confirmNewPassword}
                             onChange={(e) => setConfirmNewPassword(e.target.value)}
+                            InputLabelProps={{
+                                id: style.input
+                            }}
                         />
                     </DialogContent>
                     <DialogActions>
