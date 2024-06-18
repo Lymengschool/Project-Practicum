@@ -61,6 +61,10 @@ nav{
     color: var(--focus);
 }
 
+.toastCustomBackground {
+    background-color: #1b1f28 !important;
+}
+
 @media (min-width: 400px) and (max-width: 600px){
     .container .left div p:first-child{
         color: #8f8e8e;

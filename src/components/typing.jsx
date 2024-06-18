@@ -120,6 +120,7 @@ function Typing(props) {
 
         const content = $(".text-content").find("span");
         const input = $(".text-input");
+        console.log("Input: ", input.val());
 
         input.focus();
         var inputValue = input.val();

@@ -8,6 +8,7 @@ import nav from "../../public/css/nav.module.css";
 import { auth, signOut as firebaseSignOut } from "./firebase"; // Adjust the path accordingly
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const sound = new Howl({
     src: ["/audio/snail.mp3"], // Corrected path to audio file
@@ -16,13 +17,18 @@ const sound = new Howl({
 console.log('isLogin at nav:', localStorage.getItem('isLogin'));
 
 function Nav() {
+    const navigate = useNavigate();
     function handleSignOut() {
-        firebaseSignOut(auth).then(() => {
-            window.location.href = "/";
+        firebaseSignOut(auth)
+        .then(() => {
+            navigate("/");
             localStorage.setItem('isLogin', 'false');
             console.log("Signing out...");
-            toast.success("logout success ...");
-        }).catch((error) => {
+            toast.success("logout success ...", {
+                className: nav.toastCustomBackground
+            });
+        })
+        .catch((error) => {
             console.log(error.message);
         });
     }
