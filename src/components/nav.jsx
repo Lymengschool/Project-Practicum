@@ -6,8 +6,9 @@ import { FiLogOut } from "react-icons/fi";
 import { Howl } from "howler";
 import nav from "../../public/css/nav.module.css";
 import { auth, signOut as firebaseSignOut } from "./firebase"; // Adjust the path accordingly
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IoCloseOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 const sound = new Howl({
@@ -17,6 +18,13 @@ const sound = new Howl({
 console.log('isLogin at nav:', localStorage.getItem('isLogin'));
 
 function Nav() {
+
+    const CloseButton = ({ closeToast }) => (
+        <i onClick={closeToast}>
+           <IoCloseOutline />
+        </i>
+    );
+
     const navigate = useNavigate();
     function handleSignOut() {
         firebaseSignOut(auth)
@@ -25,7 +33,8 @@ function Nav() {
             localStorage.setItem('isLogin', 'false');
             console.log("Signing out...");
             toast.success("logout success ...", {
-                className: nav.toastCustomBackground
+                className: nav.toastCustomBackground,
+                closeButton: <CloseButton />
             });
         })
         .catch((error) => {

@@ -63,6 +63,7 @@ nav{
 
 .toastCustomBackground {
     background-color: #1b1f28 !important;
+    color: white !important;
 }
 
 @media (min-width: 400px) and (max-width: 600px){

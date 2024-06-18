@@ -34,6 +34,7 @@ function Typing(props) {
     const [mistake, setMistake] = useState(0);
     const [currentPosition, setCurrentPosition] = useState(0);
     const [wordCount, setWordCount] = useState(0);
+    const [countdown, setCountdown] = useState(null);
 
     const navigate = useNavigate();
 
@@ -100,6 +101,7 @@ function Typing(props) {
     // Listen for changes in timerm prop
     useEffect(() => {
         resetTypingState();
+        stopTimer();
     }, [timerm]);
 
     function focusOnInput(e) {
@@ -210,14 +212,22 @@ function Typing(props) {
         setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
     };
 
+    const stopTimer = () => {
+        if (countdown) {
+            clearInterval(countdown);
+            setCountdown(null);
+        }
+    };
+    
     const startTimer = () => {
         setTimerStarted(true);
-        const countdown = setInterval(() => {
+        const intervalId = setInterval(() => {
             decrementTimer();
             if (timerRef.current === 0) {
-                clearInterval(countdown);
+                clearInterval(intervalId);
             }
         }, 1000);
+        setCountdown(intervalId);
     };
 
     const handleMouseMove = () => {
