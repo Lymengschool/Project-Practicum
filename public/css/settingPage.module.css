@@ -115,6 +115,12 @@
     margin-top: 0;
 }
 
+.toastCustomBackground {
+    background-color: #1b1f28 !important;
+    color: white !important;
+}
+
+
 #dialogContentText {
     color: #ffffff; /* Black text for better contrast */
 }

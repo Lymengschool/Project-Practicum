@@ -17,6 +17,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { auth, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "../components/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IoCloseOutline } from "react-icons/io5";
 
 function Setting() {
     const [isNoTimer, setIsNoTimer] = useState(() => {
@@ -90,7 +91,6 @@ function Setting() {
         setCurrentPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
-        setError(null);
     };
 
     useEffect(() => {
@@ -99,16 +99,29 @@ function Setting() {
         localStorage.setItem("islightMode", JSON.stringify(isLightMode));
     }, [isNoTimer, isAccu100, isLightMode]);
 
+    const CloseButton = ({ closeToast }) => (
+        <i onClick={closeToast}>
+           <IoCloseOutline />
+        </i>
+    );
+
+
     const handlePasswordChange = async (e) => {
         e.preventDefault();
         if (newPassword !== confirmNewPassword) {
-            toast.error("Passwords do not match!");
+            toast.error("Passwords do not match!", {
+                className: style.toastCustomBackground,
+                closeButton: <CloseButton />
+            });;
             return;
         }
 
         const user = auth.currentUser;
         if (!user) {
-            toast.error("No user is signed in.");
+            toast.error("No user is signed in.", {
+                className: style.toastCustomBackground,
+                closeButton: <CloseButton />
+            });
             return;
         }
 
@@ -117,10 +130,16 @@ function Setting() {
         try {
             await reauthenticateWithCredential(user, credential);
             await updatePassword(user, newPassword);
-            toast.success("Password updated successfully!");
+            toast.success("Password updated successfully!", {
+                className: style.toastCustomBackground,
+                closeButton: <CloseButton />
+            });
             handleClose();
         } catch (error) {
-            toast.error("Error updating password: " + error.message);
+            toast.error("Error updating password: " + error.message, {
+                className: style.toastCustomBackground,
+                closeButton: <CloseButton />
+            });;
         }
     };
 
