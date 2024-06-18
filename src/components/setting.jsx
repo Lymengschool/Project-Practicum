@@ -11,7 +11,6 @@ function Setting({ icon, detail, name}) {
                 </h1>
                 <p className={style.detail}> {detail} </p>
             </div>
-           
         </div>
     );
 }
