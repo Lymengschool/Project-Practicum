@@ -72,6 +72,14 @@ function Setting() {
         });
     };
 
+    const handleClickOpenEdit = () => {
+        setOpenEdit(true);
+    }
+
+    const handleClickCloseEdit = () => {
+        setOpenEdit(false);
+    }
+
     const handleLightModeToggle = () => {
         setIsLightMode((prevState) => !prevState);
     };
@@ -178,7 +186,7 @@ const handleEditProfile = async (e) => {
         });
 
         toast.success("Profile updated successfully!");
-        handleCloseEdit(); // Close the dialog after successful update
+        handleClickCloseEdit(); // Close the dialog after successful update
     } catch (error) {
         toast.error("Error updating profile: " + error.message);
     }
@@ -291,9 +299,9 @@ const handleEditProfile = async (e) => {
 
 
             <React.Fragment>
-                <StyledDialog 
+                <Dialog 
                     open={openEdit} 
-                    onClose={handleCloseEdit}
+                    onClose={handleClickCloseEdit}
                 >
                     <DialogTitle>កែប្រែឈ្មោះនិងរូបភាព(profile picture)</DialogTitle>
                     <DialogContent>
@@ -322,14 +330,14 @@ const handleEditProfile = async (e) => {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <button onClick={handleCloseEdit} className={style.button}>
+                        <button onClick={handleClickCloseEdit} className={style.button}>
                             បោះបង់
                         </button>
                         <button onClick={handleEditProfile} className={style.button}>
                             ផ្លាស់ប្តូ
                         </button>
                     </DialogActions>
-                </StyledDialog>
+                </Dialog>
             </React.Fragment>
             
             <Footer />
