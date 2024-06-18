@@ -113,7 +113,7 @@ function Setting() {
 
     const CloseButton = ({ closeToast }) => (
         <i onClick={closeToast}>
-           <IoCloseOutline />
+        <IoCloseOutline />
         </i>
     );
 
