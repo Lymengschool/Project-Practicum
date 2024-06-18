@@ -286,7 +286,7 @@ const handleEditProfile = async (e) => {
                             ផ្លាស់ប្តូ
                         </button>
                     </DialogActions>
-                </StyledDialog>
+                </Dialog>
             </React.Fragment>
 
 
