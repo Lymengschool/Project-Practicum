@@ -5,6 +5,8 @@ import Chart from 'chart.js/auto';
 import { VscDebugRestart } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 import { auth, database, ref, push } from '../components/firebase.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Result() {
     const navigate = useNavigate();
@@ -64,11 +66,16 @@ function Result() {
         const newData = generateData(wpm); // Use wpm for demo, replace with actual data
         setChartData(newData);
 
+        console.log('wpm:', wpm);
+console.log('cpm:', cpm);
+console.log('accuracy:', accuracy);
+
         // Ensure all values are finite numbers
         if (isFinite(wpm) && isFinite(cpm) && isFinite(accuracy)) {
             pushDataToFirebase(timeTaken, accuracy, wpm, cpm);
         } else {
             console.error('Invalid data: ', { wpm, cpm, accuracy });
+            toast.error('Invalid data. Please try again.');
         }
 
         // Your Chart.js configuration
@@ -101,6 +108,7 @@ function Result() {
         <div>
             <Nav />
             <div className={style.container}>
+                <ToastContainer/>
                 <div className={style.block}>
                     <p className={style.word}>ពាក្យក្នុង​​.វ</p>
                     <p className={style.num}>{localStorage.getItem('wpm') || 0}</p>

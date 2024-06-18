@@ -47,6 +47,7 @@ function Setting() {
             document.documentElement.style.setProperty("--subback", "#E5DDD4");
             document.documentElement.style.setProperty("--hover", "#1b2028");
             document.documentElement.style.setProperty("--background", "#FFF9F2");
+            document.documentElement.style.setProperty("--correct", "#1e90ff");
         } else {
             document.documentElement.style.setProperty("--head", "#1e90ff");
             document.documentElement.style.setProperty("--focus", "#1e90ff");
@@ -54,6 +55,7 @@ function Setting() {
             document.documentElement.style.setProperty("--subback", "#151a21");
             document.documentElement.style.setProperty("--hover", "#dfdfdf");
             document.documentElement.style.setProperty("--background", "#1b2028");
+            document.documentElement.style.setProperty("--correct", "#f3f6f3");
         }
     }, [isLightMode]);
 

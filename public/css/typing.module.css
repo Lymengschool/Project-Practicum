@@ -27,7 +27,7 @@
 }
 
 .correct {
-    color: white; /* Change color to white for correct characters */
+      color: var(--correct); /* Change color to white for correct characters */
 }
 
 .incorrect {
