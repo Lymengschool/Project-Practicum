@@ -89,6 +89,7 @@ function Form({ name, confirmpassword, action }) {
           // Create User data
           const user_data = {
             user_name: Name,
+            profileURL: "",
             email: email,
             last_login: new Date().toLocaleDateString('en-CA') 
           };

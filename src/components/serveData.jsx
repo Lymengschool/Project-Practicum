@@ -30,6 +30,7 @@ const useServeData = () => {
     const [todayWPM, setTodayWPM] = useState(0);
     const [totalWPM, setTotalWPM] = useState(0);
     const [username, setUsername] = useState('');
+    const [profilePic, setProfilePic] = useState('');
     const [joinDate, setJoinDate] = useState('');
 
     useEffect(() => {
@@ -70,6 +71,7 @@ const useServeData = () => {
                 const data = snapshot.val();
                 setUserStats(data);
                 setUsername(data.user_name);
+                setProfilePic(data.profileURL);
                 setJoinDate(data.last_login);
                 console.log("User stats fetched:", data);
             } else {
@@ -153,7 +155,7 @@ const useServeData = () => {
         }
     };
     
-    return { user, userStats, username, joinDate, typingHistoryCount, totalTimeTaken, totalWPM, todayWPM,
+    return { user, userStats, username, profilePic, joinDate, typingHistoryCount, totalTimeTaken, totalWPM, todayWPM,
         totalCurrentCPM, totalAccuracy, todayTimeTaken, todayCurrentCPM, todayAccuracy };
 };
 

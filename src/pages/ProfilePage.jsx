@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Nav from "../components/nav.jsx";
 import style from "./../../public/css/profile.module.css";
-import Footer from '../components/footer.jsx';
 import { RiImageAddFill } from "react-icons/ri";
 import { auth, database, ref, get } from "./../components/firebase.jsx";
 import { useServeData } from "./../components/serveData.jsx";
 function Profile() {
     const [user, setUser] = useState(null);
     const [userStats, setUserStats] = useState(null); // State to store user statistics
-    const { username, joinDate, typingHistoryCount, totalCurrentCPM, totalTimeTaken, totalAccuracy, totalWPM, todayWPM, 
+    const { username, joinDate, profilePic,  typingHistoryCount, totalCurrentCPM, totalTimeTaken, totalAccuracy, totalWPM, todayWPM, 
         todayTimeTaken, todayCurrentCPM, todayAccuracy  } = useServeData();
 
     useEffect(() => {
@@ -20,6 +19,8 @@ function Profile() {
                 setUser(null);
             }
         });
+
+        console.log("profile image is ", profilePic)
 
         console.log("islogin at login page:", localStorage.getItem('isLogin'));
 
@@ -55,7 +56,9 @@ function Profile() {
             <Nav/>
             <div className={style.FirstContainer}>
                 <div className={style.FirstBlock}>
-                    <div className={style.picture}><RiImageAddFill /></div>
+                <div className={style.picture}>
+                        {profilePic ? <img src={profilePic} alt="Profile" /> : <RiImageAddFill />}
+                    </div>
                     <div className={style.nameContainer}>
                         <p className={style.name}>{username}</p>
                         <p className={style.join}>Joined Since: {joinDate}</p>

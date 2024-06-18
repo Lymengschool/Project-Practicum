@@ -7,17 +7,16 @@ import { GoSun } from "react-icons/go";
 import { MdKey } from "react-icons/md";
 import Footer from "../components/footer.jsx";
 import Toggle from "../components/toggle.jsx";
-import Typing from "../components/typing.jsx";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { auth, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "../components/firebase";
+import { styled } from '@mui/material/styles';
+import { auth, updatePassword, reauthenticateWithCredential,database, update, ref, getAuth, EmailAuthProvider, updateProfile } from "../components/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { IoCloseOutline } from "react-icons/io5";
 
 function Setting() {
     const [isNoTimer, setIsNoTimer] = useState(() => {
@@ -26,15 +25,17 @@ function Setting() {
     });
     const [isLightMode, setIsLightMode] = useState(() => JSON.parse(localStorage.getItem("isLightMode")) || false);
     const [isAccu100, setIsAccu100] = useState(() => JSON.parse(localStorage.getItem("isAccu100")) || false);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
+    const [profilePic, setProfilePic] = useState("");
+    const [profileName, setProfileName] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
     useEffect(() => {
         localStorage.setItem("isNoTimer", JSON.stringify(isNoTimer));
         console.log(sessionStorage.getItem("isNoTimer"));
-
     }, [isNoTimer]);
 
     useEffect(() => {
@@ -91,6 +92,7 @@ function Setting() {
         setCurrentPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
+        setError(null);
     };
 
     useEffect(() => {
@@ -143,6 +145,46 @@ function Setting() {
         }
     };
 
+    
+
+const handleEditProfile = async (e) => {
+    e.preventDefault();
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+        toast.error("No user is signed in.");
+        return;
+    }
+
+    try {
+        // Update user's profile in Firebase Authentication
+        let updatedFields = {};
+        if (profileName.trim() !== "") {
+            updatedFields.displayName = profileName;
+        }
+        if (profilePic.trim() !== "") {
+            updatedFields.photoURL = profilePic;
+        }
+        await updateProfile(user, updatedFields);
+
+        // Update user's profile in Firebase Realtime Database
+       
+        const userRef = ref(database, 'users/' + user.uid);
+        await update(userRef, {
+            user_name: profileName,
+            profileURL: profilePic
+        });
+
+        toast.success("Profile updated successfully!");
+        handleCloseEdit(); // Close the dialog after successful update
+    } catch (error) {
+        toast.error("Error updating profile: " + error.message);
+    }
+};
+
+   
+    
+        
     return (
         <div>
             <Nav />
@@ -168,21 +210,26 @@ function Setting() {
                     name={"ឈប់ពេលខុស  "}
                     detail={"សម្រាប់អ្នកដែលចង់បានភាពត្រឹមត្រូវ 100%។ ពេលដែលអ្នកវាយខុស នឹងឈប់ជាបន្ទាន់។"}
                 />
-
                 <Toggle isChecked={isAccu100} handleToggle={handleAccu100Toggle} className={style.toggle} />
             </div>
 
             <div className={style.changePass}>
                 <SettingComponent icon={<MdKey />} name={"ប្តូរពាក្យសម្ងាត់"} detail={"ប្តូរពាក្យសម្ថាត់របស់អ្នក"} />
-
                 <button className={style.button} onClick={handleClickOpen}>
+                    ប្តូរ
+                </button>
+            </div>
+
+            <div className={style.changePass}>
+                <SettingComponent icon={<MdKey />} name={"ផ្លាស់ប្ដូររូប​​​ និង ឈ្មោះ"} detail={"កែប្រែឈ្មោះនិងរូបភាព​ (profile picture)"} />
+                <button className={style.button} onClick={handleClickOpenEdit}>
                     ប្តូរ
                 </button>
             </div>
 
             <React.Fragment>
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle id={style.input}>ប្តូរពាក្យសម្ងាត់</DialogTitle>
+                    <DialogTitle>ប្តូរពាក្យសម្ងាត់</DialogTitle>
                     <DialogContent>
                         <DialogContentText id={style.input}>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។</DialogContentText>
                         <TextField
@@ -237,7 +284,50 @@ function Setting() {
                             ផ្លាស់ប្តូ
                         </button>
                     </DialogActions>
-                </Dialog>
+                </StyledDialog>
+            </React.Fragment>
+
+
+            <React.Fragment>
+                <StyledDialog 
+                    open={openEdit} 
+                    onClose={handleCloseEdit}
+                >
+                    <DialogTitle>កែប្រែឈ្មោះនិងរូបភាព(profile picture)</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរផ្លាស់ប្ដូររូបនិងឈ្មោះ។</DialogContentText>
+
+                        <TextField
+                            autoFocus
+                            margin='dense'
+                            label='រូប'
+                            type='file'
+                            fullWidth
+                            variant='standard'
+                            value={profilePic}
+                            onChange={(e) => setProfilePic(e.target.value)}
+                        />
+
+                        <TextField
+                            autoFocus
+                            margin='dense'
+                            label='ឈ្មោះ'
+                            type='text'
+                            fullWidth
+                            variant='standard'
+                            value={profileName}
+                            onChange={(e) => setProfileName(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <button onClick={handleCloseEdit} className={style.button}>
+                            បោះបង់
+                        </button>
+                        <button onClick={handleEditProfile} className={style.button}>
+                            ផ្លាស់ប្តូ
+                        </button>
+                    </DialogActions>
+                </StyledDialog>
             </React.Fragment>
             
             <Footer />
