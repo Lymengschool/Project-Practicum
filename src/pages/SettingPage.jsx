@@ -14,9 +14,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from '@mui/material/styles';
-import { auth, updatePassword, reauthenticateWithCredential,database, update, ref, getAuth, EmailAuthProvider, updateProfile } from "../components/firebase";
+import { auth, updatePassword, reauthenticateWithCredential, database, update, ref, getAuth, EmailAuthProvider, updateProfile, storage } from "../components/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ref as storageRef, getDownloadURL, uploadBytes } from 'firebase/storage';
 
 function Setting() {
     const [isNoTimer, setIsNoTimer] = useState(() => {
@@ -29,6 +30,7 @@ function Setting() {
     const [openEdit, setOpenEdit] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const [profilePic, setProfilePic] = useState("");
+    const [profilePicFile, setProfilePicFile] = useState(null); // New state for the file input
     const [profileName, setProfileName] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -117,7 +119,6 @@ function Setting() {
         </i>
     );
 
-
     const handlePasswordChange = async (e) => {
         e.preventDefault();
         if (newPassword !== confirmNewPassword) {
@@ -155,46 +156,60 @@ function Setting() {
         }
     };
 
-    
-
-const handleEditProfile = async (e) => {
-    e.preventDefault();
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) {
-        toast.error("No user is signed in.");
-        return;
-    }
-
-    try {
-        // Update user's profile in Firebase Authentication
-        let updatedFields = {};
-        if (profileName.trim() !== "") {
-            updatedFields.displayName = profileName;
+    const handleEditProfile = async (e) => {
+        e.preventDefault();
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (!user) {
+            toast.error("No user is signed in.");
+            return;
         }
-        if (profilePic.trim() !== "") {
-            updatedFields.photoURL = profilePic;
+
+        try {
+            let updatedFields = {};
+            if (profileName.trim() !== "") {
+                updatedFields.displayName = profileName;
+            }
+
+            if (profilePicFile) { // Check if a new image file is selected
+                const imageRef = storageRef(storage, `profilePics/${user.uid}/${profilePicFile.name}`);
+                await uploadBytes(imageRef, profilePicFile);
+                const imageUrl = await getDownloadURL(imageRef);
+                updatedFields.photoURL = imageUrl;
+
+                // Update user's profile in Firebase Realtime Database
+                const userRef = databaseRef(database, 'users/' + user.uid);
+                await update(userRef, {
+                    user_name: profileName,
+                    profileURL: imageUrl // Use the uploaded image URL
+                });
+            } else if (profilePic.trim() !== "") { // Handle case where a URL string is directly provided
+                updatedFields.photoURL = profilePic;
+
+                // Update user's profile in Firebase Realtime Database
+                const userRef = databaseRef(database, 'users/' + user.uid);
+                await update(userRef, {
+                    user_name: profileName,
+                    profileURL: profilePic
+                });
+            } else {
+                // Only update the user name in Firebase Realtime Database if no new profile pic is provided
+                const userRef = databaseRef(database, 'users/' + user.uid);
+                await update(userRef, {
+                    user_name: profileName
+                });
+            }
+
+            // Update user's profile in Firebase Authentication
+            await updateProfile(user, updatedFields);
+
+            toast.success("Profile updated successfully!");
+            handleClickCloseEdit(); // Close the dialog after successful update
+        } catch (error) {
+            toast.error("Error updating profile: " + error.message);
         }
-        await updateProfile(user, updatedFields);
+    };
 
-        // Update user's profile in Firebase Realtime Database
-       
-        const userRef = ref(database, 'users/' + user.uid);
-        await update(userRef, {
-            user_name: profileName,
-            profileURL: profilePic
-        });
-
-        toast.success("Profile updated successfully!");
-        handleClickCloseEdit(); // Close the dialog after successful update
-    } catch (error) {
-        toast.error("Error updating profile: " + error.message);
-    }
-};
-
-   
-    
-        
     return (
         <div>
             <Nav />
@@ -297,10 +312,9 @@ const handleEditProfile = async (e) => {
                 </Dialog>
             </React.Fragment>
 
-
             <React.Fragment>
-                <Dialog 
-                    open={openEdit} 
+                <Dialog
+                    open={openEdit}
                     onClose={handleClickCloseEdit}
                 >
                     <DialogTitle>កែប្រែឈ្មោះនិងរូបភាព(profile picture)</DialogTitle>
@@ -314,8 +328,10 @@ const handleEditProfile = async (e) => {
                             type='file'
                             fullWidth
                             variant='standard'
-                            value={profilePic}
-                            onChange={(e) => setProfilePic(e.target.value)}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={(e) => setProfilePicFile(e.target.files[0])} // Update the file input state
                         />
 
                         <TextField
@@ -339,7 +355,7 @@ const handleEditProfile = async (e) => {
                     </DialogActions>
                 </Dialog>
             </React.Fragment>
-            
+
             <Footer />
         </div>
     );
