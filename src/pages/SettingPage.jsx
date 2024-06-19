@@ -14,10 +14,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from '@mui/material/styles';
-import { auth, updatePassword, reauthenticateWithCredential, database, update, ref, getAuth, EmailAuthProvider, updateProfile, storage } from "../components/firebase";
+import { auth, updatePassword, reauthenticateWithCredential, database, update, ref as databaseRef, getAuth, EmailAuthProvider, updateProfile, storage } from "../components/firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ref as storageRef, getDownloadURL, uploadBytes } from 'firebase/storage';
+import { IoCloseOutline } from 'react-icons/io5';
 
 function Setting() {
     const [isNoTimer, setIsNoTimer] = useState(() => {
@@ -104,7 +105,6 @@ function Setting() {
         setCurrentPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
-        setError(null);
     };
 
     useEffect(() => {
@@ -125,7 +125,7 @@ function Setting() {
             toast.error("Passwords do not match!", {
                 className: style.toastCustomBackground,
                 closeButton: <CloseButton />
-            });;
+            });
             return;
         }
 
@@ -152,7 +152,7 @@ function Setting() {
             toast.error("Error updating password: " + error.message, {
                 className: style.toastCustomBackground,
                 closeButton: <CloseButton />
-            });;
+            });
         }
     };
 

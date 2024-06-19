@@ -30,7 +30,7 @@ const useServeData = () => {
     const [todayWPM, setTodayWPM] = useState(0);
     const [totalWPM, setTotalWPM] = useState(0);
     const [username, setUsername] = useState('');
-    const [profilePic, setProfilePic] = useState('');
+    const [profilePic, setProfilePic] = useState(null);
     const [joinDate, setJoinDate] = useState('');
 
     useEffect(() => {
@@ -72,6 +72,7 @@ const useServeData = () => {
                 setUserStats(data);
                 setUsername(data.user_name);
                 setProfilePic(data.profileURL);
+                console.log(profilePic)
                 setJoinDate(data.last_login);
                 console.log("User stats fetched:", data);
             } else {

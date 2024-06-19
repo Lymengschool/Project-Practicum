@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBl6rvFMcaoh0P87U3lhmgSQkSgjTwyOzg",
   authDomain: "jai-typi.firebaseapp.com",
   projectId: "jai-typi",
-  storageBucket: "jai-typi.appspot.com",
+  storageBucket: "gs://jai-typi.appspot.com",
   messagingSenderId: "978339587144",
   appId: "1:978339587144:web:899c827c22d6f0b62fe47d",
   measurementId: "G-ST3BWXETBF",
