@@ -254,9 +254,9 @@ function Setting() {
 
             <React.Fragment>
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>ប្តូរពាក្យសម្ងាត់</DialogTitle>
+                    <DialogTitle style={{backgroundColor: '#4b5975', color: '#fff'}}>ប្តូរពាក្យសម្ងាត់</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id={style.input}>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។</DialogContentText>
+                        <DialogContentText id={style.input} style={{paddingTop: 10}}>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរពាក្យសម្ងាត់។</DialogContentText>
                         <TextField
                             autoFocus
                             required
@@ -317,7 +317,7 @@ function Setting() {
                     open={openEdit}
                     onClose={handleClickCloseEdit}
                 >
-                    <DialogTitle>កែប្រែឈ្មោះនិងរូបភាព(profile picture)</DialogTitle>
+                    <DialogTitle style={{backgroundColor: '#4b5975', color: '#fff'}}>កែប្រែឈ្មោះនិងរូបភាព(profile picture)</DialogTitle>
                     <DialogContent>
                         <DialogContentText>សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីប្តូរផ្លាស់ប្ដូររូបនិងឈ្មោះ។</DialogContentText>
 

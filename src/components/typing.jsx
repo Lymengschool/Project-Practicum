@@ -7,6 +7,28 @@ import clickMistakeFile from "./../../public/audio/mistake_click.wav";
 var clickNoise = new Audio(clickFile);
 var mistakeClickNoise = new Audio(clickMistakeFile);
 
+const khmerDependentVowels = [
+    'ា', // ā
+    'ិ', // i
+    'ី', // ī
+    'ឹ', // eu
+    'ឺ', // eū
+    'ុ', // u
+    'ូ', // ū
+    'ួ', // ua
+    'ឿ', // uea
+    'ៀ', // ia
+    'េ', // e
+    'ែ', // ae
+    'ៃ', // ai
+    'ោ', // ao
+    'ៅ', // au
+    'ំ', // um
+    'ះ', // ah
+    'ៈ', // ă
+    '្'
+];
+
 function Typing(props) {
     const [isNoTimer, setIsNoTimer] = useState(() => {
         return JSON.parse(sessionStorage.getItem("isNoTimer")) || false;
@@ -149,7 +171,16 @@ function Typing(props) {
         
         if ($(content[currentPosition]).html() !== inputValue[inputLength - 1]) {
             playMistakeSound();
+            console.log("currentposition", content, currentPosition, $(content[currentPosition]))
             $(content[currentPosition]).addClass(style.incorrect);
+            if (khmerDependentVowels.includes($(content[currentPosition]).html())) {
+                $(content[currentPosition-1]).removeClass(style.correct);
+                $(content[currentPosition-1]).addClass(style.incorrect);
+            } else if ($(content[currentPosition-1]).html() == '្') {
+                $(content[currentPosition-1]).removeClass(style.correct);
+                $(content[currentPosition-1]).addClass(style.incorrect);
+            }
+
             setMistake((prev) => prev + 1);
             if (inputValue.endsWith(" ")) {
                 setWordCount((prev) => prev + 1);
