@@ -171,7 +171,7 @@ function Setting() {
                 updatedFields.displayName = profileName;
             }
 
-            if (profilePicFile) { // Check if a new image file is selected
+            if (profilePicFile) { 
                 const imageRef = storageRef(storage, `profilePics/${user.uid}/${profilePicFile.name}`);
                 await uploadBytes(imageRef, profilePicFile);
                 const imageUrl = await getDownloadURL(imageRef);
