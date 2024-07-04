@@ -1,12 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from "react";
 import Nav from "../components/nav.jsx";
 import style from "./../../public/css/result.module.css";
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 import { VscDebugRestart } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
-import { auth, database, ref, push } from '../components/firebase.jsx';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { auth, database, ref, push } from "../components/firebase.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Result() {
     const navigate = useNavigate();
@@ -24,13 +24,13 @@ function Result() {
     };
 
     const restart = () => {
-        localStorage.setItem('wpm', '0');
-        localStorage.setItem('cpm', '0');
+        localStorage.setItem("wpm", "0");
+        localStorage.setItem("cpm", "0");
         navigate("/");
-    }
+    };
 
     const pushDataToFirebase = (timeTaken, accuracy, wpm, cpm) => {
-        const isLogin = localStorage.getItem('isLogin') === 'true';
+        const isLogin = localStorage.getItem("isLogin") === "true";
         if (isLogin && !dataPushedRef.current) {
             const user = auth.currentUser;
             if (user) {
@@ -40,49 +40,38 @@ function Result() {
                     accuracy,
                     wpm,
                     cpm,
-                    timestamp: Date.now()
-                }).then(() => {
-                    console.log("WPM and CPM successfully saved.");
-                    dataPushedRef.current = true; // Mark as pushed
-                }).catch((error) => {
-                    console.error("Error saving WPM and CPM:", error);
-                });
+                    timestamp: Date.now(),
+                })
+                    .then(() => {
+                        console.log("WPM and CPM successfully saved.");
+                        dataPushedRef.current = true; // Mark as pushed
+                    })
+                    .catch((error) => {
+                        console.error("Error saving WPM and CPM:", error);
+                    });
             }
         }
     };
 
     useEffect(() => {
-        if (componentMounted.current) {
-            // Prevent the useEffect logic from running again
-            return;
-        }
-
+        // Retrieve data from localStorage
         const wpm = parseFloat(localStorage.getItem('wpm')) || 0;
         const cpm = parseFloat(localStorage.getItem('cpm')) || 0;
         const accuracy = parseFloat(localStorage.getItem('accuracy')) || 0;
         const timeTaken = parseFloat(localStorage.getItem('timeTaken')) || 0;
 
-        // Update chart data
-        const newData = generateData(wpm); // Use wpm for demo, replace with actual data
-        setChartData(newData);
-
         console.log('wpm:', wpm);
-console.log('cpm:', cpm);
-console.log('accuracy:', accuracy);
+        console.log('cpm:', cpm);
+        console.log('accuracy:', accuracy);
 
-        // Ensure all values are finite numbers
-        if (isFinite(wpm) && isFinite(cpm) && isFinite(accuracy)) {
-            pushDataToFirebase(timeTaken, accuracy, wpm, cpm);
-        } else {
-            console.error('Invalid data: ', { wpm, cpm, accuracy });
-            toast.error('Invalid data. Please try again.');
-        }
+        // Example dynamic data based on wpm for demonstration purposes
+        const newData = generateData(wpm);
 
-        // Your Chart.js configuration
+        // Chart.js configuration
         const config = {
             type: 'line',
             data: {
-                labels: Array.from({ length: 30 }, (_, i) => i + 1),
+                labels: Array.from({ length: timeTaken }, (_, i) => i + 1),
                 datasets: [{
                     label: 'WPM',
                     data: newData,
@@ -97,9 +86,6 @@ console.log('accuracy:', accuracy);
         const ctx = chartRef.current.getContext('2d');
         const myChart = new Chart(ctx, config);
 
-        // Mark component as mounted
-        componentMounted.current = true;
-
         // Cleanup on component unmount
         return () => myChart.destroy();
     }, []); // Empty dependency array to ensure it runs once on mount
@@ -108,22 +94,22 @@ console.log('accuracy:', accuracy);
         <div>
             <Nav />
             <div className={style.container}>
-                <ToastContainer/>
+                <ToastContainer />
                 <div className={style.block}>
                     <p className={style.word}>ពាក្យក្នុង​​.វ</p>
-                    <p className={style.num}>{localStorage.getItem('wpm') || 0}</p>
+                    <p className={style.num}>{localStorage.getItem("wpm") || 0}</p>
                 </div>
                 <div className={style.block}>
                     <p className={style.word}>អក្សរក្នុង​​.វ</p>
-                    <p className={style.num}>{localStorage.getItem('cpm') || 0}</p>
+                    <p className={style.num}>{localStorage.getItem("cpm") || 0}</p>
                 </div>
                 <div className={style.block}>
                     <p className={style.word}>ភាពត្រឹមត្រូវ</p>
-                    <p className={style.numW}>{localStorage.getItem('accuracy') || 0}</p>
+                    <p className={style.numW}>{localStorage.getItem("accuracy") || 0}</p>
                 </div>
                 <div className={style.block}>
                     <p className={style.word}>រយ:ពេល</p>
-                    <p className={style.numW}>{localStorage.getItem('timeTaken') || 0}</p>
+                    <p className={style.numW}>{localStorage.getItem("timeTaken") || 0}</p>
                 </div>
             </div>
             {/* Add a canvas element for the chart */}
@@ -131,10 +117,14 @@ console.log('accuracy:', accuracy);
                 <canvas ref={chartRef}></canvas>
             </div>
             <div className={style.restartContainer}>
-                <button onClick={restart} className={style.restart}> <VscDebugRestart /> </button>
+                <button onClick={restart} className={style.restart}>
+                    {" "}
+                    <VscDebugRestart />{" "}
+                </button>
             </div>
         </div>
     );
 }
 
 export default Result;
+
